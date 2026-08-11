@@ -1,0 +1,149 @@
+/* Programmering B · Frederikssund Gymnasium — minimalistisk stil */
+:root {
+  --bg:      #1f1f1f;
+  --surface: #252526;
+  --border:  #333333;
+  --text:    #d4d4d4;
+  --muted:   #8a8a8a;
+  --accent:  #4ec9b0;
+  --link:    #3794ff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.65;
+}
+
+.container {
+  width: min(680px, 92%);
+  margin-inline: auto;
+}
+
+/* Header */
+.site-header {
+  padding: 2.5rem 0 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.kicker {
+  margin: 0 0 0.25rem;
+  color: var(--accent);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.site-header h1 {
+  margin: 0;
+  font-size: 1.9rem;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+
+/* Intro */
+.intro {
+  padding: 2rem 0 0.5rem;
+}
+
+.intro p {
+  margin: 0;
+  font-size: 1.05rem;
+  color: #c8c8c8;
+  max-width: 60ch;
+}
+
+kbd {
+  font-family: inherit;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0 0.35em;
+  font-size: 0.9em;
+}
+
+/* Ugeplan */
+.ugeplan {
+  padding: 2rem 0 0;
+}
+
+.ugeplan h2 {
+  margin: 0 0 1.25rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+th, td {
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+}
+
+.uge-col {
+  width: 4.5rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+thead th {
+  color: var(--muted);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-bottom: 1px solid #444;
+}
+
+tr.forlob th {
+  background: var(--surface);
+  color: var(--accent);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid var(--border);
+  border-left: 2px solid var(--accent);
+}
+
+tr.forlob:not(:first-of-type) th {
+  border-top: 1px solid #444;
+}
+
+a {
+  color: var(--link);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+/* Footer */
+.site-footer {
+  margin-top: 3.5rem;
+  padding: 2rem 0;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.site-footer p {
+  margin: 0;
+}
+
+@media (max-width: 560px) {
+  .site-header h1 { font-size: 1.5rem; }
+}
