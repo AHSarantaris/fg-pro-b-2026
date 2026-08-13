@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1f1f1f" />
+  <title>FG ProB - Lektion 02: Opstart og Forventningsafstemning</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/dark.css" id="theme">
+  <link rel="stylesheet" href="../variables.css">
+  <link rel="stylesheet" href="../styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <section class="title-slide">
+        <h1>Opstart og Forventningsafstemning</h1>
+        <h3>Lektion 02</h3>
+        <p>Andreas Hussain Sarantaris</p>
+        <p style="font-size: 0.82em; color: var(--fg-muted);">Frederikssund Gymnasium · Programmering B</p>
+      </section>
+
+      <section data-slide-step="0">
+        <h2>(1U) Hovedbudskaberne for sidste lektion</h2>
+        <div class="small-list" style="display: grid; grid-template-columns: 1fr 1fr;">
+          <div>
+            <h3>1U. Om mig</h3>
+            <ul>
+              <li><strong>Inspiration:</strong> Programmering kan bruges til mange forskellige ting (eksempelvis ingeniøruddannelser og anvendt matematik), måske kan noget inspirere jer.</li>
+              <li><strong>Programmeringserfaring:</strong> Jeg har primært brugt JavaScript til mine egne projekter, selvom jeg har prøvet flere forskellige programmeringssprog.</li>
+              <li><strong>Åben invitation:</strong> Hvis I synes det lød interessant vil jeg meget gerne hjælpe jer med at undersøge videre omkring Tropisk Geometri og Dynamik (emnet for mine afgangsprojekter).</li>
+            </ul>
+          </div>
+          <div>
+            <h3>1Ø. Om jer</h3>
+            <ul>
+              <li><strong>Motivation:</strong> I har primært valgt Programmering B på grund af jeres interesse for computerspil og nysgerrighed på hvordan de skabes.</li>
+              <li><strong>Læringsmål:</strong> I tænker også at det er brugbart for jer generelt at udvikle en mere logisk og systematisk tankegang.</li>
+              <li><strong>Andre fag:</strong> I er ikke super begejstrede for matematik men I har det fint med det.</li>
+              <li><strong>Andre interesser:</strong> Flere af jer går op i sport og motion.</li>
+            </ul>
+          </div>
+          <div><hr></div>
+          <div><hr></div>
+          <div>
+            <h3>2U. Læreplan til Programmering B</h3>
+            <ul>
+              <li><strong>Identitet:</strong> Teknisk og kreativt fag med vægt på eksperimentelle og innovative processer.</li>
+              <li><strong>Formål:</strong> En bred og nuanceret introduktion til programmering, til at tilfredsstille personlig nysgerrighed, kreativt udtryk, at skabe ny viden og at løse problemer.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>2Ø. Opsummering og evaluering af Programmering C</h3>
+            <ul>
+              <li><strong>Hvad I mangler:</strong> Mest noget om parametrisering, rekursion, polymorfi, algoritmemønstre, hændelsesstyret interaktion</li>
+              <li><strong>Spørgsmål:</strong> Hvad med generiske programdele, test og fejlfinding, samt dokumentation?</li>
+              <!-- <li><strong>Udviklingsmiljø:</strong> I brugte en IDE (PyCharm) men udviklede kun programmer der kørte i terminalen.</li> -->
+              <li><strong>Hvad I ønsker</strong> Mere om objektorienteret programmering og større projekter hvor I selv kan arbejde kreativt.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>(1U) Forløbsplan for første halve år</h2>
+        <table class="studyplan-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Antal uger</th>
+              <th>Titel</th>
+              <th>Indhold</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>F1</td><td>2</td><td>Introduktion og repetition</td><td>Introduktion til JavaScript, p5.js og VS Code, og repetition af kontrolstrukturer og algoritmik i JavaScript</p> </td></tr>
+            <tr><td>F2</td><td>1</td><td>Versionskontrol og Git</td><td>Introduktion til Git og Github for  samarbejde i udviklingsprojekter.</td></tr>
+            <tr><td>F3</td><td>1</td><td>Udviklingsprocess</td><td>Hvordan man på en struktureret måde kan udvikle et softwareprogram i et team for at optimere tidsforbruget, kvaliteten og brugertilfredsheden af programmet.</td></tr>
+            <tr><td>F4</td><td>1</td><td>Programmering i AI-tidsalderen</td>
+              <td>Hvilke måder kan man bruge AI til softwareudvikling (vibe coding, prompt engineering), og hvordan I må bruge AI her i Programmering B.
+              </td></tr>
+            <tr><td>F5</td><td>2</td><td>Afleveringsprojekt 1 - Tegneprogram</td><td>I skal udvikle jeres eget tegneprogram i grupper af to ved brug af Git som versionskontrol.</td></tr>
+            <tr><td>F6</td><td>2</td><td>Rekursion og træer</td><td>Algoritmer og datastrukturer</td></tr>
+            <tr><td>F7</td><td>1</td><td>Objektorienteret programmering i JavaScript</td><td>Introduktion til klasser og objekter i JavaScript, herunder JSON-filer.</td><tr></tr>
+            <tr><td>F8</td><td>1</td><td>Afleveringsprojekt 2 - Vektorbibliotek</td><td>I skal udvikle et generisk vektorbibliotek ved brug af OOP der kan bruges af andre, samt teste og dokumentere det.</td></tr>
+            <tr><td>F9</td><td>4</td><td>Afleveringsprojekt 3 - Floksimulering</td><td>I skal udvikle en interaktiv simulator/spil der simulerer flokadfærd hos dyr, hvor I benytter vektorbiblioteket som I lavede i afleveringsprojekt 2.</td></tr>
+            <tr><td>Samlet:</td><td>15</td><td></td><td></td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>(1U) Forløbsplan for andet halve år</h2>
+        <table class="studyplan-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Antal uger</th>
+              <th>Titel</th>
+              <th>Indhold</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>F10</td><td>1</td><td>Reptition af første halve år</td><td>Objektorienteret programmering og JavaScript.</td></tr>
+            <tr><td>F11</td><td>6</td><td>Webudvikling</td><td>Udvikling af interaktive hjemmesider med HTML, CSS og JavaScript.</td></tr>
+            <tr><td>F12</td><td>8</td><td>Eksamensprojekt</td><td>Her skal I arbejde på jeres eksamensprojekt. Mere om eksamensprojektet næste gang.</td></tr>
+            <tr><td>Samlet:</td><td>15</td><td></td><td></td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section data-slide-step="1">
+        <h2>(1Ø) Spørgsmål og gennemgang af logbøger</h2>
+        <div style="height: 80%; display: flex; flex-direction: column; justify-content: space-evenly;">
+          <h3>1. Spørgsmål eller kommentarer til sidste Lektion?</h3>
+          <h3>2. Gennemgang af p5.js projekter I har fundet</h3>
+        </div>
+      </section>
+
+
+      <section data-slide-step="2">
+        <h2>(3U) Mine forventninger til mig selv </h2>
+        <ol class="spaced-list" style="font-size: 1.1em;">
+          <li>At jeg er <strong>velforberedt</strong> og har <strong>overskud</strong>.</li>
+          <li>At jeg behandler alle med <strong>respekt</strong> og skaber et <strong>trygt</strong> og <strong>åbent læringsmiljø</strong>, hvor alle spørgsmål er velkomne (men ikke nødvendigvis besvares).</li>
+          <li>At jeg er <strong>tilgængelig</strong> for spørgsmål og vejledning - både i og uden for timerne, og at jeg <strong>ikke bliver irriteret</strong> hvis jeg bliver nødt til at forklare noget på <strong>forskellige måder</strong> før det giver mening.</li>
+          <li>At jeg er <strong>ærlig</strong>, hvis jeg ikke kender svaret på et spørgsmål, og <strong>anerkender</strong> hvis jeg har sagt noget forkert eller <strong>begået en fejl</strong>.</li>
+          <li>At jeg <strong>lytter</strong> til jeres <strong>feedback</strong> og <strong>justerer undervisningen</strong>, når det giver mening.</li>
+        </ol>
+
+      </section>
+      
+      <section>
+        <h2>(3U) Mine forventninger til jer</h2>
+        <ol class="spaced-list" style="font-size: 0.95em">
+          <h3>Undervisningen</h3>
+          <li>At I <strong>ikke laver andet</strong> i undervisningstiden (pånær noter eller andet fagligt relevant), og at I <strong>i stedet fortæller mig</strong> hvis I har behov for en pause eller I synes noget er <strong>uinteressant</strong> eller jeg har <strong>brugt for meget tid</strong> på noget.</li>
+          <li>At I <strong>respekterer</strong> hinandens og min <strong>tid</strong> ved at <strong>møde til tiden</strong> og undlader at <strong>distrahere hinanden</strong>.</li>
+          <li>At I <strong>ikke taler med sidemakkeren</strong> i undervisningen, <strong>selv</strong> ved spørgsmål, men nævner det for <strong>hele klassen</strong>, eller stiller spørgsmålet til mig (<em>pånær hvis det bare er en kort intern kommentar</em>). </li>
+          <h3>Fejlfinding</h3>
+          <li>At I <strong>hjælper hinanden</strong> med at forstå stoffet og at kunne løse opgaverne, <strong>uden blot at give svaret</strong>, men har andres <strong>læring</strong> i mente.</li>
+          <li>At I <strong>spørger</strong> når der er noget I ikke forstår, eller <strong>tror</strong> jeg har begået en fejl, og at I ikke holder jer tilbage.</li>
+          <li>At I <strong>prøver selv</strong>, før I spørger om hjælp til opgaver.</li>
+          <li>At I <strong>tør begå fejl</strong>, og kan klare at blive fortalt at <strong>noget I har lavet er forkert</strong>.</li>
+          <li>At I <strong>bærer over med mig</strong> hvis jeg siger tingene lidt for <strong>direkte</strong>, og ikke tager det <strong>personligt</strong>, men at I kan tåle at tage fejl, siden at alle mennesker begår fejl, men anerkender at det er <strong>en del af læringen</strong>.</li>
+          <h3>Ansvar</h3>
+          <li>At I tager faget <strong>seriøst</strong> og bruger den <strong>nødvendige tid</strong> til at følge med i kurset, fremfor at springe over hvor gærdet er lavest.</li>
+          <li>At I <strong>ikke snyder</strong> men <strong>taler med mig</strong> hvis I er bekymrede for jeres karakterer eller om I består.</li>
+        </ol>
+      </section>
+
+      <section data-slide-step="3">
+        <h2>(3Ø) Hvad forventer I af mig og jer selv?</h2>
+        
+        <div  style="display: grid; gap:3em; grid-template-columns: 1fr 1fr;">
+          <div>
+            <h3>Skriv jeres forventninger ned (5 minutter)</h3>
+            <ol class="spaced-list">
+              <li><strong>Åben et tomt dokument:</strong>
+                <div>Gerne i en markdown-fil ellers i word.</div>
+              </li>
+              <li>
+                <strong>Hvad forventer I af mig og undervisningen?:</strong>
+                <div>Eksempelvis: Tempo, forklaringer, feedback, hjælp.</div>
+              </li>
+              <li>
+                <strong>Hvad vil I selv lægge i faget?</strong>
+                <div>Eksempelvis: 
+                  <ul>
+                    <li>Hvor meget tid om ugen tænker I at bruge på lektier?</li>
+                    <li>Hvor meget fravær forventer I at have?</li>
+                    <li>Hvad forventer I at få i karakter?</li>
+                    <li>Vil I komme til lektionen selv hvis I tænker at I ville få 100% fravær for at komme for sent?</li>
+                  </ul>
+                </div>
+              </li>
+              <li>
+                <strong>Opsamling:</strong>
+                <div>Del gerne hvad I har skrevet.</div>
+              </li>
+              <li>
+                <strong>Aflever:</strong>
+                <div>Aflever jeres dokument på Lectio i dag inden klokken 21:00.</div>
+              </li>
+            </ol>
+          </div>
+          <div>
+            <div>
+              <h3>Eksempel 1</h3>
+              <ul class="fragment" style="margin-bottom: 1em;">
+                <li>"Jeg vil bruge minimum tid og holde fri så meget som jeg kan uden at få problemer."</li>
+                <li>"Morgenmodulerne skipper jeg nok hvis jeg kommer for sent til at få 50% fravær."</li>
+                <li>"Jeg vil kun aflevere de opgaver der giver karakter."</li>
+                <li>"Jeg skal bare bestå."</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Eksempel 2</h3>
+              <ul class="fragment">
+                <li>"Jeg vil prøve at få afsat 1 time onsdag til lektier og 2 timer mellem torsdag og tirsdag."</li>
+                <li>"Jeg vil komme til undervisningen selv hvis jeg ikke er helt på toppen eller hvis jeg kommer for sent og nok vil få 100% fravær, så vil jeg få det bedste ud af det."</li>
+                <li>"Jeg vil gerne have mindst 10 i karakter."</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section data-slide-step="4">
+        <h2>(4U) Udviklingsmiljøer og VS Code</h2>
+        <div style="display: grid; grid-template-columns: 1.5fr 1fr;">
+          <div>
+            <h3>Hvad er en IDE?</h3>
+            <ul class="spaced-list">
+              <li><strong>IDE:</strong> Integrated Development Environment (Integreret udviklingsmiljø).</li>
+              <li><strong>Features:</strong>
+                <ul>
+                  <li>Kodeeditor med fejlregistrering og auto-complete mm.</li>
+                  <li>Forskellige typer terminaler.</li>
+                  <li>Debugger koblet til kodeeditoren.</li>
+                  <li>Grafisk display til versionskontrol.</li>
+                  <li>Integreret AI chat.</li>
+                </ul>
+              </li>
+              <li><strong>Alternativet:</strong> Simpel teksteditor + terminal.</li>
+            </ul>
+          </div>
+          <div class="fragment">
+            <h3>Introduktion til VS Code</h3>
+            <!-- <img src="images/vs-code-ui.png"> -->
+            <div style="flex:1; display: flex; flex-direction: column;gap:1em">
+              <a href="#" data-modal-type="iframe" data-modal-url="https://www.youtube.com/embed/KMxo3T_MTvY?autoplay=1" class="play-video" style="font-size: 4em;width:80%;height:80%;" >
+                <div class="r-stack">
+                  <img src="https://img.youtube.com/vi/KMxo3T_MTvY/sddefault.jpg">
+                  <img src="../images/overlay-play-button.png" height="200px" width="200px" style="opacity: 0.5; margin:auto">
+                </div>
+              </a>
+              <a href="https://www.youtube.com/watch?v=KMxo3T_MTvY">VS Code in 100 Seconds - Fireship</a> 
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section data-slide-step="5">
+        <h2>(4Ø) Download VS Code og tilføj p5.js</h2>
+        <div style="display: flex; flex-direction: column;justify-content: space-evenly; height:80%; ">
+          <div>
+            <h3>Guide</h3>
+            <ol class="spaced-list">
+              <li>
+                Følg trinene i guiden på <a href="p5js.org">p5js.org</a> (husk at scrolle ned til <strong>Using VS Code</strong>).
+                <p>Sti: <a href="https://p5js.org/tutorials/setting-up-your-environment/#vscode">p5js.org -> Tutorials -> Setting up your environment -> Using VS Code</a></p>
+              </li>
+              <li>
+                Tilføj yderligere følgende extensions til VS Code:
+                <ul>
+                  <li><strong>Live Server</strong> af Ritwick Dey: <a href="https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer">Link</a></li>
+                  <li><strong>Prettier - Code formatter</strong> af Prettier: <a href="https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode">Link</a></li>
+                </ul>  
+              </li>
+            </ol>
+          </div>
+          <div>
+            <h3>Hjælp til VS Code</h3>
+            <p>En kort introduktion til at finde rundt i IDE'en: </p>
+            <p><a href="https://code.visualstudio.com/docs/editing/getting-started">code.visualstudio.com -> Docs -> Editing -> Getting Started</a></p>
+          </div>
+        </div>
+      </section>
+
+      <section data-slide-step="6">
+        <h2>(5U) Lektier</h2>
+        <div class="homework-list">
+          <!-- <h3>2. Evaluering af lektionen: </h3>
+          <ul>
+            <li>Giv mig feedback på lektionen.</li>
+            <li>Afleveres senest klokken 21:00 i dag.</li>
+            <li>Link:</li>
+          </ul> -->
+          <!-- <h3>1. Evaluering af lektionerne</h3>
+          <ul>
+            <li>Giv mig feedback på lektionen.</li>
+            <li>I dag før klokken 21:00.</li>
+          </ul> -->
+          
+          <h3>1. Aflever dokumentet med jeres forventninger</h3>
+          <ul>
+            <li>Det som I lavede i dag.</li>
+            <li>I dag før klokken 21:00.</li>
+          </ul>
+          <h3>2. Dan jer et overblik af VS Code: </h3>
+          <ul>
+            <li>Brugbare simple funktionaliteter: VS Code > Help > Editor playground</li>
+            <li>Flere brugbare funktionaliteter: <a href="https://code.visualstudio.com/docs/editing/codebasics">code.visualstudio.com > Docs > Documentation > Editor > Write Code > Basic Editing</a></li>
+          </ul>
+          <h3>3. Færdiggør setup og læs den første p5.js tutorial igennem</h3>
+          <ul>
+            <li>Færdiggør setup (hvis I ikke allerede har gjort det): <a href="https://p5js.org/tutorials/setting-up-your-environment/#vscode">p5js.org > Tutorials > Setting up your environment (using VS Code)</a> </li>
+            <li>Læs denne tutorial igennem: <a href="https://p5js.org/tutorials/get-started/">p5js.org > Tutorials > Get Started</a></li>
+            <li>Lav jeres eget simple program der er lidt mere interessant end eksemplet ovenfor. Eventuelt lav det til et spil.</li>
+          </ul>
+          <h3>4. Aflever logbogen med jeres research af Processing projekter (lektien til i onsdags)</h3>
+          <ul>
+            <li><strong>Hvis ikke I fik afleveret den onsdag.</strong></li>
+            <li>Man må gerne genaflevere hvis man finder flere interessante projekter.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <h2>(5U) Næste lektion</h2>
+        <ul>
+          <li>
+            <strong>Praktiske informationer:</strong>
+            <div>Resten af læreplanen, inklusiv eksamensprojektet.</div>
+          </li>
+          <li>
+            <strong>Research af Processing projekter:</strong>
+            <div>Vi kigger <strong>videre</strong> på de processing-eksempler og -projekter som I synes er interessante og ser hvordan de har gjort det.</div>
+          </li>
+          <li>
+            <strong>Repetition af pensum fra Programmering C i p5.js:</strong>
+            <div>Vi gennemgår tutorials om variabler, typer, kontrolstrukturer, parametrisering og objekter (så meget vi nu kan nå).</div>
+          </li>
+        </ul>
+      </section>
+
+
+
+
+      <section data-slide-step="7">
+        <h2>(5Ø) Lektionen er slut</h2>
+        <div style="display: flex;flex-direction: column;justify-content: space-evenly; height: 80%;margin-left:10%;">
+          <h3>Læg en plan for hvornår I vil lave lektierne og sæt en påmindelse</h3>
+          <!-- <h3>... færdiggør og GEM jeres arbejde</h3> -->
+          <h3>... reflektér over det I har lært og saml jeres tanker</h3>
+          <h3>... I kan gå når I vil.</h3>
+        </div>
+      </section>
+      
+      
+
+    </div>
+
+    <template id="agenda-template">
+      <section class="agenda">
+        <!-- <h2 class="agenda-header" style="display: none">Program</h2> -->
+        <h2 class="agenda-header">Program</h2>
+        <!-- <h2>Program</h2> -->
+        <div class="flex-center" style="font-size: 1.05em;">
+          <table class="agenda-table">
+            <thead>
+              <tr>
+                <!-- Trin: Del, sektion,... -->
+                <th><strong>Punkt *</strong></th>
+                <th><strong>Start + varighed</strong></th>
+                <th><strong>Aktivitet</strong></th>
+                <th><strong>Indhold</strong></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr data-step="0"><td>1U</td><td>08:10 + 10</td><td>Opsamling fra sidst</td><td>Kort opsummering og hovedbudskaberne af sidste lektion.</td></tr>
+              <tr data-step="1"><td>1Ø</td><td>08:20 + 30</td><td>Spørgsmål om sidste lektion samt gennemgang af lektier</td><td>Eventuelle spørgsmål om indholdet i sidste lektion, samt gennemgang af de projekter som I har fundet.</td></tr>
+              <!-- <tr data-step="2"><td>2U</td><td>08:40 + 10</td><td>Læreplan til Programmering B - Del 2</td><td>Supplerende stof, eksamensprojekt og evaluering.</td></tr>
+              <tr data-step="3"><td>2Ø</td><td>08:50 + 10</td><td>Jeres forslag til hvordan andre fag kan inddrages</td><td>I skal brainstorme over hvilke projekter eller øvelser man kunne lave der inddrager andre fag.</td></tr> -->
+              <!-- <tr data-step="4"><td>3U</td><td>09:00 + 10</td><td>Mine forventninger</td><td>Hvad jeg forventer af jer og mig selv.</td></tr>
+              <tr data-step="5"><td>3Ø</td><td>09:10 + 10</td><td>Jeres forventninger</td><td>Hvad I forventer af min undervisning og jeres egen indsats.</td></tr>
+              <tr data-step="6"><td>4U</td><td>09:20 + 5</td><td>Introduktion til VS Code</td><td>Hvordan VS Code kan bruges til at optimere ens arbejsgang.</td></tr>
+              <tr data-step="7"><td>4Ø</td><td>09:25 + 10</td><td>Opstart af VS Code og p5.js</td><td>I får rørt ved de værktøjer I skal bruge.</td></tr>
+              <tr data-step="8"><td>5U</td><td>09:35 + 5</td><td>Opsamling, lektier og næste lektion</td><td>Hjemmearbejde til næste gang og emnerne for næste lektion.</td></tr>
+              <tr data-step="9"><td>5Ø</td><td>09:40 + 5</td><td>Afrunding</td><td>Færdiggør jeres arbejde og saml jeres tanker.</td></tr> -->
+              <tr data-step="2"><td>2U</td><td>08:50 + 10</td><td>Mine forventninger</td><td>Hvad jeg forventer af jer og mig selv.</td></tr>
+              <tr data-step="3"><td>2Ø</td><td>09:00 + 10</td><td>Jeres forventninger</td><td>Hvad I forventer af min undervisning og jeres egen indsats.</td></tr>
+              <tr data-step="4"><td>3U</td><td>09:10 + 5</td><td>Introduktion til VS Code</td><td>Hvordan VS Code kan bruges til at optimere ens arbejsgang.</td></tr>
+              <tr data-step="5"><td>3Ø</td><td>09:15 + 20</td><td>Opstart af VS Code og p5.js</td><td>I får rørt ved de værktøjer I skal bruge.</td></tr>
+              <tr data-step="6"><td>4U</td><td>09:35 + 5</td><td>Opsamling, lektier og næste lektion</td><td>Hjemmearbejde til næste gang og emnerne for næste lektion.</td></tr>
+              <tr data-step="7"><td>4Ø</td><td>09:40 + 5</td><td>Afrunding</td><td>Færdiggør jeres arbejde og saml jeres tanker.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="text-sm muted"><strong>*</strong> (U=Undervisning, Ø=Øvelse)</div>
+      </section>
+    </template>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js-menu@2.1.0/menu.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js-multimodal@1.0.1/plugin/multimodal/multimodal.js"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/plugin/notes.js"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+  <script src="../main.js"></script>
+</body>
+</html>
