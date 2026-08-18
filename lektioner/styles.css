@@ -308,7 +308,8 @@ html {
 .reveal .studyplan-table :is(th,td):nth-child(2) {
     text-align: right;
     padding-right: 2em;
-    width: 10% !important;
+    padding-left: 0;
+    width: 12% !important;
 }
 
 .reveal .studyplan-table :is(th,td):nth-child(3) {

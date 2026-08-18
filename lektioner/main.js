@@ -1,4 +1,56 @@
+addStudyplanSlides();
 addAgendaSlides();
+
+function addStudyplanSlides() {
+  var firstHalf = [
+    ['F1', '5', 'Introduktion og repetition', 'Introduktion til JavaScript, p5.js og VS Code, og repetition af Programmering C.'],
+    ['F2', '2', 'Versionskontrol og Git', 'Introduktion til Git og Github for samarbejde i udviklingsprojekter.'],
+    ['F3', '3', 'Udviklingsprocess', 'Hvordan man kan arbejde inkrementelt og systematisk i programmeringsprocessen.'],
+    ['F4', '1', 'Programmering i AI-tidsalderen', 'Hvilke måder man kan (og bør) bruge AI i programmeringsprocessen.'],
+    ['P','-','Uge 38 - Ikke almindelig undervisning.',''],
+    ['F5', '6', 'Afleveringsprojekt 1 - Simpelt spil', 'I skal udvikle et simpelt 2D computerspil ved brug af p5.js og Git.'],
+    ['P','-','Uge 42 - Efterårsferie',''],
+    ['F6', '3', 'Rekursion og træer', 'Algoritmer og datastrukturer'],
+    ['F7', '2', 'Objektorienteret programmering i JavaScript', 'Introduktion til klasser og objekter i JavaScript, herunder JSON-filer.'],
+    ['F8', '3', 'Afleveringsprojekt 2 - Vektorbibliotek', 'I skal udvikle et generisk vektorbibliotek ved brug af objektorienteret programmering der kan bruges af andre, samt teste og dokumentere det.'],
+    ['F9', '7', 'Afleveringsprojekt 3 - Floksimulering', 'I skal udvikle en interaktiv simulator/spil der simulerer flokadfærd hos dyr, hvor I benytter vektorbiblioteket som I lavede i afleveringsprojekt 2.'],
+    ['P','-','Uge 50 - SOP og juleferie','']
+  ];
+  var secondHalf = [
+    ['F10', '2', 'Repetition af første halve år', 'Objektorienteret programmering og JavaScript.'],
+    ['F11', '10', 'Webudvikling', 'Udvikling af interaktive hjemmesider med HTML, CSS og JavaScript.'],
+    ['F12', '7', 'Afleveringsprojekt 4 - Portfolio hjemmeside', 'I skal udvikle en moderne interaktiv hjemmeside der dokumenterer jeres projekter.'],
+    ['F13', '13', 'Eksamensprojekt', 'Her skal I arbejde på jeres eksamensprojekt.'],
+    ['E','-','Start maj - Aflevering af eksamensprojekt','Eksamensperioden starter']
+  ];
+  var sumRow = ['Samlet:', '32', '', ''];
+
+  var anchors = document.querySelectorAll('section[data-insert-studyplan]');
+  anchors.forEach(function (anchor) {
+    var prefix = anchor.getAttribute('data-insert-studyplan') || '';
+    anchor.parentNode.insertBefore(buildStudyplanSlide(prefix, 'første halve år', firstHalf), anchor);
+    anchor.parentNode.insertBefore(buildStudyplanSlide(prefix, 'andet halve år', secondHalf), anchor);
+  });
+}
+
+function buildStudyplanSlide(prefix, halveAar, rows) {
+  var thead = '<thead><tr><th>ID</th><th>Antal moduler</th><th>Titel</th><th>Indhold</th></tr></thead>';
+  // var thead = '<thead><tr><th>ID</th><th>Uge nr.</th><th>Antal moduler</th><th>Titel</th><th>Indhold</th></tr></thead>';
+  var tbody = rows.map(function (r) {
+    var rowStr;
+    if (r[1] === '-') {
+      rowStr = '<tr class="muted">';
+    } else {
+      rowStr = '<tr>';
+    }
+    return rowStr + '<td>' + r[0] + '</td><td>' + r[1] + '</td><td>' + r[2] + '</td><td>' + r[3] + '</td></tr>';
+    // return '<tr><td>' + r[0] + '</td><td>' + r[1] + '</td><td>' + r[2] + '</td><td>' + r[3] + '</td></tr>' + r[4] + '</td></tr>';
+  }).join('');
+  var section = document.createElement('section');
+  section.innerHTML = '<h2>(' + prefix + ') Forløbsplan for ' + halveAar + '</h2>'
+    + '<table class="studyplan-table">' + thead + '<tbody>' + tbody + '</tbody></table>';
+  return section;
+}
 
 function addAgendaSlides() {
   var template = document.getElementById('agenda-template');
@@ -114,8 +166,7 @@ Reveal.initialize({
   // The "normal" size of the presentation, aspect ratio will
   // be preserved when the presentation is scaled to fit different
   // resolutions. Can be specified using percentage units.
-  // width: 1920,
-  width: 2048,
+  width: 1920,
   height: 1080,
   // width: window.innerWidth,
   // height: window.innerHeight,
