@@ -1,4 +1,8 @@
-'use strict'
+/** 
+ * Fork of the p5.js tutorial "Get Started" 
+ * by Layla Quiñones, Jaleesa Trapp
+ * Link: https://editor.p5js.org/Msqcoding/sketches/SDbVilWaf
+ */
 
 let points = 0; // number of points the user has
 let canvasWidth = 600; 

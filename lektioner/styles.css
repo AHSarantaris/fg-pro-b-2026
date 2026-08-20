@@ -381,7 +381,7 @@ a:has(img):hover {
     color: var(--cyan);
     padding: 0.1em 0.35em;
     border-radius: 3px;
-    font-size: 0.88em;
+    /* font-size: 0.88em; */
 }
 .reveal pre code {
     background: var(--bg-light) !important;

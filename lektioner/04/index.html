@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1f1f1f" />
+  <title>FG ProB - Lektion 04: Simpelt 2D spil i p5.js</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/dark.css" id="theme">
+  <link rel="stylesheet" href="../variables.css">
+  <link rel="stylesheet" href="../styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <section class="title-slide">
+        <h1><span hidden>Lektion 04: </span>Simpelt 2D spil i p5.js</h1>
+        <h3>Lektion 04</h3>
+        <p>Andreas Hussain Sarantaris</p>
+        <p style="font-size: 0.82em; color: var(--fg-muted);">Frederikssund Gymnasium · Programmering B</p>
+      </section>
+
+      <section data-slide-step="0">
+        <h2>(1U) Opsummering af fælles spiludvikling</h2>
+        <div class="small-list" style="display: grid; grid-template-columns: 1.2fr 1fr;gap:2em">
+          <div >
+            <h3>1Ø. Videreudvikling af eksempel fra lektien</h3>
+            <ul>
+              <li>Vi <strong>ændrede</strong> i koden så det blev et spil hvor man skulle fange blomsten med musen, og fik point ved at opdate variablen <code>points</code> og skrive det på lærredet med <code>text()</code>.</li>
+              <li>Vi ændrede <strong>positionen</strong> af blomsten med p5-funktionen <code>random()</code> <strong>hvert sekund</strong> ved at opdatere variablen <code>frame</code> hver frame og genstarte når den blev lig programmets "<strong>frame rate</strong>" som blev sat med p5-funktionen <code>frameRate()</code>.</li>
+              <li>Vi gemte blomstens egenskaber (<strong>properties</strong>) ved at definere varablen <code>flower</code> som et <strong>objekt</strong> ved brug af en "<strong>object literal</strong>" (<code>{}</code>).</li>
+              <li>Vi <strong>beregnede afstanden</strong> mellem centrum af de to cirkler for at tjekke om vi havde fanget blomsten, ved brug af <strong>afstandsformlen</strong>. (Man kunne også have brugt den indbyggede funktion <code>dist()</code>)</li>
+              <li>Vi <strong>debuggede</strong> koden ved at åbne browserens <strong>DevTools</strong> (<strong>F12</strong>-knappen) og bruge <code>console.log()</code>.</li>
+              <li>Vi lavede en funktion <code>updateFlowerPosition()</code> for ikke at skulle <strong>kopiere koden</strong>, siden at man både skulle opdatere positionen hvert sekund <strong>og</strong> når man fangede blomsten.</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Reference</h4>
+            <ul>
+              <li><strong>Link</strong> til 
+                <a href="https://ahsarantaris.github.io/fg-pro-b-2026/eksempler/get-started/">spillet</a> og 
+                <a href="https://ahsarantaris.github.io/fg-pro-b-2026/eksempler/get-started/sketch.js">koden</a> 
+                er lagt op på Lectio.</li>
+            </ul>
+            <h4 style="margin-top: 2em;">Læringsmål:</h4> 
+            <ul class="fragment">
+                <li>I har set et simpelt eksempel på <strong>udviklingsprocessen</strong> med <strong>design</strong>, <strong>implementation</strong> og <strong>test</strong> af et spil ved at ændre i en eksisterende kode.</li>
+                <li>I har stiftet bekendskab med <strong>JavaScript-syntaks</strong> og <strong>p5-funktioner</strong>.</li>
+                <li>I har set nogle <strong>gode vaner</strong> med at skrive <strong>kommentarer</strong> til koden, og <strong>refaktorere</strong> den ved at udtrække kodeblokke til <strong>genanvendelige</strong> funktioner.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>(1U) Opsummering af p5-tutorials</h2>
+        <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 2em">
+          <div>
+            <h3>2U. Gennemgang af "Variables and Change"</h3>
+            <ul class="spaced-list">
+                <li>Jeg gik hurtigt igennem den næste p5-tutorial med skyer der <strong>bevægede sig horizontalt</strong> og 
+                  træer der <strong>voksede vertikalt</strong>, og blev genstartet med <strong>modulo-operatoren</strong> (<code>%</code>), samt stjerneskud der blev tegnet tilfældige steder.</li>
+                <li>Himlen og græsset blev tegnet med <code>rect()</code>, månen med <strong>to overlappende cirkler</strong> ved brug af <code>circle()</code>, bjergene og træerne med <code>triangle()</code> og stjerneskudene med <code>line()</code>.</li>
+            </ul>
+            <h4 style="margin-top: 2em;">Læringsmål</h4>
+            <ul class="spaced-list">
+              <li>I har stiftet bekendskab med nogle funktioner til at tegne <strong>geometriske former</strong> i p5.js (resten kan findes i <a href="https://p5js.org/reference/">referencen</a> under <i><strong>Shape</strong></i>).</li>
+              <li>I har set <strong>forskellige måder</strong> at gøre en scene <strong>dynamisk</strong>.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>2Ø. Gå igennem "Conditionals and Interactivity" og lav det til et spil</h3>
+            <div class="fragment">
+              <ul class="spaced-list">
+                  <li>Jeg gav jer for lidt tid da jeg brugte længere tid end forventet (<strong>min fejl</strong>), men I lavede det i stedet som <strong>lektie</strong> (næste slide).</li>
+                  <li>I skulle bruge <code>mouseIsPressed</code> og <strong>afstandsformlen</strong>, samt opdatere en <strong>position</strong> som før, men denne gang skulle I også opdatere en <strong>hastighed</strong>.</li>
+                  <li>I skule selv søge i <strong>referencen</strong> hvis der var andre funktioner I skulle bruge.</li>
+              </ul>
+              <h4 style="margin-top: 2em;">Læringsmål</h4>
+              <ul class="spaced-list">
+                <li>I har <strong>prøvet selv</strong> at lave en ny p5-sketch i VS Code, og ændre i koden ud fra nogle specifikationer.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section data-slide-step="1">
+        <h2>(1Ø) Opsamling på lektier</h2>
+        <div class="homework-list" style="display:flex;flex-direction: column;height:60%;justify-content: space-evenly;">
+          <div>
+            <h3>Spørgsmål eller kommentarer til spillet med solanimationen?</h3>
+            <ul>
+              <li>Hvad var svært?</li>
+              <li>Var det interessant, eller et kedeligt eksempel?</li>
+              <li>Andet?</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Min løsning</h3>
+            <ul>
+              <li>Link til spillet: <a href="https://ahsarantaris.github.io/fg-pro-b-2026/eksempler/sun-animation/">https://ahsarantaris.github.io/fg-pro-b-2026/eksempler/sun-animation/</a>.</li>
+              <li>Link til koden: <a href="https://ahsarantaris.github.io/fg-pro-b-2026/eksempler/sun-animation/sketch.js">https://ahsarantaris.github.io/fg-pro-b-2026/eksempler/sun-animation/sketch.js</a>.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section data-slide-step="2">
+        <h2>(2U) Gennemgang af tutorial</h2>
+        <div style="display: grid; place-content: center; height: 80%; font-size: 1.3em;gap:4em">
+          <div>
+            <h3>Løkker</h3>
+            <p>
+              Gennemgang af
+              <a href="https://p5js.org/tutorials/repeating-with-loops/">p5js.org > Tutorials > Repeating with Loops</a>.
+            </p>
+          </div>
+          <div>
+            <h3>Objekter</h3>
+            <p>
+              Gennemgang af
+              <a href="https://p5js.org/tutorials/data-structure-garden/">p5js.org > Tutorials > Data Structure Garden</a>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section data-slide-step="3">
+        <h2>(2Ø) Planlæg og design et spil</h2>
+        <div class="homework-list">
+          <h3>1. Brainstorm idéer til hvilket spil vi skal implementere.</h3>
+          <ul>
+            <li>Eksempler: Pong, Snake, BreakOut, Asteroids, Flappy Bird, Angry Birds, etc.</li>
+            <li>Hvilke variationer kan man tilføje til klassiske spil?</li>
+          </ul>
+          <h3>2. Udvælg hvilket spil vi vil udvikle</h3>
+          <ul>
+            <li>Stemme om det?</li>
+          </ul>
+          <h3>3. Design spillet</h3>
+          <ul>
+            <li>Hvordan skal spillet være?</li>
+            <li>Hvilke features er minimum (MVP) og hvad kunne man tilføje senere?</li>
+            <li>Skriv simpel pseudokode til de vigtigste algoritmer/funktioner i spillet.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section data-slide-step="4">
+        <h2>(P) Pause</h2>
+        <div style="display: grid; place-content: center; height: 80%; font-size: 2em;">
+            <h3>Vi starter igen</h3>
+        </div>
+      </section>
+      
+      <section data-slide-step="5">
+        <h2>(3U) Fælles implementation af spillet</h2>
+        <div style="display: grid; place-content: center; height: 80%; font-size: 1.3em;">
+          <h3>Bemærk</h3>
+          <ul>
+              <li>Jeg skriver koden og deler den med jer efterfølgende.</li>
+              <li>I skal IKKE selv skrive koden ned, men følg med og kom med input.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section data-slide-step="6">
+        <h2>(3Ø) Lav jeres egne tilføjelser</h2>
+        <div style="display: grid; place-content: center; height: 80%; font-size: 1.3em;">
+            <ul>
+                <li>Jeg lægger koden op på Lectio.</li>
+                <li>I skal lave yderligere tilføjelser til programmet.</li>
+                <li>I må gerne arbejde sammen i grupper af 2 (undtagelsesvist 3).</li>
+            </ul>
+
+        </div>
+      </section>
+
+      <section data-slide-step="7">
+        <h2>(4U) Lektier</h2>
+        <div style="display: grid; grid-template-columns: 2fr 1fr;gap: 2em">
+          <div class="homework-list">
+            <!-- <h3>2. Evaluering af lektionen: </h3>
+            <ul>
+              <li>Giv mig feedback på lektionen.</li>
+              <li>Afleveres senest klokken 21:00 i dag.</li>
+              <li>Link:</li>
+            </ul> -->
+            <!-- <h3>1. Evaluering af lektionerne</h3>
+            <ul>
+              <li>Giv mig feedback på lektionen.</li>
+              <li>I dag før klokken 21:00.</li>
+            </ul> -->
+          
+          
+            <h3>1. Evaluér forløbet</h3>
+            <ul>
+              <li>Link lægges op i løbet af i dag eller senest i morgen.</li>
+              <li>Udfyldes inden mandag klokken 21:00</li>
+            </ul>
+            <h3>2. Se følgende videoer om Git og GitHub.</h3>
+            <ul>
+              <li>Video 1: <a href="https://www.youtube.com/watch?v=y-an0v208A0">
+                Git and Github Explained in 7 Minutes</a> - Tech With Diego</li>
+              <li>Video 2: <a href="https://www.youtube.com/watch?v=HkdAHXoRtos">Git It? How to use Git and Github</a> - Fireship</li>
+            </ul>
+            <h3>3. Byg videre på jeres p5.js kode og aflever den.</h3>
+            <ul>
+              <li>Arbejd videre på jeres spil og aflever koden (blot jeres sketch.js fil) inden mandag klokken 21:00.</li>
+            </ul>
+            <!-- <h3>4. (Ekstra) Dan jer et overblik af VS Code: </h3>
+            <ul>
+              <li>Brugbare simple funktionaliteter: VS Code > Help > Editor playground</li>
+              <li>Flere brugbare funktionaliteter: <a href="https://code.visualstudio.com/docs/editing/codebasics">code.visualstudio.com > Docs > Documentation > Editor > Write Code > Basic Editing</a></li>
+            </ul> -->
+          </div>
+          <div style="display: flex; flex-direction: column;gap:1em; align-items: center;">
+              <a href="#" data-modal-type="iframe" data-modal-url="https://www.youtube.com/embed/y-an0v208A0" class="play-video" style="font-size: 4em;width:70%" >
+                <div class="r-stack">
+                  <img src="https://img.youtube.com/vi/y-an0v208A0/sddefault.jpg">
+                  <img src="../images/overlay-play-button.png" height="200px" width="200px" style="opacity: 0.5; margin:auto">
+                </div>
+              </a>
+              <p>Video 1</p>
+              <a href="#" data-modal-type="iframe" data-modal-url="https://www.youtube.com/embed/HkdAHXoRtos" class="play-video" style="font-size: 4em;width:70%; margin-top: 0.5em" >
+                <div class="r-stack">
+                  <img src="https://img.youtube.com/vi/HkdAHXoRtos/sddefault.jpg">
+                  <img src="../images/overlay-play-button.png" height="200px" width="200px" style="opacity: 0.5; margin:auto">
+                </div>
+              </a>
+              <p>Video 2</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>(4U) Næste lektion</h2>
+        <div class="homework-list">
+          <h3>Vi får besøg</h3>
+          <ul>
+            <li>Catherine kommer forbi og overværer undervisningen.</li>
+          </ul>
+          <h3>Læreplan - Del 2</h3>
+          <ul>
+            <li>Vi gennemgår indholdet af resten af læreplanen, inklusiv eksamensprojektet.</li>
+          </ul>
+          <h3>Opstart af Git og GitHub</h3>
+          <ul>
+            <li>Vi lærer om versionskontrol af programmer ved hjælp af Git, samt hvordan man kan bruge GitHub til at samarbejde i udviklingsprocessen.</li>
+          </ul>
+          <h3>Opstart af logbøger</h3>
+          <ul>
+            <li>Vi får oprettet nogle logbøger (som er en del af læreplanen) og opretter GitHub repos med logbøgerne og jeres projekter.</li>
+          </ul>
+        </div>
+      </section>
+
+
+
+
+      <section data-slide-step="8">
+        <h2>(4Ø) Lektionen er slut</h2>
+        <div style="display: flex;flex-direction: column;justify-content: space-evenly; height: 80%;margin-left:10%;">
+          <h3>Læg en plan for hvornår I vil lave lektierne og sæt en påmindelse</h3>
+          <!-- <h3>... færdiggør og GEM jeres arbejde</h3> -->
+          <h3>... reflektér over det I har lært og saml jeres tanker</h3>
+          <h3>... I kan gå når I vil.</h3>
+        </div>
+      </section>
+      
+      
+
+    </div>
+
+    <template id="agenda-template">
+      <section class="agenda">
+        <!-- <h2 class="agenda-header" style="display: none">Program</h2> -->
+        <h2 class="agenda-header">Program</h2>
+        <!-- <h2>Program</h2> -->
+        <div class="flex-center" style="font-size: 1.05em;">
+          <table class="agenda-table">
+            <thead>
+              <tr>
+                <!-- Trin: Del, sektion,... -->
+                <th><strong>Punkt *</strong></th>
+                <th><strong>Start + varighed</strong></th>
+                <th><strong>Aktivitet</strong></th>
+                <th><strong>Indhold</strong></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr data-step="0"><td>1U</td><td>08:10 + 10</td><td>Opsamling fra sidst</td><td>Kort opsummering og hovedbudskaberne af sidste lektion.</td></tr>
+              <tr data-step="1"><td>1Ø</td><td>08:20 + 30</td><td>Gennemgang af lektierne til i dag</td><td>Eventuelle spørgsmål om indholdet i sidste lektion og lektierne, samt gennemgang af min løsning.</td></tr>
+              <tr data-step="2"><td>2U</td><td>08:50 + 20</td><td>Gennemgang af de to sidste p5-tutorials</td><td>Jeg gennemgår hurtigt koden i "Repeating with Loops" og "Data Stucture Garden".</td></tr>
+              <tr data-step="3"><td>2Ø</td><td>09:10 + 35</td><td>Planlæg og design det spil vi skal udvikle</td><td>I skal planlægge og designe et spil som vi skal udvikle næste modul.</td></tr>
+              <tr data-step="4"><td>P</td><td>09:45 + 15</td><td>Pause inden næste modul</td><td></td></tr>
+              <tr data-step="5"><td>3U</td><td>10:00 + 30</td><td>Vi udvikler fundamentet af spillet i fællesskab</td><td>Jeg skriver koden og I hjælper mig.</td></tr>
+              <tr data-step="6"><td>3Ø</td><td>10:30 + 55</td><td>I laver jeres egne tilføjelser til koden</td><td>I må gerne arbejde sammen.</td></tr>
+              <tr data-step="7"><td>4U</td><td>11:25 + 5</td><td>Opsamling, lektier og næste lektion</td><td>Hjemmearbejde til næste gang og emnerne for næste lektion.</td></tr>
+              <tr data-step="8"><td>4Ø</td><td>11:30 + 5</td><td>Afrunding</td><td>Færdiggør jeres arbejde og saml jeres tanker.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="text-sm muted"><strong>*</strong> (U=Undervisning, Ø=Øvelse, P=Pause)</div>
+      </section>
+    </template>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js-menu@2.1.0/menu.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js-multimodal@1.0.1/plugin/multimodal/multimodal.js"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/plugin/notes.js"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+  <script src="../main.js"></script>
+</body>
+</html>
