@@ -375,19 +375,17 @@ a:has(img):hover {
 }
 .uml-sec:last-child { border-bottom: none; }
 
-.reveal code {
-    /* font-family: 'JetBrains Mono', monospace; */
+/* .reveal code {
     background: var(--bg-light) !important;
     color: var(--cyan);
     padding: 0.1em 0.35em;
     border-radius: 3px;
-    /* font-size: 0.88em; */
 }
 .reveal pre code {
     background: var(--bg-light) !important;
     color: var(--fg);
     padding: 1em 1.2em !important;
-}
+} */
 
 .reveal .footer {
     /* font-family: 'JetBrains Mono', monospace; */
