@@ -552,5 +552,5 @@ Reveal.initialize({
   
   // plugins: [ RevealMenu, Multimodal,RevealNotes],
   
-  plugins: [ RevealMenu, Multimodal],
-});
+  plugins: [ RevealMenu, Multimodal, RevealHighlight],
+})

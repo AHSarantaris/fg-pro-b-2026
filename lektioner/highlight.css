@@ -1,0 +1,112 @@
+/*
+  highlight.js theme matching VS Code "Dark+" (used across these slides).
+
+  Palette:
+    comment          #6A9955
+    keyword / control  #C586C0
+    type / class / built-in  #4EC9B0
+    function         #DCDCAA
+    string           #CE9178
+    number / constant  #B5CEA8
+    property / attr  #9CDCFE
+    tag / element    #569CD6
+    foreground       #D4D4D4
+
+  The <pre><code> background and padding come from styles.css (--bg-light),
+  so we keep .hljs transparent here.
+*/
+
+.hljs {
+  background: transparent;
+  color: #D4D4D4;
+}
+
+/* Comments */
+.hljs-comment,
+.hljs-quote,
+.hljs-doctag {
+  color: #6A9955;
+}
+
+/* Keywords, control keywords, operators-as-keywords */
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-meta-keyword,
+.hljs-literal {
+  /* color: #C586C0; */
+  color: #569CD6;
+}
+
+/* Numbers and symbols */
+.hljs-number,
+.hljs-symbol,
+.hljs-bullet {
+  color: #B5CEA8;
+}
+
+/* Strings and regex */
+.hljs-string,
+.hljs-regexp,
+.hljs-meta-string,
+.hljs-addition,
+.hljs-template-tag,
+.hljs-section {
+  color: #CE9178;
+}
+
+/* Properties and attributes (light blue) */
+.hljs-attr,
+.hljs-attribute,
+.hljs-property,
+.hljs-selector-attr,
+.hljs-selector-pseudo {
+  color: #9CDCFE;
+}
+
+/* Types, classes, built-ins (teal) */
+.hljs-type,
+.hljs-built_in,
+.hljs-class .hljs-title,
+.hljs-title.class_,
+.hljs-title.class_.inherited__ {
+  color: #4EC9B0;
+}
+
+/* Function names / constructors (yellow) */
+.hljs-title,
+.hljs-title.function_,
+.hljs-function .hljs-title,
+.hljs-selector-id {
+  color: #DCDCAA;
+}
+
+/* HTML/JSX tags and element names (blue) */
+.hljs-tag,
+.hljs-name {
+  color: #569CD6;
+}
+
+/* Variables and parameters (light blue) */
+.hljs-variable,
+.hljs-variable-2,
+.hljs-template-variable,
+.hljs-params {
+  color: #9CDCFE;
+}
+
+.hljs-meta {
+  color: #C586C0;
+}
+
+.hljs-deletion {
+  color: #F14C4C;
+}
+
+.hljs-link,
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: bold;
+}

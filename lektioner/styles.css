@@ -146,19 +146,18 @@ html {
     color: var(--blue);
 }
 
-.reveal pre {
+/* .reveal pre {
     box-shadow: 0 4px 24px rgba(0,0,0,0.4);
     border-radius: 8px;
     border: 1px solid rgba(122, 162, 247, 0.15);
 }
 .reveal pre code {
-    /* font-family: 'JetBrains Mono', monospace !important; */
     font-size: 0.8em !important;
     line-height: 1.55;
     padding: 1em 1.2em !important;
     background: var(--bg-light) !important;
     border-radius: 8px;
-}
+} */
 
 .reveal blockquote {
     border-left: 3px solid var(--purple);
@@ -375,17 +374,25 @@ a:has(img):hover {
 }
 .uml-sec:last-child { border-bottom: none; }
 
-/* .reveal code {
-    background: var(--bg-light) !important;
+.reveal code {
+    background: var(--bg-card) !important;
     color: var(--cyan);
+    /* color: var(--yellow); */
     padding: 0.1em 0.35em;
     border-radius: 3px;
 }
+.reveal pre {
+    display: inline;
+}
 .reveal pre code {
-    background: var(--bg-light) !important;
-    color: var(--fg);
-    padding: 1em 1.2em !important;
-} */
+    background: var(--bg-card) !important;
+    /* color: var(--fg); */
+    /* padding: 0.5em 0.8em !important; */
+}
+.reveal pre.block {
+    display: block;
+    background: var(--bg-card) !important;
+}
 
 .reveal .footer {
     /* font-family: 'JetBrains Mono', monospace; */
@@ -493,6 +500,10 @@ a:has(img):hover {
 .reveal .small-list li {
     margin-bottom: 1em;
     font-size: 0.9em;
+}
+
+.reveal .small-list li li {
+    font-size: 1em;
 }
 
 .bottom-nav {

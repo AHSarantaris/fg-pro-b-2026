@@ -7,9 +7,11 @@
   <title>FG ProB - Lektion 05: Git</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/all.min.css">
   <link rel="stylesheet" href="../../node_modules/reveal.js/dist/reveal.css">
-  <link rel="stylesheet" href="../../node_modules/reveal.js/dist/theme/black.css" id="theme">
+  <!-- <link rel="stylesheet" href="../../node_modules/reveal.js/dist/theme/black.css" id="theme"> -->
+  <!-- <link rel="stylesheet" href="../../node_modules/reveal.js/dist/plugin/highlight/vs-dark.css" /> -->
   <link rel="stylesheet" href="../variables.css">
   <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../highlight.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -17,7 +19,7 @@
     <div class="slides">
 
       <section class="title-slide">
-        <h1><span hidden>Lektion 05: </span>Git</h1>
+        <h1><span hidden>Lektion 05: </span>Git og GitHub</h1>
         <h3>Lektion 05</h3>
         <p>Andreas Hussain Sarantaris</p>
         <p style="font-size: 0.82em; color: var(--fg-muted);">Frederikssund Gymnasium · Programmering B</p>
@@ -25,105 +27,405 @@
 
       <section data-slide-step="0">
         <h2>(1U) Hovedbudskaberne for sidste lektion</h2>
-        <div class="small-list" style="display: grid; grid-template-columns: 1.5fr 1fr;">
+        <div class="small-list" style="display: grid; grid-template-columns: 3fr 1fr;gap:1em">
+        <!-- <div class="small-list"> -->
           <div >
             <h3>2U. Gennemgang af tutorials</h3>
             <ul>
-              <li>Vi gennemgik de to sidste p5-tutorials, "Repeating with Loops" og "Data Structure Garden".</li>
-              <li>Vi så hvordan man kan lave arrays med <code>let arr = [];</code>, og tilføje elementer til enden af et array med <code>arr.push()</code>.</li>
-              <li>Vi så syntaksen for at lave for-løkker: <pre><code>for (let i = 0; i < arr.length; i++) {...}</code></pre> .
-              </li>
+              <li>Vi gennemgik de to sidste p5-tutorials, <strong>Repeating with Loops</strong> og <strong>Data Structure Garden</strong>.</li>
+              <li>Vi så hvordan man kan lave <strong>arrays</strong> med <pre><code class="language-js">let arr = [];</code></pre>, og <strong>tilføje elementer</strong> til enden af et array med <pre><code  class="language-js">arr.push()</code></pre>.</li>
+              <li>Vi så hvordan man kan lave <strong>for-løkker</strong> med syntaksen: <pre><code class="language-js">for (let i = 0; i &lt arr.length; i++) {...}</code></pre> .</li>
+              <li>Vi så en måde at skabe mange <strong>objekter</strong> på ved at indlejre en <strong>object-literal</strong> (<code>{}</code>) i en funktion og kalde funktionen flere gange i en for-løkke.</li>
             </ul>
+          </div>
+          <div class="text-sm">
+            <pre class="block"><code class="language-js">function createFlower() {
+  let flower = {
+    x: random(20,380),
+    y: random(20,380),
+    size: random(20,75),
+    lifespan: random(255,300),
+    color: color(
+      random(255), 
+      random(255), 
+      random(255))
+  };
+  return flower;
+}</code></pre>
+          </div>
+          <div>
+            <h3>2Ø. Planlæg og design spillet + <br> 3U. Fælles implementation af spillet</h3>
+            <ul class="fragment" data-fragment-index="0">
+              <li>Vi valgte at udvikle et Tower Defence spil.</li>
+              <li>Vi lavede et objekt <pre><code>grid</code></pre> som indeholdte nogle <strong>properties</strong> for antallet af grid-elementer og deres størrelse, samt et <strong>2-dimensionelt array</strong> med information om stien som fjenderne kunne gå på.</li>
+              <li>Vi tegnede grid'et med <strong>to for-løkker</strong> til henholdsvis de <strong>horizontale</strong> og <strong>vertikale</strong> linjer.
+              <pre>
+<code class="language-js">
+for (let i=0; i &lt grid.numElems; i++) {line(0, i*grid.sizeElems, width, i*grid.sizeElems)}</code></pre>
+              </li>
+              <li>Vi tegnede stien med to "<strong>nestede</strong>" for-løkker der tegnede en <strong>lysebrun firkant</strong> hvis <pre><code>grid.data[i][j] === 1</code></pre>.</li>
+            </ul>
+          </div>
+          <div class="fragment text-sm" data-fragment-index="0">
+            <img src="images/tower-defence-grid.jpg">
           </div>
         </div>
       </section>
 
       <section data-slide-step="1">
+        <h2>(1Ø) Lektier</h2>
+        <!-- <div style="display: grid; grid-template-columns: 2fr 1fr;gap: 2em"> -->
+        <div style="width:75%">
+          <div class="homework-list">
+            <!-- <h3>2. Evaluering af lektionen: </h3>
+            <ul>
+              <li>Giv mig feedback på lektionen.</li>
+              <li>Afleveres senest klokken 21:00 i dag.</li>
+              <li>Link:</li>
+            </ul> -->
+            <!-- <h3>1. Evaluering af lektionerne</h3>
+            <ul>
+              <li>Giv mig feedback på lektionen.</li>
+              <li>I dag før klokken 21:00.</li>
+            </ul> -->
+          
+          
+            <h3>Byg videre på jeres p5.js kode og aflever den.</h3>
+            <ul>
+              <li>Hvor langt nåede I?</li>
+              <li>Var det svært/nemt? Uddyb.</li>
+              <li>Hvor meget brugte I AI?</li>
+              <li>Vi fortsætter med at planlægge og designe spillet over de næste par uger, og så implementerer, tester og dokumenterer vi det i afleveringsprojekt 1.</li>
+            </ul>
+          
+        <div class="fragment">
+          <h3>Evaluering af Forløb 13 - Opstart af JavaScript, p5.js og VS Code</h3>
+          <ul>
+            <li>Kun to af jer har evalueret.</li>
+            <li>Skal jeg forlænge fristen?</li>
+          </ul>
+          <h3>Se videoer om Git og GitHub.</h3>
+          <ul>
+            <li>Video 1: <a href="https://www.youtube.com/watch?v=y-an0v208A0">
+              Git and Github Explained in 7 Minutes</a> - Tech With Diego</li>
+            <li>Video 2: <a href="https://youtu.be/i_23KUAEtUM">Using Git with Visual Studio Code (Official Beginner Tutorial)</a> - Visual Studio Code</li>
+          </ul>
+        </div>
+      </div>
 
       </section>
 
 
       <section data-slide-step="2">
-        2.4 Omfang:
-            ”Det forventede omfang af fagligt stof er normalt svarende til 200 - 350 sider” 
-            Fagligt stof i faget omfatter alt fra 
-            netbaserede tutorials (herunder video-tutorials), 
-            netbaserede udviklingsværktøjer, 
-            biblioteksmoduler, 
-            dokumentationer og vejledninger,
-            i- og e-bøger 
-            bøger, 
-            udleveret tekst materiale
-
-        3.2 Arbejdsformer:
-            ”I den afsluttende periode af undervisningen afsættes 20 timers undervisningstid til, at eleverne med vejledning fra læreren udarbejder et eksamensprojekt i grupper på to til tre. Hvor dette ikke er muligt eller ønskeligt, kan man lade eleverne arbejde individuelt. Eksamensprojektet består af et produkt og en synopsis. Synopsen skal dokumentere udviklingen af det færdige produkt og har et omfang på 5-8 normalsider, eksklusiv koder, rutediagrammer, bilag mm” 
-        Synopsis:
-            Forblad  
-            Kort abstract 
-            Problemformulering  
-            Funktionsbeskrivelse
-            Dokumentation
-            Test
-            Konklusion  
-            Bilag
-
-        "Det er vigtigt, at man igennem hele fagets forløb sikrer en gradvis større selvstændighed i elevernes arbejde, således at de bliver i stand til at arbejde selvstændigt med eksamensprojektet. Derfor skal eleverne inden eksamensprojektet have afprøvet projektarbejdsformen, eksempelvis gennem flere forudgående projekter af mindre omfang med god mulighed for feedback og erfaringsudveksling mellem lærer og elev, og eleverne imellem. 
-"
-        "Eksamensprojektets synopsis er individuelt udarbejdet. Afleveringstidspunktet skal normalt være senest en uge før eksamensperiodens begyndelse"
-
-        ”Den enkelte elev dokumenterer løbende sin faglige udvikling i en logbog. Dokumentationen i logbogen kan have form af f.eks. programmer, noter, synopser, programbeskrivelser og flowcharts.” 
-            - Der skal inden eksamen udfærdiges en logbog. Den laves undervejs, og der laves eventuelt en portfolio i slutningen 
-            - Logbogen er en refleksionsopgave, hvor man reflekterer over egen læring. 
-            - Den kan således have tilknyttet et refleksionsresume for hvert forløb, hvor eleven gør sig nogle overvejelser om den læring der er opstået. 
-            - Logbogen skal endvidere være et sted hvor elever og lærer kan have adgang til den. (GitHub)
-
+        <h2>(2U) Supplerende stof og Omfang</h2>
+        <div style="display:grid;grid-template-columns: 1.5fr 1fr; gap: 2em">
+          <div>
+            <h3>2.3 Supplerende stof</h3>
+            <ul class="small-list">
+              <li>Det supplerende stof skal opfattes som <strong>fordybelsesområder</strong>, der ligger i forlængelse af den <strong>øvrige undervisning</strong>.</li>
+              <li>Eksempelvis kan nævnes
+                  programmering af en mobilapp,
+                  <strong>et spil</strong>,
+                  <strong>en webapplikation</strong>,
+                  en robot,
+                  en databaseapplikation
+                  eller et Internet of Things produkt.
+              </li>
+              <li>Dele af det supplerende stof vælges i <strong>samarbejde med eleverne</strong>, når det er muligt.</li>
+              <li>Fagligt samspil med de øvrige fag i uddannelsen: 
+                <ul>
+                  <li><strong>Matematik:</strong> Lineære funktioner og vektorer (Afleveringsprojekt 2).</li>
+                  <li><strong>Fysik:</strong> Bevægelse og tyngdekraft (mm.)</li>
+                  <li><strong>Biologi:</strong> Flokadfærd (Afleveringsprojekt 3).</li>
+                  <li><strong>Kommunikation & IT</strong> og <strong>teknikfag (DDU):</strong> Udvikling af hjemmesider (til næste år).</li>
+                </ul>
+              </li>
+              <li>Der skal indgå læsning af it-faglige tekster på <strong>engelsk</strong>.</li>
+              <li>En anden mulighed er at <strong>gå i dybden</strong> med mere <strong>avancerede konstruktioner</strong> i det valgte programmeringssprog.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>2.4 Omfang</h3>
+            <div class="fragment small-list">
+              <ul>
+                <li>"Det forventede omfang af fagligt stof er normalt svarende til <strong>200 - 350 sider</strong>"</li>
+                <ul>
+                  <li><strong>netbaserede tutorials</strong> (herunder <strong>video-tutorials</strong>), </li>
+                  <li>netbaserede udviklingsværktøjer</li>
+                  <li><strong>biblioteksmoduler</strong></li>
+                  <li><strong>dokumentationer</strong> og <strong>vejledninger</strong></li>
+                  <li><strong>i-</strong> og <strong>e-bøger</strong></li>
+                  <li>fysiske bøger</li>
+                  <li>udleveret tekst materiale</li>
+                </ul>
+                <li><strong>Minimum:</strong> 200 [sider] / 2 [år] / (65-20 [moduler / år]) <br>= <strong>2.5 [sider / modul]</strong>.</li>
+                <li>Vi har været igennem 4 moduler, så I skal have læst minimum <strong>10 sider</strong>.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </section>
 
+      <section>
+        <h2>(2U) Didaktiske principper og brug af AI</h2>
+        <div class="small-list" style="display:grid;grid-template-columns: 3fr 1fr; gap: 2em">
+          <div>
+            <h3>3.1 Didaktiske principper</h3>
+            <ul>
+              <li><strong>'use-modify-create'</strong>-progression fra at <strong>anvende</strong> udleverede programmer, til at <strong>modificere</strong> disse for til sidst selvstændigt at <strong>skabe</strong> (nye dele af) programmer; </li>
+              <li><strong>'Stepwise Improvement'</strong>, som teknik til <strong>trinvis</strong>, <strong>iterativ</strong> og <strong>systematisk</strong> udvikling af programmer </li>
+              <li><strong>'Worked Examples'</strong> (kombineret med <strong>'faded guidance'</strong>), til illustration af <strong>eksemplariske</strong> løsningsprocesser.</li>
+            </ul>
+          </div>
+          <div></div>
+          <div>
+            <h3>3.2 Arbejdsformer > Brug af AI</h3>
+            
+              <ul class="fragment" data-fragment-index="0">
+                <li>
+                  Det er vigtigt at have en <strong>åben dialog</strong> med eleverne om brug af <strong>generativ kunstig intelligens</strong> og understøtte dem til <strong>hensigtsmæssig brug</strong>, så der <strong>forekommer læring</strong>.
+                </li>
+                <li>
+                  Dette kunne fx være brug af generativ kunstig intelligens som <strong>redskab</strong> til at 
+                  <ul>
+                    <li><strong>forstå</strong> kode,</li>
+                    <li><strong>debugge</strong> kode,</li>
+                    <li><strong>sparre</strong> med om emner for at <strong>øge forståelsen</strong></li>
+                    <li>eller at <strong>få hjælp</strong> til at løse en opgave <strong>uden</strong> at svaret bliver genereret.</li>
+                  </ul>
+                </li>
+              </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- <section>
+        <h2>(2U) Eksamensprojekt og evaluering</h2>
+        <div class="small-list" style="display:grid;grid-template-columns: 3fr 1fr; gap: 2em">
+          <div>
+            <h3 style="margin-top:1em">3.2 Arbejdsformer > Eksamensprojekt</h3>
+            <ul class="fragment" data-fragment-index="0">
+              <li>I den afsluttende periode af undervisningen afsættes <strong>20 timers undervisningstid</strong> til, 
+                at eleverne - med <strong>vejledning</strong> fra læreren - 
+                udarbejder et eksamensprojekt i <strong>grupper</strong> på to til tre.
+              </li>
+              <li>I eksamensprojektet <strong>vælger eleverne</strong> deres problemstilling ud fra det <strong>projektoplæg</strong> som <strong>underviseren udarbejder</strong>. </li>
+              <li>Eksamensprojektet består af et <strong>produkt</strong> og en <strong>synopsis</strong>.</li>
+              <li>Synopsen skal <strong>dokumentere udviklingen</strong> af det <strong>færdige produkt</strong> og har et omfang på <strong>5-8 normalsider</strong>, eksklusiv koder, rutediagrammer, bilag mm.
+              </li>
+              <li>
+                Synopsen skal <strong>udarbejdet individuelt</strong>.
+              </li>
+              <li>
+                 <strong>Afleveringstidspunktet</strong> skal normalt være senest en uge før eksamensperiodens begyndelse.
+              </li>
+              <li>
+                Når eleverne vælger arbejdsgrupper, er det hensigtsmæssigt, at de er opmærksomme på at få <strong>delt opgaverne ligeligt</strong>, så hvert gruppemedlem er klar over, hvordan vedkommende skal bidrage til softwareløsningen.
+              </li>
+              <li>
+                Det er vigtigt, at eleverne lærer <strong>arbejdsmetoder</strong> til at arbejde sammen i grupper, fx. at bruge <strong>repositories</strong>, fx. via et <strong>Git system</strong>. 
+              </li>
+              <li>Eleverne [skal] inden eksamensprojektet have <strong>afprøvet projektarbejdsformen</strong>, eksempelvis gennem flere <strong>forudgående projekter</strong> af mindre omfang med god mulighed for <strong>feedback</strong> og <strong>erfaringsudveksling</strong> mellem lærer og elev, og eleverne imellem.</li>
+
+            </ul>
+          </div>
+          <div class="fragment" data-fragment-index="0">
+            <h3>Synopsis:</h3>
+            <ul>
+              <li>Forblad</li>
+              <li>Kort abstract</li>
+              <li>Problemformulering</li>
+              <li>Funktionsbeskrivelse</li>
+              <li>Dokumentation</li>
+              <li>Test</li>
+              <li>Konklusion</li>
+              <li>Bilag</li>
+            </ul>
+          </div>
+        </div>
+      </section> -->
+
+      <section>
+        <h2>(2U) Logbog</h2>
+        <div style="display:grid;grid-template-columns: 1.5fr 1fr; gap: 2em">
+          <div>
+            <h3>3.2 Arbejdsformer > Logbog</h3>
+            <ul class="spaced-list">
+              <li>
+                Den <strong>enkelte</strong> elev dokumenterer <strong>løbende</strong> sin <strong>faglige udvikling</strong> i en logbog.
+              </li>
+              <li>
+                Den kan således have tilknyttet et <strong>refleksionsresume</strong> for <strong>hvert forløb</strong>, hvor eleven gør sig nogle <strong>overvejelser</strong> om den <strong>læring</strong> der er opstået. 
+              </li>
+              <li>
+                Her kan eleverne
+                reflektere over deres <strong>faglige udbytte</strong> af forløbet, <strong>arbejdsprocessen</strong> og de <strong>anvendte arbejdsformer</strong>, perspektivere til <strong>andre fag</strong>, osv.
+              </li>
+              <li>
+                Dokumentationen i logbogen kan have form af f.eks. <strong>programmer</strong>, <strong>noter</strong>, <strong>synopser</strong>, <strong>programbeskrivelser</strong> og <strong>flowcharts</strong>. 
+              </li>
+              <li>Logbogen skal endvidere være et sted hvor elever og lærer kan have adgang til den. Eksempelvis GitHub.</li>
+            </ul>
+          </div>
+          <div  class="fragment">
+            <h3>Afsnittene om eksamensprojektet og bedømmelse udskydes</h3>
+            <ul>
+              <li>De <strong>sidste dele</strong> af læreplanen gennemgår vi når vi påbegynder <strong>Afleveringsprojekt 1</strong>.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+
+
       <section data-slide-step="3">
+        <h2>(2Ø) Påbegynd jeres logbog</h2>
+        <!-- <div style="display:grid;place-content: center;height:80%"> -->
+        <div style="display: grid; grid-template-columns: 2fr 1fr;gap:3em">
+          <div>
+            <h3>3.2 Arbejdsformer > Logbog</h3>
+            <ul class="spaced-list">
+              <li>Lav en mappe <code>logbog</code>.</li>
+              <li>Download følgende fil til mappen som skabelon: <a href="https://github.com/AHSarantaris/fg-pro-b-2026/blob/main/logbog/README.md">https://github.com/AHSarantaris/fg-pro-b-2026/tree/main/logbog/README.md</a>.</li>
+              <li>Opret en undermappe <code>13</code> med en ny markdown-fil <code>README.md</code>.</li>
+              <li>Påbegynd et <strong>refleksionsresumé</strong> for forløb 13 som vi lige har været igennem i readme-filen.</li>
+              <li>I får <strong>10 minutter</strong>.</li>
+              <li>Søg eventuelt på "<a href="https://www.google.com/search?q=markdown+cheat+sheet">Markdown cheat sheet</a>" for at lære syntaksen, eller <strong>spørg AI</strong> om hjælp.</li>
+            </ul>
+          </div>
+          
+          <div>
+            <h3>Slå "inline suggestions" fra i VS Code</h3>
+            <ul>
+              <li>Tryk på det lille Github copilot symbol i status-baren. <img src="images/copilot-brands-solid.png" height="50px"></li>
+              <li>Fravælg alt under "Inline Suggestions". <img src="images/inline-suggestions.png" width="200" style="margin-top: 1em" ></li>
+            </ul>
+          </div>
+        </div>
       </section>
 
       <section data-slide-step="4">
+        <h2>(3U) Git-kommandoer der bruges hver dag i én branch</h2>
+        <div style="display:grid;grid-template-columns: 1.5fr 1fr; gap: 2em">
+          <div>
+            <ul class="spaced-list">
+              <li><code>git status</code> – se hvilke filer der er ændret</li>
+              <li><code>git add -A</code> – stage alle ændringer</li>
+              <li><code>git commit -m "Beskriv ændringen"</code> – gem en version (snapshot)</li>
+              <li><code>git push</code> – send dine ændringer op til GitHub</li>
+              <li><code>git pull</code> – hent ændringer fra GitHub</li>
+              <li><code>git log</code> – se tidligere commits</li>
+            </ul>
+          </div>
+          <img src="images/git-bytebytego.png">
+        </div>
       </section>
 
       <section data-slide-step="5">
+        <h2>(3Ø) Opstart af Git</h2>
+        <div class="small-list" style="display:grid;grid-template-columns: 1fr 1fr; gap: 4em">
+          <div>
+            <h3>Installer Git:</h3>
+            <ul>
+              <li>Download den nyeste version herfra: 
+                <br>
+                <a href="https://git-scm.com/">https://git-scm.com/</a></li>
+            </ul>
+            <h3>Konfigurer Git</h3>
+            <ul>
+              <li>Åben en <strong>terminal</strong> i VS Code.</li>
+              <li><strong>Konfigurer Git med jeres navn:</strong> 
+                <div>Kør <code>git config --global user.name "Jeres Navn"</code> hvor I indsætter <em>jeres eget</em> navn så man kan se hvilke commits I har lavet.</div>
+              </li>
+              <li><strong>Konfigurer git med en email addresse:</strong> 
+                <div>Kør <code>git config --global user.email "jeres@email.dk"</code> hvor I indsætter jeres <em>personlige</em> email-addresse.</div>
+              </li>
+
+            </ul>
+          </div>
+          <div>
+            <h3>Initialisér et repository</h3>
+            <ol>
+              <li>Åben mappen i VS Code hvor jeres spil med solanimationen ligger. Omdøb den hvis der er mellemrum i mappens navn. </li>
+              <li>Åben en terminal og tjek at stien er korrekt</li>
+              <li>Kør <code>git init</code> for at initialisere versionskontrol med git i mappen. </li>
+              <li>Der laves en skjult <code>.git</code>-mappe der opdateres hver gang der køres en kommando med git så den indeholder alt information om versionerne</li>
+              <li>Opret en <code>README.md</code> fil i mappen, og skriv <code>Hello World</code> i den. </li>
+              <li>Kør <code>git add -A</code> for at "stage" jeres ændringer.</li>
+              <li>Kør <code>git commit -m "First commit: Add readme"</code>.</li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>(3Ø) Opstart af Github</h2>
+        <div  class="small-list" style="display:grid;grid-template-columns: 1fr 1fr; gap: 4em">
+          <div>
+            <h3>1: Lav en github account</h3>
+            <ul>
+              <li><strong>Brugernavn:</strong> Helst små bogstaver. Eventuelt jeres fornavn og efternavn med små bogstaver og uden mellemrum, eller initialer af enten fornavn+mellemnavn eller efternavn.</li>
+              <li><strong>Email:</strong> Brug den samme <em>personlige</em> email-addresse som i Git.</li>
+            </ul>
+            <h3>Gør GitHub til remote</h3>
+            <ol>
+              <li>Lav et <strong>public</strong> repo i Github der hedder “sunrise-game”. Jeres lokale repo behøver ikke at hedde det samme.</li>
+              <li>Gå tilbage til VS Code terminalen og kør <code>git remote add origin https://github.com/brugernavn/sunrise-game.git</code> hvor I indsætter jeres GitHub brugernavn i url-addressen.</li>
+              <li>Kør <code>git push -u origin main</code> for at <strong>pushe</strong> jeres lokale <code>main</code>-branch til <code>origin/main</code> på GitHub, og samtidig sætte <code>origin/main</code> som <em>upstream</em>-branch for jeres lokale <code>main</code>.</li>
+            </ol>
+          </div>
+          <div>
+            <h3>Lav en intentionel merge-konflikt</h3>
+            <ol>
+              <li><strong>På GitHub:</strong> Tilføj følgende linje i README.md <code>Hello mom</code> og commit.</li>
+              <li><strong>I VS Code:</strong> Kør <code>git pull</code>.</li>
+              <li><strong>I VS Code:</strong> Lav linjen om til <code>Hello mum and dad</code> og kør <code>git commit -m "edit: add 'dad' to hello message in readme"</code> men kør <em>IKKE</em> git push.</li>
+              <li><strong>På Github:</strong> Slet linjen <code>Hello mum</code> og skriv <code>Hello family</code> i stedet og commit.</li>
+              <li><strong>I VS Code:</strong> Kør <code>git pull</code>. Der burde ske en merge konflikt.</li>
+              <li><strong>I VS Code:</strong> Løs merge-konflikten ved at vælge den version som du vil beholde.</li>
+            </ol>
+          </div>
+        </div>
       </section>
 
       <section data-slide-step="6">
         <h2>(4U) Lektier</h2>
         <div class="homework-list">
-          <h3>1. Aflever jeres p5.js kode (blot jeres .js fil).</h3>
+          <h3>1. Evaluér sidste forløb</h3>
           <ul>
-            <li>Aflever koden med ændringerne til den tutorial I lavede i lektionen i dag.</li>
-            <li>Afleveres i dag inden klokken 21:00.</li>
+            <li>Hvis man ikke har gjort det endnu.</li>
           </ul>
-          <h3>2. Læs næste p5.js tutorial</h3>
+          <h3>2. Færdiggør opstarten af Git og Github</h3>
           <ul>
-            <li>Læs denne tutorial igennem: <a href="https://p5js.org/tutorials/organizing-code-with-functions/">p5js.org > Tutorials > Organizing Code with Functions</a></li>
+            <li>Hvis man ikke er færdig med det endnu.</li>
+            <li>I skal have prøvet at få en merge-konflikt.</li>
           </ul>
-          <h3>3. Overvej hvilke simple spil man kunne lave med p5.js.</h3>
+          <h3>3. Læs eller genlæs p5-tutorials</h3>
           <ul>
-            <li>(Se næste slide)</li>
-          </ul>
-          <h3>4. (Ekstra) Dan jer et overblik af VS Code: </h3>
-          <ul>
-            <li>Brugbare simple funktionaliteter: VS Code > Help > Editor playground</li>
-            <li>Flere brugbare funktionaliteter: <a href="https://code.visualstudio.com/docs/editing/codebasics">code.visualstudio.com > Docs > Documentation > Editor > Write Code > Basic Editing</a></li>
+            <li>Læs eller genlæs de p5-tutorials vi har været igennem for at få styr på JavaScript-syntaks og p5-funktioner.</li>
           </ul>
         </div>
       </section>
 
       <section>
         <h2>(4U) Næste lektion</h2>
-        <ul>
-          <li>
-            <strong>Repetition af pensum fra Programmering C i p5.js:</strong>
-            <div>Vi færdiggør p5.js tutorials om løkker og objekter.</div>
-          </li>
-          <li>
-            <strong>Vi designer og implementerer et spil:</strong>
-            <div>Vi færdiggør p5.js tutorials om løkker og objekter.</div>
-          </li>
-        </ul>
+        <div class="homework-list">
+          <h3>Dan grupper</h3>
+          <ul>
+            <li>Dan grupper til afleveringsprojekt 1</li>
+          </ul>
+          <h3>Mere om Git</h3>
+          <ul>
+            <li>Git clone og fork</li>
+            <li>Git branch</li>
+          </ul>
+          <h3>Mere om GitHub</h3>
+          <ul>
+            <li>Dokumentation, readme og markdown</li>
+            <li>Github issues og discussion</li>
+            <li>Github pages</li>
+          </ul>
+        </div>
       </section>
 
 
@@ -160,15 +462,15 @@
               </tr>
             </thead>
             <tbody>
-              <tr data-step="0"><td>1U</td><td>12:05 + 10</td><td>Opsamling fra sidst</td><td>Kort opsummering og hovedbudskaberne af sidste lektion.</td></tr>
-              <tr data-step="1"><td>1Ø</td><td>12:20 + 20</td><td>Gennemgang af lektier til i dag</td><td>Eventuelle spørgsmål om indholdet i sidste lektion, samt gennemgang af de projekter som I har fundet.</td></tr>
-              <tr data-step="2"><td>2U</td><td>12:40 + 10</td><td>Læreplan til Programmering B - Del 2</td><td>Supplerende stof, eksamensprojekt og evaluering.</td></tr>
-              <tr data-step="3"><td>2Ø</td><td>12:50 + 10</td><td> </td><td></td></tr>
+              <tr data-step="0"><td>1U</td><td>10:00 + 10</td><td>Opsamling fra sidst</td><td>Kort opsummering og hovedbudskaberne af sidste lektion.</td></tr>
+              <tr data-step="1"><td>1Ø</td><td>10:10 + 10</td><td>Gennemgang af lektier til i dag</td><td>Eventuelle spørgsmål om indholdet i sidste lektion, samt gennemgang af de projekter som I har fundet.</td></tr>
+              <tr data-step="2"><td>2U</td><td>10:20 + 20</td><td>Læreplan til Programmering B - Del 2</td><td>Supplerende stof, didaktiske pricnipper og logbøger.</td></tr>
+              <tr data-step="3"><td>2Ø</td><td>10:40 + 10</td><td>Opstart af logbøger</td><td>I får lidt tid til at påbegynde jeres logbøger med et refleksionsresume af sidste forløb.</td></tr>
               <!-- <tr data-step="2"><td>2U</td><td>12:50 + 10</td><td>Læreplan del 2 - Eksamensform og bedømmelse</td><td>Vi gennemgår anden del af læreplanen</td></tr> -->
-              <tr data-step="4"><td>3U</td><td>13:00 + 20</td><td>Gennemgang af "Variables and Change"</td><td>Jeg gennemgår en p5.js tutorial.</td></tr>
-              <tr data-step="5"><td>3Ø</td><td>13:20 + 20</td><td>Gå igennem "Conditionals and Interactivity"</td><td>I skal selv gennemgå en p5.js tutorial og lave ændringer i koden.</td></tr>
-              <tr data-step="6"><td>4U</td><td>13:45 + 5</td><td>Opsamling, lektier og næste lektion</td><td>Hjemmearbejde til næste gang og emnerne for næste lektion.</td></tr>
-              <tr data-step="7"><td>4Ø</td><td>12:40 + 5</td><td>Afrunding</td><td>Færdiggør jeres arbejde og saml jeres tanker.</td></tr>
+              <tr data-step="4"><td>3U</td><td>10:50 + 10</td><td>Introduktion til Git og GitHub</td><td> </td></tr>
+              <tr data-step="5"><td>3Ø</td><td>11:00 + 25</td><td>Opstart af Git og GitHub</td><td> </td></tr>
+              <tr data-step="6"><td>4U</td><td>11:25 + 5</td><td>Opsamling, lektier og næste lektion</td><td>Hjemmearbejde til næste gang og emnerne for næste lektion.</td></tr>
+              <tr data-step="7"><td>4Ø</td><td>11:30 + 5</td><td>Afrunding</td><td>Færdiggør jeres arbejde og reflektér over jeres læring.</td></tr>
             </tbody>
           </table>
         </div>
