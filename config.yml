@@ -2,7 +2,5 @@ theme: jekyll-theme-cayman
 title: FG - ProB - 2026/27
 url: "https://github.io"
 baseurl: "/fg-pro-b-2026"
-exclude:
+include:
   - node_modules/
-  - package.json
-  - package-lock.json
