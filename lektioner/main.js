@@ -602,7 +602,5 @@ Reveal.initialize({
     loadIcons: true
   },
   
-  // plugins: [ RevealMenu, Multimodal,RevealNotes],
-  
-  plugins: [ RevealMenu, Multimodal, RevealHighlight, RevealNotes],
+  plugins: [ RevealMenu, Multimodal, RevealHighlight, RevealNotes, RevealMath, RevealZoom],
 });
