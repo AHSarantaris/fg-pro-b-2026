@@ -3,4 +3,4 @@ title: FG - ProB - 2026/27
 url: "https://github.io"
 baseurl: "/fg-pro-b-2026"
 include:
-  - node_modules/
+  - node_modules
