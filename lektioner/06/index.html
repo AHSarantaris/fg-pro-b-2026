@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1f1f1f" />
+  <title>FG ProB - Lektion 06: Git Branches og GitHub Forks</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/all.min.css">
+  <link rel="stylesheet" href="../../node_modules/reveal.js/dist/reveal.css">
+  <!-- <link rel="stylesheet" href="../../node_modules/reveal.js/dist/theme/black.css" id="theme"> -->
+  <!-- <link rel="stylesheet" href="../../node_modules/reveal.js/dist/plugin/highlight/vs-dark.css" /> -->
+  <link rel="stylesheet" href="../variables.css">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../highlight.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <section class="title-slide">
+        <h1><span hidden>Lektion 06: </span>Git Branches og GitHub Forks</h1>
+        <h3>Lektion 06</h3>
+        <p>Andreas Hussain Sarantaris</p>
+        <p style="font-size: 0.82em; color: var(--fg-muted);">Frederikssund Gymnasium · Programmering B</p>
+      </section>
+
+      <section data-slide-step="0">
+        <h2>(1U) Hovedbudskaberne for sidste lektion</h2>
+        <div class="small-list" style="display: grid; grid-template-columns: 3fr 1fr;gap:1em">
+        <!-- <div class="small-list"> -->
+          <!-- <div >
+            <h3>2U. Gennemgang af tutorials</h3>
+            <ul>
+              <li>Vi gennemgik de to sidste p5-tutorials, <strong>Repeating with Loops</strong> og <strong>Data Structure Garden</strong>.</li>
+              <li>Vi så hvordan man kan lave <strong>arrays</strong> med <pre><code class="language-js">let arr = [];</code></pre>, og <strong>tilføje elementer</strong> til enden af et array med <pre><code  class="language-js">arr.push()</code></pre>.</li>
+              <li>Vi så hvordan man kan lave <strong>for-løkker</strong> med syntaksen: <pre><code class="language-js">for (let i = 0; i &lt arr.length; i++) {...}</code></pre> .</li>
+              <li>Vi så en måde at skabe mange <strong>objekter</strong> på ved at indlejre en <strong>object-literal</strong> (<code>{}</code>) i en funktion og kalde funktionen flere gange i en for-løkke.</li>
+            </ul>
+          </div>
+          <div class="text-sm">
+            <pre class="block"><code class="language-js">function createFlower() {
+  let flower = {
+    x: random(20,380),
+    y: random(20,380),
+    size: random(20,75),
+    lifespan: random(255,300),
+    color: color(
+      random(255), 
+      random(255), 
+      random(255))
+  };
+  return flower;
+}</code></pre>
+          </div>
+          <div>
+            <h3>2Ø. Planlæg og design spillet + <br> 3U. Fælles implementation af spillet</h3>
+            <ul class="fragment" data-fragment-index="0">
+              <li>Vi valgte at udvikle et Tower Defence spil.</li>
+              <li>Vi lavede et objekt <pre><code>grid</code></pre> som indeholdte nogle <strong>properties</strong> for antallet af grid-elementer og deres størrelse, samt et <strong>2-dimensionelt array</strong> med information om stien som fjenderne kunne gå på.</li>
+              <li>Vi tegnede grid'et med <strong>to for-løkker</strong> til henholdsvis de <strong>horizontale</strong> og <strong>vertikale</strong> linjer.
+              <pre>
+<code class="language-js">
+for (let i=0; i &lt grid.numElems; i++) {line(0, i*grid.sizeElems, width, i*grid.sizeElems)}</code></pre>
+              </li>
+              <li>Vi tegnede stien med to "<strong>nestede</strong>" for-løkker der tegnede en <strong>lysebrun firkant</strong> hvis <pre><code>grid.data[i][j] === 1</code></pre>.</li>
+            </ul>
+          </div>
+          <div class="fragment text-sm" data-fragment-index="0">
+            <img src="images/tower-defence-grid.jpg">
+          </div>
+        </div> -->
+      </section>
+
+      <section data-slide-step="1">
+        <h2>(1Ø) Lektier</h2>
+        <!-- <div style="display: grid; grid-template-columns: 2fr 1fr;gap: 2em"> -->
+        <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 2em">
+          <div class="homework-list">
+            <h3>Se videoer om Git og GitHub.</h3>
+            <ul>
+              <li>Video 1: <a href="https://www.youtube.com/watch?v=y-an0v208A0">
+                Git and Github Explained in 7 Minutes</a> - Tech With Diego</li>
+              <li>Video 2: <a href="https://youtu.be/i_23KUAEtUM">Using Git with Visual Studio Code (Official Beginner Tutorial)</a> - Visual Studio Code</li>
+            </ul>
+            <h3>Færdiggør opstarten af Git og Github</h3>
+            <ul>
+              <li>Hvor langt er I nået? Har I fået en merge konflikt?</li>
+            </ul>
+            <h3>Evaluering af Forløb 13 - Opstart af JavaScript, p5.js og VS Code</h3>
+            <ul>
+              <li>Opsamling.</li>
+            </ul>
+            <h3>Læs eller genlæs p5-tutorials</h3>
+            <ul>
+              <li>Giver det bedre mening nu?</li>
+            </ul>
+          </div>
+          
+          <div class="fragment">
+            <h3>Lav en intentionel merge-konflikt</h3>
+            <ol>
+              <li><strong>På GitHub:</strong> Tilføj følgende linje i README.md <code>Hello mom</code> og commit.</li>
+              <li><strong>I VS Code:</strong> Kør <code>git pull</code>.</li>
+              <li><strong>I VS Code:</strong> Lav linjen om til <code>Hello mum and dad</code> og kør <code>git commit -m "edit: add 'dad' to hello message in readme"</code> men kør <em>IKKE</em> git push.</li>
+              <li><strong>På Github:</strong> Slet linjen <code>Hello mum</code> og skriv <code>Hello family</code> i stedet og commit.</li>
+              <li><strong>I VS Code:</strong> Kør <code>git pull</code>. Der burde ske en merge konflikt.</li>
+              <li><strong>I VS Code:</strong> Løs merge-konflikten ved at vælge den version som du vil beholde.</li>
+            </ol>
+          </div>
+        </div>
+
+      </section>
+
+
+      <section data-slide-step="2">
+        <h2>(2U) Git Branches</h2>
+        <div class="small-list" style="display:grid;grid-template-columns:2fr 1fr;gap:2em">
+          <div>
+            <h3>Hvordan skal man branche?</h3>
+            <ul>
+              <li>Lav en ny branch <strong>hver gang</strong> du arbejder på en ny feature til dit program.</li>
+              <li>Brug <strong>korte, beskrivende navne</strong> med <strong>bindestreger</strong> og <strong>små bogstaver</strong>, fx. <code>branch-navn</code>.</li>
+            </ul>
+            <h3>Workflow</h3>
+            <ul class="fragment">
+              <li>Lav altid en ny branch <strong>fra <code>main</code></strong>: Kør <code>git switch main</code> først, ellers arver din nye branch ændringer fra den gamle.</li>
+              <li>Hold branches <strong>små og afgrænsede</strong>: Én feature pr. branch, og lav mange <strong>små commits</strong> undervejs.</li>
+              <li><strong>Undgå</strong> generelt at arbejde i <code>main</code>-branchen. <strong>Main</strong> skal kun bruges når man <strong>merger</strong> en branch ind i den.</li>
+              <li>Når man er sikker på at <strong>alt fungerer</strong> merger man feature-branchen ind i <strong>main</strong>.</li>
+            </ul>
+            <h3>Samarbejde over GitHub</h3>
+            <ul class="fragment">
+              <li><strong>Pull</strong> de seneste ændringer (<code>git pull</code>) fra <code>main</code>, før du merger - så undgår du flest <strong>merge-konflikter</strong>.</li>
+              <li><strong>Push</strong> din feature-branch til GitHub (<code>git push -u origin branch-navn</code>) - også mens du stadig arbejder på den, så dit arbejde er i sikkerhed.</li>
+              <li>Hvis man <strong>samarbejder</strong> med andre laver man en <strong>pull request</strong> som andre kan <strong>reviewe</strong> før branchen merges ind i main.</li>
+            </ul>
+          </div>
+          <div>
+            <img src="images/git-branches-features.webp">
+            <p style="margin-bottom: 2em">Kilde: <a href="https://www.sitepoint.com/use-git-branches-buddy/">SitePoint</a></p>
+            <img src="images/git-branches-merge.avif">
+            <p>Kilde: <a href="https://blog.nobledesktop.com/learn/git/git-branches">Noble Desktop Buddy</a></p>
+          </div>
+        </div>
+      </section>
+
+
+      <section data-slide-step="3">
+        <h2>(2Ø) Fork, clone og branch et projekt</h2>
+        <div class="small-list homework-list">
+          <h3>Fork og clone repo fra GitHub</h3>
+          <ol>
+            <li>Gå ind på følgende GitHub repository: 
+              <div><a href="https://github.com/AHSarantaris/sunrise-game/">https://github.com/AHSarantaris/sunrise-game/</a></div>
+            </li>
+            <li>Følg denne guide for at <strong>forke</strong> repository'et og <strong>clone</strong> det til jeres computer: 
+              <div><a href="https://docs.github.com/en/pull-requests/how-tos/work-with-forks/fork-a-repo">https://docs.github.com/en/pull-requests/how-tos/work-with-forks/fork-a-repo</a></div>
+            </li>
+          </ol>
+          <h3>Lav en feature-branch</h3>
+          <ol>
+            <li>Lav en ny branch: <code>git switch -c deflating-sun</code></li>
+            <li>Få solen til at punktere når man klikker på den, og først derefter skal den falde ned: 
+              <ul>
+                <li>Stop solen: Gør hastigheden til 0. <strong>Commit</strong> når det fungerer.</li>
+                <li>Sæt et <strong>flag</strong> der angiver at solen punkterer: <code>sun.isDeflating = true</code>. <strong>Commit</strong> når det fungerer.</li>
+                <li>Gør diameteren mindre med en konstant hastighed når det <strong>flag</strong> er sandt. <strong>Commit</strong> når det fungerer.</li>
+                <li>Stop når diameteren blive mindre end en bestemt værdi, prøv 40 pixel. <strong>Commit</strong> når det fungerer.</li>
+              </ul>
+            </li>
+            <li>På et hvilket somhelst tidspunkt efter det første commit i branchen pusher I til GitHub: <code>git push -u origin deflating-sun</code>.</li>
+            <li>Når alt fungerer så <strong>merge</strong> jeres branch ind i <code>main</code> igen: <code>git switch main</code> og så <code>git merge deflating-sun</code>.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section data-slide-step="4">
+      </section>
+
+      <section data-slide-step="5">
+        <h2>(3Ø) Opstart af Git</h2>
+        <div class="small-list" style="display:grid;grid-template-columns: 1fr 1fr; gap: 4em">
+        </div>
+      </section>
+
+
+      <section data-slide-step="6">
+        <h2>(4U) Lektier</h2>
+        <!-- <div class="homework-list">
+          <h3>1. Evaluér sidste forløb</h3>
+          <ul>
+            <li>Hvis man ikke har gjort det endnu.</li>
+          </ul>
+          <h3>2. Se følgende videoer om Git og GitHub.</h3>
+          <ul>
+            <li>Video 1: <a href="https://www.youtube.com/watch?v=y-an0v208A0">
+              Git and Github Explained in 7 Minutes</a> - Tech With Diego</li>
+            <li>Video 2: <a href="https://youtu.be/i_23KUAEtUM">Using Git with Visual Studio Code (Official Beginner Tutorial)</a> - Visual Studio Code</li>
+          </ul>
+          <h3>3. Færdiggør opstarten af Git og Github</h3>
+          <ul>
+            <li>Hvis man ikke er færdig med det endnu.</li>
+            <li>I skal have prøvet at få en merge-konflikt.</li>
+          </ul>
+          <h3>4. Læs eller genlæs p5-tutorials</h3>
+          <ul>
+            <li>Læs eller genlæs de p5-tutorials vi har været igennem for at få styr på JavaScript-syntaks og p5-funktioner.</li>
+          </ul>
+        </div> -->
+      </section>
+
+      <section>
+        <h2>(4U) Næste lektion</h2>
+        <!-- <div class="homework-list">
+          <h3>Dan grupper</h3>
+          <ul>
+            <li>Dan grupper til afleveringsprojekt 1</li>
+          </ul>
+          <h3>Mere om Git</h3>
+          <ul>
+            <li>Git clone og fork</li>
+            <li>Git branch</li>
+          </ul>
+          <h3>Mere om GitHub</h3>
+          <ul>
+            <li>Dokumentation, readme og markdown</li>
+            <li>Github issues og discussion</li>
+            <li>Github pages</li>
+          </ul>
+        </div> -->
+      </section>
+
+
+
+
+      <section data-slide-step="7">
+        <h2>(5Ø) Lektionen er slut</h2>
+        <div style="display: flex;flex-direction: column;justify-content: space-evenly; height: 80%;margin-left:10%;">
+          <h3>Læg en plan for hvornår I vil lave lektierne og sæt en påmindelse</h3>
+          <!-- <h3>... færdiggør og GEM jeres arbejde</h3> -->
+          <h3>... reflektér over det I har lært og saml jeres tanker</h3>
+          <h3>... I kan gå når I vil.</h3>
+        </div>
+      </section>
+      
+      
+
+    </div>
+
+    <template id="agenda-template">
+      <section class="agenda">
+        <!-- <h2 class="agenda-header" style="display: none">Program</h2> -->
+        <h2 class="agenda-header">Program</h2>
+        <!-- <h2>Program</h2> -->
+        <div class="flex-center" style="font-size: 1.05em;">
+          <table class="agenda-table">
+            <thead>
+              <tr>
+                <!-- Trin: Del, sektion,... -->
+                <th><strong>Punkt *</strong></th>
+                <th><strong>Start + varighed</strong></th>
+                <th><strong>Aktivitet</strong></th>
+                <th><strong>Indhold</strong></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr data-step="0"><td>1U</td><td>10:00 + 10</td><td>Opsamling fra sidst</td><td>Kort opsummering og hovedbudskaberne af sidste lektion.</td></tr>
+              <tr data-step="1"><td>1Ø</td><td>10:10 + 10</td><td>Gennemgang af lektier til i dag</td><td>Eventuelle spørgsmål om indholdet i sidste lektion, samt gennemgang af de projekter som I har fundet.</td></tr>
+              <tr data-step="2"><td>2U</td><td>10:20 + 20</td><td>Git branches og GitHub forks</td><td>Introduktion til at arbejde med forskellige branches af et repo, samt forke et projekt på GitHub.</td></tr>
+              <tr data-step="3"><td>2Ø</td><td>10:40 + 10</td><td>Fork et projekt og udvid det</td><td>I skal forke et projekt fra Github, clone det til jeres computer og lave en feature-branch der så skal merges ind i main.</td></tr>
+              <!-- <tr data-step="2"><td>2U</td><td>12:50 + 10</td><td>Læreplan del 2 - Eksamensform og bedømmelse</td><td>Vi gennemgår anden del af læreplanen</td></tr> -->
+              <tr data-step="4"><td>3U</td><td>10:50 + 10</td><td>Dokumentation, readme og markdown</td><td>Kort introduktion til dokumentation af projekter med README filer og markdown formattet.</td></tr>
+              <tr data-step="5"><td>3Ø</td><td>11:00 + 25</td><td></td><td> .</td></tr>
+              <tr data-step="6"><td>4U</td><td>11:25 + 5</td><td>Opsamling, lektier og næste lektion</td><td>Hjemmearbejde til næste gang og emnerne for næste lektion.</td></tr>
+              <tr data-step="7"><td>4Ø</td><td>11:30 + 5</td><td>Afrunding</td><td>Færdiggør jeres arbejde og reflektér over jeres læring.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="text-sm muted"><strong>*</strong> (U=Undervisning, Ø=Øvelse)</div>
+      </section>
+    </template>
+
+  </div>
+  <script src="../../node_modules/reveal.js/dist/reveal.js"></script>
+  <script src="../../node_modules/reveal.js-menu/menu.js"></script>
+  <script src="../../node_modules/reveal.js-multimodal/plugin/multimodal/multimodal.js"></script>
+  <script src="../../node_modules/reveal.js/dist/plugin/notes.js"></script>
+  <script src="../../node_modules/reveal.js/dist/plugin/highlight.js"></script>
+  <script src="../../node_modules/reveal.js/dist/plugin/zoom.js"></script>
+  <script src="../../node_modules/reveal.js/dist/plugin/math.js"></script>
+  
+  <script src="../main.js"></script>
+</body>
+</html>

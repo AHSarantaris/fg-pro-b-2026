@@ -1,25 +1,6 @@
-# get-started
+# Sunrise Game
+A game where the user has to click on the sun before it moves out of view.
 
-## Getting Started
+## Acknowledgements
+Fork of the [sunrise animation](https://editor.p5js.org/gbenedis@gmail.com/sketches/9lz2aqfTO) in the p5.js tutorial [Conditionals and Interactivity](https://p5js.org/tutorials/conditionals-and-interactivity/) by Greg Benedis-Grab and Layla Quiñones.
 
-Open `index.html` in your web browser and start editing `sketch.js`.
-
-## Running Locally
-
-For projects with media files, use a local server:
-
-```bash
-# Using Python
-python -m http.server 8000
-
-# Using Node.js
-npx http-server
-
-# Using VS Code Live Server extension
-# Right-click index.html -> "Open with Live Server"
-```
-
-## Resources
-
-- [p5.js 2.0](https://beta.p5js.org/)
-- [p5.js Reference](https://p5js.org/reference/)
