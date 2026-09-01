@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1f1f1f" />
+  <title>FG ProB - Lektion 07: Softwareudviklingsprocessen</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/all.min.css">
+  <link rel="stylesheet" href="../../node_modules/reveal.js/dist/reveal.css">
+  <!-- <link rel="stylesheet" href="../../node_modules/reveal.js/dist/theme/black.css" id="theme"> -->
+  <!-- <link rel="stylesheet" href="../../node_modules/reveal.js/dist/plugin/highlight/vs-dark.css" /> -->
+  <link rel="stylesheet" href="../variables.css">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../highlight.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <section class="title-slide">
+        <h1><span hidden>Lektion 07: </span>Softwareudviklingsprocessen (SDLC)</h1>
+        <h3>Lektion 07</h3>
+        <p>Andreas Hussain Sarantaris · 01-09-2026</p>
+        <p style="font-size: 0.82em; color: var(--fg-muted);">Frederikssund Gymnasium · Programmering B</p>
+      </section>
+
+      <section data-slide-step="0">
+        <h2>(1U) Hovedbudskaberne for sidste lektion</h2>
+        <div class="small-list" style="display: grid; grid-template-columns: 2.2fr 1fr;column-gap:1em; font-size: 0.9em">
+          
+          <div>
+            <h3>Video 1 - Tech with Diego</h3>
+            <ul>
+              <li>Hvad er formålet med at bruge Git og GitHub?
+                <ul>
+                  <li>Hvis I laver en ændring i jeres kode som skaber en fejl og derefter bruger timer på at fikse fejlen og så ikke længere kan trykke "undo".</li>
+                  <li>Hvis I vil afprøve nye features så behøver I ikke at gemme forskellige versioner af programmet.</li>
+                  <li>Man kan samarbejde uden at skulle sende filer til hinanden.</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <div style="background-color: var(--bg-card);">
+              <pre>
+
+  game.js 
+  game_old.js
+  game_old2.js
+  game_final.js
+  game_final2.js
+  game_final_FINAL.js
+
+              </pre>
+            </div>
+          </div>
+          <div>
+            <h3 style="margin-top:0.5em">Video 2 - Visual Studio Code</h3>
+            <ul>
+              <li>Hvordan man kan bruge VS Code's integrerede <strong>source control interface</strong> som hjælp til git.</li>
+              <li>Mere information om Git i VS Code (inklusiv <strong>merge-konflikter</strong>): <a href="https://code.visualstudio.com/docs/sourcecontrol/overview">https://code.visualstudio.com/docs/sourcecontrol/overview</a></li>
+            </ul>
+          </div>
+          <div style="padding: 0 5em">
+            <img src="images/vscode-git.png">
+          </div>
+          <div>
+            <h3>Intentionel merge konflikt</h3>
+            <ul>
+              <li>Vi nåede ikke så meget mere end det som var lektier til sidste gang.</li>
+              <li><strong>Budskab:</strong> I skal <em>ikke</em> ændre i <strong>samme linje kode</strong> som andre der samarbejder med jer over git.</li>
+            </ul>
+          </div>
+          <div style="padding-left: 0em; padding-top: 1em">
+            <img src="images/merge-editor-overview.png">
+          </div>
+        </div>
+      </section>
+
+      <section data-slide-step="1">
+        <h2>(1Ø) Lektie - Fork og clone et projekt</h2>
+        <div class="small-list homework-list" style="font-size: 0.9em;">
+          <h3>Fork og clone repo fra GitHub</h3>
+          <ol>
+            <li>Gå ind på følgende GitHub repository: 
+              <div><a href="https://github.com/AHSarantaris/sunrise-game/">https://github.com/AHSarantaris/sunrise-game/</a></div>
+            </li>
+            <li>Følg denne guide for at <strong>forke</strong> repository'et og <strong>clone</strong> det til jeres computer, men stop før afsnittet "Configuring Git to sync your fork with the upstream repository":
+              <div><a href="https://docs.github.com/en/pull-requests/how-tos/work-with-forks/fork-a-repo">https://docs.github.com/en/pull-requests/how-tos/work-with-forks/fork-a-repo</a></div>
+            </li>
+          </ol>
+          <h3>Lav en feature-branch i det klonede projekt</h3>
+          <p><strong>BEMÆRK:</strong> Hvis jeres "main"-branch hedder master i stedet så skriv master i stedet for main i alle git kommandoer nedenfor.</p>
+          <ol>
+            <li>Lav en ny branch: <code>git switch -c deflating-sun</code></li>
+            <li>Lav ændringer i koden så solen <strong>punkterer</strong> når man klikker på den, og først derefter skal den falde ned. Følg disse trin:
+              <ul>
+                <li>Stop solen når der trykkes på den: Gør hastigheden til 0.</li>
+                <li>Lav en property på variablen sun med navnet <code>isDeflating</code> der er falsk i starten, og gør den sand når der trykkes på den: <code>sun.isDeflating = true</code>.</li>
+                <li>Gør diameteren mindre med en konstant hastighed når <code>sun.isDeflating</code> er sand.</li>
+                <li>Stop når diameteren blive mindre end en bestemt værdi, prøv 40 pixel.</li>
+                <li>Få solen til at falde ned i frit fald (som før) når diameteren har nået den bestemte værdi.</li>
+              </ul>
+            </li>
+            <li>Når alt fungerer så <strong>commit</strong> jeres ændringer.</li>
+            <li>Derefter pusher I til GitHub: <code>git push -u origin deflating-sun</code>.</li>
+            <li>Derefter så <strong>merge</strong> jeres branch ind i <code>main</code> igen: <code>git switch main</code> og til sidst <code>git merge deflating-sun</code>.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section>
+        <h2>(1Ø) Evaluering</h2>
+        <div class="small-list homework-list">
+          <h3>Flere små øvelser</h3>
+          <ul>
+            <li>Jeg har hørt jeres efterspørgsel og vil forsøge at give jer flere <strong>små</strong> og <strong>lette</strong> øvelser med en <strong>tydelig fremgangsmåde</strong>.</li>
+            <li>Jeg vil lave dem lidt <strong>på samme måde</strong> som opgaverne til Git og Github, og især "<strong>Fork og clone et projekt</strong>".</li>
+          </ul>
+          <h3>Flere projekter</h3>
+          <ul>
+            <li>Projekterne kommer stille og roligt, så jeg håber I vil være tålmodige og se det som vi gennemgår nu som <strong>forberedelse</strong> til projekterne.</li>
+            <li>Planen har været at I skal <em>rystes lidt</em> og få et <strong>overblik</strong> over <strong>værktøjerne</strong> og <strong>sværhedsgraden</strong>, og derefter tager vi det i et mere <strong>roligt tempo</strong> og får styr på <strong>værktøjerne</strong> og <strong>programmeringssproget</strong> ved at lave nogle <strong>projekter</strong>.</li>
+          </ul>
+          <h3>I har svært ved at fokusere i fremlæggelserne og lære programmeringssproget</h3>
+          <ul>
+            <li>Der var ikke nok øvelser hvor I kunne arbejde med programmeringssproget.</li>
+            <li>Det var <em>ikke meningen</em> at I skulle have helt styr på programmeringssproget endnu, blot en smule omkring <strong>variabler</strong>, <strong>betingelser</strong>, <strong>løkker</strong> og <strong>objekter</strong>. Mestringen kommer i projekterne.</li>
+            <li>Jeg skulle også lige finde jeres niveau, siden at I allerede har haft programmering i et år, men jeg tror det vil blive lettere når vi kommer igang med første projekt.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- <section>
+        <h2>(1Ø) Mine forventninger til mig selv </h2>
+        <ol class="spaced-list" style="font-size: 1.1em;">
+          <li>At jeg er <strong>velforberedt</strong> og har <strong>overskud</strong>.</li>
+          <li>At jeg behandler alle med <strong>respekt</strong> og skaber et <strong>trygt</strong> og <strong>åbent læringsmiljø</strong>, hvor alle spørgsmål er velkomne (men <em>ikke nødvendigvis</em> besvares).</li>
+          <li>At jeg er <strong>tilgængelig</strong> for spørgsmål og vejledning - både i og uden for timerne, og at jeg <strong>ikke bliver irriteret</strong> hvis jeg bliver nødt til at forklare noget på <strong>forskellige måder</strong> før det giver mening.</li>
+          <li>At jeg er <strong>ærlig</strong>, hvis jeg ikke kender svaret på et spørgsmål, og <strong>anerkender</strong> hvis jeg har sagt noget forkert eller <strong>begået en fejl</strong>.</li>
+          <li>At jeg <strong>lytter</strong> til jeres <strong>feedback</strong> og <strong>justerer undervisningen</strong>, når det giver mening.</li>
+        </ol>
+
+      </section>
+
+      
+      <section>
+        <h2>(1Ø) Mine forventninger til jer</h2>
+        <ol class="spaced-list" style="font-size: 0.9em">
+          <h3>Undervisningen</h3>
+          <li>At I <strong>ikke laver andet</strong> i undervisningstiden (pånær noter eller andet fagligt relevant), og at I <strong>i stedet fortæller mig</strong> hvis I har behov for en pause eller I synes noget er <strong>uinteressant</strong> eller jeg har <strong>brugt for meget tid</strong> på noget.</li>
+          <li>At I <strong>respekterer</strong> hinandens og min <strong>tid</strong> ved at møde <strong>velforberedte</strong>, <em>især</em> hvis I ikke kunne være til sidste lektion. Som <em>minimum</em> kig i <strong>materialet</strong> (slides, uddelt kode, øvelser, etc) og dan jer et <strong>overblik</strong> over hvad vi gik igennem.</li>
+          <li>At I <strong>ikke taler med sidemakkeren</strong> i undervisningen, <strong>selv</strong> ved spørgsmål, men nævner det for <strong>hele klassen</strong>, eller stiller spørgsmålet til mig (<em>pånær hvis det bare er en kort intern kommentar</em>). </li>
+          <h3>Fejlfinding</h3>
+          <li>At I <strong>hjælper hinanden</strong> med at forstå stoffet og at kunne løse opgaverne, <strong>uden blot at give svaret</strong>, men har andres <strong>læring</strong> i mente.</li>
+          <li>At I <strong>spørger</strong> når der er noget I ikke forstår, eller <strong>tror</strong> jeg har begået en fejl, og at I ikke holder jer tilbage.</li>
+          <li>At I <strong>prøver selv</strong>, før I spørger om hjælp til opgaver.</li>
+          <li>At I <strong>tør begå fejl</strong>, og kan klare at blive fortalt at <strong>noget I har lavet er forkert</strong>.</li>
+          <li>At I <strong>bærer over med mig</strong> hvis jeg siger tingene lidt for <strong>direkte</strong>, og ikke tager det <strong>personligt</strong>, men at I kan tåle at tage fejl, siden at alle mennesker begår fejl, men anerkender at det er <strong>en del af læringen</strong>.</li>
+          <h3>Ansvar</h3>
+          <li>At I tager faget <strong>seriøst</strong> og bruger den <strong>nødvendige tid</strong> til at følge med i kurset, fremfor at springe over hvor gærdet er lavest.</li>
+          <li>At I <strong>ikke snyder</strong> men <strong>taler med mig</strong> hvis I er bekymrede for jeres karakterer eller om I består.</li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>(1Ø) Fremgangsmåde når man har problemer</h2>
+        <div class="homework-list small-list" style="display: grid;grid-template-columns: 1fr 1fr;gap:2em">
+          <div>
+            <h3>1. Prøv selv</h3>
+            <ol>
+              <li>
+                Kig i dokumentationen.
+                <ul>
+                  <li>Hvis I ikke ved hvor I skal lede så spørg mig</li>
+                  <li>Hvis I ikke forstår  dokumentationen så spørg mig</li>
+                </ul>
+              </li>
+              <li>
+                Søg på google
+                <ul>
+                  <li>Hvis I ikke ved hvad I skal søge på så spørg mig</li>
+                  <li>Hvis I ikke forstår det der står på google så spørg mig</li>
+                </ul>
+              </li>
+              <li>
+                Spørg en AI
+                <ul>
+                  <li>Hvis den ikke har alt kontekst der er nødvendigt for at stille spørgsmålet så spørg mig</li>
+                  <li>Hvis I er i tvivl om AI's svar så spørg mig</li>
+                </ul>
+              </li>
+            </ol>
+            <h3>2. Spørg jeres sidemakker</h3>
+            <ul>
+              <li>Hvis ikke han har lavet opgaven så spørg mig.</li>
+              <li>Hvis ikke han kan (eller vil) hjælpe så spørg mig.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Tilfælde hvor I skal spørge mig med det samme</h3>
+            <ul>
+              <li class="fragment">Hvis terminalen er igang med en nedtælling til at slette alt på jeres computer.</li>
+            </ul>
+            <div class="fragment">
+              <h3>Hvorfor I ikke skal spørge mig om hjælp som det første</h3>
+              <ul>
+                <li>I er ikke afhængige af mig. Programmering handler meget om at kunne løse problemer og søge på tingene selv (især nu med AI).</li>
+                <li>Nogle gange kender jeg ikke en præcis funktion, syntaks eller kommando.</li>
+                <li><strong>Vigtigt:</strong> 
+                  <ul>
+                    <li>I skal heller ikke holde jer tilbage med at spørge, for hvis I ikke er sikre på det som I har lavet så kan der opstå nogle problemer hen ad vejen som kan være svære at løse. </li>
+                    <li>Men I skal blot <strong>acceptere</strong> hvis jeg beder jer om lige at søge på det selv, og derefter vil jeg <strong>meget gerne</strong> hjælpe jer.</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+
+      </section> -->
+
+
+      <section data-slide-step="2">
+        <h2>(2U) Software Development Life Cycle (SDLC) - Del 1</h2>
+        <div class="homework-list" style="display: grid; grid-template-columns: 1fr 1fr;gap:2em">
+          <div>
+            <h3>1. Planlægning og analyse</h3>
+            <ul>
+              <li>Hvilket <strong>problem</strong> skal vi løse og hvordan <strong>kunne</strong> det løses?</li>
+              <li>Problemformulering, problemanalyse, identificering af begrænsninger og eksisterende løsninger.</li>
+              <li><strong>Metoder:</strong> Interessentanalyse, konkurrentanalyse, brainstorm af funktionaliteter, etc.</li>
+            </ul>
+            <h3>2. Kravspecifikation</h3>
+            <ul>
+              <li>Hvad er <strong>kravene</strong> for programmet så det <strong>løser problemet</strong>?</li>
+              <li>Valg og prioritering af features og funktionaliteter.</li>
+              <li><strong>Metoder:</strong> MoSCoW, MVP, etc.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>3. Design</h3>
+            <ul>
+              <li>Hvordan <strong>strukturerer</strong> og <strong>designer</strong> vi programmet så det <strong>opfylder kravene</strong>?</li>
+              <li>Design af systemarkitektur, brugergrænseflade, interaktioner</li>
+              <li><strong>Metoder:</strong> Use cases, flow diagrammer, klassediagrammer, datastrukturer, pseudokode, etc.</li>
+            </ul>
+          </div>
+        </div>
+        <p>Læs mere: <a href="https://www.geeksforgeeks.org/software-engineering/software-development-life-cycle-sdlc/">https://www.geeksforgeeks.org/software-engineering/software-development-life-cycle-sdlc/</a></p>
+      </section>
+
+      <section>
+        <h2>(2U) Software Development Life Cycle (SDLC) - Del 2</h2>
+        <div class="homework-list" style="display: grid; grid-template-columns: 1fr 1fr;gap:2em">
+          <div>
+            <h3>4. Implementation</h3>
+            <ul>
+              <li><strong>Byg</strong> og <strong>dokumentér</strong> det program vi har designet.</li>
+              <li><strong>Først her</strong> begynder man at programmere. Programmet bliver <strong>løbende</strong> dokumenteret, for at andre (og en selv) kan forstå de forskellige dele.</li>
+              <li><strong>Bemærk:</strong> Her laves også <strong>enhedstest</strong>, selvom test-fasen først er næste fase.</li>
+            </ul>
+            <h3>5. Test</h3>
+            <ul>
+              <li><strong>Løser</strong> programmet problemet?</li>
+              <li>Test programmet som helhed, om der er nogen bugs, glitches, uforudsete hændelser. Afprøv alle muligheder, selv noget som man ikke forventer at brugeren gør.</li>
+              <li><strong>Metoder:</strong> Alpha og beta test, brugertest, etc.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>6. Udrulning (Deployment)</h3>
+            <ul>
+              <li><strong>Lancér</strong> programmet så brugerne kan bruge det og <strong>problemet løses</strong>.</li>
+              <li>Sørg for at der ikke er <strong>sensitive informationer</strong> i koden, og indpak alle de relevante filer i det rette format (eksempelvis en executable eller en zip-fil).</li>
+              <li>Sørg for at der er den nødvendige <strong>dokumentation</strong> for at kunne bruge programmet.</li>
+            </ul>
+            <h3>7. Opretholdelse (Maintenance)</h3>
+            <ul>
+              <li>Oprethold programmet så det <strong>bliver ved</strong> med at fungere, og <strong>support</strong> brugerne så problemet <strong>fortsat løses</strong>.</li>
+              <li>Rettelse af fejl, levering af opdateringer, support i at bruge programmet, overvåg ydeevnen.</li>
+            </ul>
+          </div>
+        </div>
+        <p>Læs mere: <a href="https://www.geeksforgeeks.org/software-engineering/software-development-life-cycle-sdlc/">https://www.geeksforgeeks.org/software-engineering/software-development-life-cycle-sdlc/</a></p>
+      </section>
+
+      <section>
+        <h2>(2U) SDLC Modeller</h2>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1em; text-align: center;">
+          <div>
+            <!-- <h3>Waterfall</h3> -->
+            <img src="images/waterfall_methodology.webp" style="height: 400px">
+            <p>Figur 1: Vandfaldsmodellen. <a href="https://www.geeksforgeeks.org/software-engineering/waterfall-model/">Kilde</a>.</p>
+          </div>
+          <div>
+            <!-- <h3>Iterative</h3> -->
+            <img src="images/interative-model.jpg" style="height: 400px">
+            <p>Figur 2: Iterativ model. <a href="https://www.geeksforgeeks.org/software-engineering/top-8-software-development-models-used-in-industry/">Kilde</a>.</p>
+          </div>
+          <div style="grid-column: span 2">
+            <!-- <h3>Agile</h3> -->
+            <img src="images/agile-model.jpeg" style="height: 400px">
+            <p>Figur 3: Agile (Scrum). <a href="https://soldevelo.com/blog/is-agile-always-the-best-solution-for-software-development-projects/">Kilde</a>.</p>
+          </div>
+        </div>
+      </section>
+
+      
+      <section data-slide-step="3">
+        <h2>(2Ø) Problemformulering og Interessentanalyse</h2>
+        <div class="homework-list" style="display: grid; grid-template-columns: 2fr 1fr;">
+          <div>
+            <h3>Problemformulering</h3>
+            <ul>
+              <li>Vores (fiktive) problem: "Anne Vedersø vil gerne have udviklet et online Tower Defence-spil til eleverne på FG og folkeskoleelever i Frederikssund og omegn, så de kan se hvad man kan lære i programmering B på FG for højere antal ansøgningere, og det skal lanceres søndag før efterårsferien."</li>
+            </ul>
+          </div>
+          <div>
+
+          </div>
+          <div>
+            <h3>Interessentanalyse</h3>
+            <ul>
+              <li>Undersøg hvad kunden, brugerne og andre interessenter behøver og ønsker.</li>
+              <li>Interessenter:
+                <ul>
+                  <li>Kunde: Anne Vedersø.</li>
+                  <li>Projektleder: Andreas.</li>
+                  <li>Softwareudviklingerne: Jer.</li>
+                  <li>Brugere: Eleverne på FG og folkeskoleelever i Frederikssund og omegn.</li>
+                  <li>Andre?</li>
+                </ul>
+              </li>
+              <li>Hvad er Interessenternes ønsker og behov? Fælles markdown dokument.</li>
+            </ul>
+          </div>
+          <div style="align-self:center">
+            <img src="images/stakeholder-matrix.avif">
+          </div>
+        </div>
+      </section>
+      
+      <section>
+        <h2>(2Ø) Begrænsninger og Planlægning</h2>
+        <div class="homework-list">
+          <h3>Begrænsninger</h3>
+          <ul>
+            <li><strong>Tid:</strong> 5 uger (minus uge 38). 9 moduler inklusiv i dag</li>
+            <li><strong>Ressourcer:</strong> SU (for jeres lønninger) og hjernekraft.</li>
+            <li><strong>Tekniske værktøjer:</strong> Javascript, p5.js, VS Code, Git og Github.</li>
+          </ul>
+          <h3>Plan</h3>
+          <ul>
+            <li><strong>Teams:</strong> 3 teams der udvikler et <strong>MVP</strong> parallelt. Vi tager det bedste fra hvert program og <strong>kombinerer</strong> det til ét program.</li>
+            <li>Denne lektion: Planlægning, kravspecifikation og lidt design.</li>
+            <li>Næste lektion: Design fortsat.</li>
+            <li>Næste uge (1 modul): AI-genereret prototype.</li>
+            <li>Uge 38: Aktivitetsuge (ikke normal undervisning).</li>
+            <li>Uge 39: Implementation.</li>
+            <li>Uge 40: Test og udrulning. Inklusiv dokumentation (synopsis).</li>
+            <li>Uge 41: Fremlæggelse og mini-prøve.</li>
+            <li>Uge 42: Efterårsferie. </li>
+          </ul>
+        </div>
+        
+      </section>
+
+
+      <section>
+        <h2>(2Ø) Analyse</h2>
+        <div class="homework-list">
+          <h3>Konkurrentanalyse</h3>
+          <ul>
+            <li>Hvilke løsninger eksisterer allerede, hvad kan vi tage fra dem og hvordan kan vi lave noget bedre?</li>
+            <li>
+              Eksempler:
+              <ul>
+                <li>Bloons tower defence</li>
+                <li>Plants vs zombies</li>
+                <li>Vector td</li>
+                <li>Bubble tanks td</li>
+                <li>Dungeon defenders</li>
+                <li>Onslaught 2</li>
+              </ul>
+            </li>
+          </ul>
+          <h3>Feature brainstorm</h3>
+          <ul>
+            <li>Fælles markdown dokument <code>features.md</code></li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <h2>(2Ø) Kravspecifikation</h2>
+        <div class="homework-list">
+          <h3>MoSCoW</h3>
+          <ul>
+            <li>Must have, Should have, Could have, Won't have.</li>
+          </ul>
+          <h3>Definér Minimum Viable Product (MVP)</h3>
+          <ul>
+            <li>Hvad gør et spil til et Tower defence-spil?</li>
+            <li><strong>Formål:</strong> Test programmet og se hvad der virker så man bedre kan planlægge og udbygge næste iteration.</li>
+        </div>
+        </ul>
+              
+      </section>
+
+      
+      <section data-slide-step="P">
+        <h2>(P) Pause</h2>
+        <div style="display: grid; place-content: center; height: 80%; font-size: 2em;">
+            <h3>Vi starter igen</h3>
+        </div>
+      </section>
+
+      
+      
+      <section data-slide-step="4">
+        <h2>(3U) Opstart af design-fasen</h2>
+        <h3>Design-fasen</h3>
+        <ul>
+          <li>Hvordan <strong>strukturerer</strong> og <strong>designer</strong> vi programmet så det <strong>opfylder kravene</strong>?</li>
+          <li>Design af systemarkitektur, brugergrænseflade, interaktioner</li>
+          <li><strong>Metoder:</strong> Use cases, flow diagrammer, klassediagrammer, datastrukturer, pseudokode, etc.</li>
+        </ul>
+      </section>
+
+      <section data-slide-step="5">
+        <h2>(3Ø) Øvelser til design-fasen</h2>
+        <h3>Struktur</h3>
+        <ol>
+          <li>Lav en mappe <code>fg-tower-defence</code> med p5.js</li>
+          <li>Lav en markdown-fil <code>structure.md</code> og opskriv en fil-struktur til de forskellige objekter.</li>
+        </ol>
+        <h3>Use cases</h3>
+        <ul>
+          <li>Lav use cases til alle interaktioner i jeres MVP. </li>
+          <li>Lav en ny markdown fil <code>use_cases.md</code>.</li>
+          <li>Eksempel:</li>
+          <li>
+            <ol>
+              <li>Spilleren vælger et tower.</li>
+              <li>Systemet viser towerets pris.</li>
+              <li>Spilleren vælger en position på banen.</li>
+              <li>Systemet kontrollerer, om positionen er gyldig.</li>
+              <li>Systemet kontrollerer, om spilleren har nok coins.</li>
+              <li>Systemet placerer toweret.</li>
+              <li>Systemet trækker towerets pris fra spillerens coins.</li>
+            </ol>
+          </li>
+        </ul>
+
+        <h3>Algoritmer</h3>
+        <ul>
+          <li>Skriv pseudokode til de algoritmer/trin som programmet går igennem for at udføre de forskellige funktionaliteter.</li>
+          <li>Eksempler: Tower skyder en fjende, Fjende bevæger sig på banen.</li>
+        </ul>
+
+      </section>
+
+
+      <section data-slide-step="6">
+        <h2>(4U) Lektier</h2>
+        <div class="homework-list" >
+          <!-- <h3>Færdiggør øvelserne</h3> -->
+          <h3>Analyse</h3>
+          <ul>
+            <li>Spil nogle tower defence spil og skriv ned hvilke features de har som I ikke har tilføjet til <code>features.md</code>.</li>
+          </ul>
+          <h3>Video</h3>
+          <ul>
+            <li>Se første video (eller flere) i denne playliste om design af Tower Defence-spil: <a href="https://www.youtube.com/watch?v=DL4tiI53IW4&list=PL-eCFrNZ9nlImCM7CdPpby8Ee2fVErVQO">https://www.youtube.com/watch?v=DL4tiI53IW4&list=PL-eCFrNZ9nlImCM7CdPpby8Ee2fVErVQO</a></li>
+          </ul>
+          <h3>Design</h3>
+          <ul>
+            <li>Tegn hvordan spillet skal se ud (design layout).</li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <h2>(4U) Næste lektion</h2>
+        <div class="homework-list" style="display: grid; place-content: center;">
+          <h3>Fortsættelse af Softwareudviklingsprocessen</h3>
+          <ul>
+            <li>Vi fortsætter design-fasen for Tower Defence-spillet.</li>
+          </ul>
+        </div>
+      </section>
+
+
+
+
+      <section data-slide-step="7">
+        <h2>(5Ø) Lektionen er slut</h2>
+        <div style="display: flex;flex-direction: column;justify-content: space-evenly; height: 80%;margin-left:10%;">
+          <h3>Læg en plan for hvornår I vil lave lektierne og sæt en påmindelse</h3>
+          <!-- <h3>... færdiggør og GEM jeres arbejde</h3> -->
+          <h3>... reflektér over det I har lært og saml jeres tanker</h3>
+          <h3>... I kan gå når I vil.</h3>
+        </div>
+      </section>
+      
+      
+
+    </div>
+
+    <template id="agenda-template">
+      <section class="agenda">
+        <!-- <h2 class="agenda-header" style="display: none">Program</h2> -->
+        <h2 class="agenda-header">Program</h2>
+        <!-- <h2>Program</h2> -->
+        <div class="flex-center" style="font-size: 1.05em;">
+          <table class="agenda-table">
+            <thead>
+              <tr>
+                <!-- Trin: Del, sektion,... -->
+                <th><strong>Punkt *</strong></th>
+                <th><strong>Start + varighed</strong></th>
+                <th><strong>Aktivitet</strong></th>
+                <th><strong>Indhold</strong></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr data-step="0"><td>1U</td><td>12:05 + 10</td><td>Opsamling fra sidst</td><td>Kort opsummering og hovedbudskaberne af sidste lektion.</td></tr>
+              <tr data-step="1"><td>1Ø</td><td>12:15 + 20</td><td>Gennemgang af lektier til i dag</td><td>Eventuelle spørgsmål om indholdet i sidste lektion, samt gennemgang af de projekter som I har fundet.</td></tr>
+              <tr data-step="2"><td>2U</td><td>12:35 + 10</td><td>Softwareudviklingsprocessen</td><td>Introduktion de forskellige trin i udviklingsprocessen.</td></tr>
+              <tr data-step="3"><td>2Ø</td><td>12:45 + 55 </td><td>Planlægning og kravspecification af Tower Defence-spillet</td><td>Vi udfører i fællesskab trin 1 og 2 i udviklingsprocessen for at fastlægge kravene til spillet og.</td></tr>              
+              <tr data-step="P"><td>P</td><td>13:40 + 10</td><td>Pause inden næste modul</td><td></td></tr>
+              <tr data-step="4"><td>3U</td><td>13:50 + 10</td><td>Opstart af øvelser til design-fasen</td><td>Jeg sætter jer igang med de øvelser som I skal lave i design-fasen.</td></tr>
+              <tr data-step="5"><td>3Ø</td><td>14:00 + 75</td><td>Design af Tower Defence-spillet</td><td>I skal fortsætte med at designe spillet og vælge hvordan koden skal struktureres.</td></tr>
+              <tr data-step="6"><td>4U</td><td>15:15 + 5</td><td>Opsamling, lektier og næste lektion</td><td>Hjemmearbejde til næste gang og emnerne for næste lektion.</td></tr>
+              <tr data-step="7"><td>4Ø</td><td>15:20 + 5</td><td>Afrunding</td><td>Færdiggør jeres arbejde og reflektér over jeres læring.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="text-sm muted"><strong>*</strong> (U=Undervisning, Ø=Øvelse)</div>
+      </section>
+    </template>
+
+  </div>
+  <script src="../../node_modules/reveal.js/dist/reveal.js"></script>
+  <script src="../../node_modules/reveal.js-menu/menu.js"></script>
+  <script src="../../node_modules/reveal.js-multimodal/plugin/multimodal/multimodal.js"></script>
+  <script src="../../node_modules/reveal.js/dist/plugin/notes.js"></script>
+  <script src="../../node_modules/reveal.js/dist/plugin/highlight.js"></script>
+  <script src="../../node_modules/reveal.js/dist/plugin/zoom.js"></script>
+  <script src="../../node_modules/reveal.js/dist/plugin/math.js"></script>
+  
+  <script src="../main.js"></script>
+</body>
+</html>

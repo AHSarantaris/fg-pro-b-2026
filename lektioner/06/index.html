@@ -148,29 +148,32 @@ for (let i=0; i &lt grid.numElems; i++) {line(0, i*grid.sizeElems, width, i*grid
 
       <section data-slide-step="3">
         <h2>(2Ø) Fork, clone og branch et projekt</h2>
-        <div class="small-list homework-list">
+        <div class="small-list homework-list" style="font-size: 0.9em;">
           <h3>Fork og clone repo fra GitHub</h3>
           <ol>
             <li>Gå ind på følgende GitHub repository: 
               <div><a href="https://github.com/AHSarantaris/sunrise-game/">https://github.com/AHSarantaris/sunrise-game/</a></div>
             </li>
-            <li>Følg denne guide for at <strong>forke</strong> repository'et og <strong>clone</strong> det til jeres computer: 
+            <li>Følg denne guide for at <strong>forke</strong> repository'et og <strong>clone</strong> det til jeres computer, men stop før afsnittet "Configuring Git to sync your fork with the upstream repository":
               <div><a href="https://docs.github.com/en/pull-requests/how-tos/work-with-forks/fork-a-repo">https://docs.github.com/en/pull-requests/how-tos/work-with-forks/fork-a-repo</a></div>
             </li>
           </ol>
-          <h3>Lav en feature-branch</h3>
+          <h3>Lav en feature-branch i det klonede projekt</h3>
+          <p><strong>BEMÆRK:</strong> Hvis jeres "main"-branch hedder master i stedet så skriv master i stedet for main i alle git kommandoer nedenfor.</p>
           <ol>
             <li>Lav en ny branch: <code>git switch -c deflating-sun</code></li>
-            <li>Få solen til at punktere når man klikker på den, og først derefter skal den falde ned: 
+            <li>Lav ændringer i koden så solen <strong>punkterer</strong> når man klikker på den, og først derefter skal den falde ned. Følg disse trin:
               <ul>
-                <li>Stop solen: Gør hastigheden til 0. <strong>Commit</strong> når det fungerer.</li>
-                <li>Sæt et <strong>flag</strong> der angiver at solen punkterer: <code>sun.isDeflating = true</code>. <strong>Commit</strong> når det fungerer.</li>
-                <li>Gør diameteren mindre med en konstant hastighed når det <strong>flag</strong> er sandt. <strong>Commit</strong> når det fungerer.</li>
-                <li>Stop når diameteren blive mindre end en bestemt værdi, prøv 40 pixel. <strong>Commit</strong> når det fungerer.</li>
+                <li>Stop solen når der trykkes på den: Gør hastigheden til 0.</li>
+                <li>Lav en property på variablen sun med navnet <code>isDeflating</code> der er falsk i starten, og gør den sand når der trykkes på den: <code>sun.isDeflating = true</code>.</li>
+                <li>Gør diameteren mindre med en konstant hastighed når <code>sun.isDeflating</code> er sand.</li>
+                <li>Stop når diameteren blive mindre end en bestemt værdi, prøv 40 pixel.</li>
+                <li>Få solen til at falde ned i frit fald (som før) når diameteren har nået den bestemte værdi.</li>
               </ul>
             </li>
-            <li>På et hvilket somhelst tidspunkt efter det første commit i branchen pusher I til GitHub: <code>git push -u origin deflating-sun</code>.</li>
-            <li>Når alt fungerer så <strong>merge</strong> jeres branch ind i <code>main</code> igen: <code>git switch main</code> og så <code>git merge deflating-sun</code>.</li>
+            <li>Når alt fungerer så <strong>commit</strong> jeres ændringer.</li>
+            <li>Derefter pusher I til GitHub: <code>git push -u origin deflating-sun</code>.</li>
+            <li>Derefter så <strong>merge</strong> jeres branch ind i <code>main</code> igen: <code>git switch main</code> og til sidst <code>git merge deflating-sun</code>.</li>
           </ol>
         </div>
       </section>
@@ -187,48 +190,27 @@ for (let i=0; i &lt grid.numElems; i++) {line(0, i*grid.sizeElems, width, i*grid
 
       <section data-slide-step="6">
         <h2>(4U) Lektier</h2>
-        <!-- <div class="homework-list">
+        <div class="homework-list">
           <h3>1. Evaluér sidste forløb</h3>
           <ul>
             <li>Hvis man ikke har gjort det endnu.</li>
           </ul>
-          <h3>2. Se følgende videoer om Git og GitHub.</h3>
+          <h3>2. Færdiggør øvelserne</h3>
           <ul>
-            <li>Video 1: <a href="https://www.youtube.com/watch?v=y-an0v208A0">
-              Git and Github Explained in 7 Minutes</a> - Tech With Diego</li>
-            <li>Video 2: <a href="https://youtu.be/i_23KUAEtUM">Using Git with Visual Studio Code (Official Beginner Tutorial)</a> - Visual Studio Code</li>
+            <li>Lav øvelsen "Fork og clone et projekt" færdig.</li>
           </ul>
-          <h3>3. Færdiggør opstarten af Git og Github</h3>
-          <ul>
-            <li>Hvis man ikke er færdig med det endnu.</li>
-            <li>I skal have prøvet at få en merge-konflikt.</li>
-          </ul>
-          <h3>4. Læs eller genlæs p5-tutorials</h3>
-          <ul>
-            <li>Læs eller genlæs de p5-tutorials vi har været igennem for at få styr på JavaScript-syntaks og p5-funktioner.</li>
-          </ul>
-        </div> -->
+        </div>
       </section>
 
       <section>
         <h2>(4U) Næste lektion</h2>
-        <!-- <div class="homework-list">
-          <h3>Dan grupper</h3>
+        <div class="homework-list" style="display: grid; place-content: center;">
+          <h3>Softwareudviklingsprocessen</h3>
           <ul>
-            <li>Dan grupper til afleveringsprojekt 1</li>
+            <li>Introduktion til softwareudviklingsprocessen og SDLC.</li>
+            <li>Opstart af de første par faser i udviklingsprocessen af Tower Defence-spillet.</li>
           </ul>
-          <h3>Mere om Git</h3>
-          <ul>
-            <li>Git clone og fork</li>
-            <li>Git branch</li>
-          </ul>
-          <h3>Mere om GitHub</h3>
-          <ul>
-            <li>Dokumentation, readme og markdown</li>
-            <li>Github issues og discussion</li>
-            <li>Github pages</li>
-          </ul>
-        </div> -->
+        </div>
       </section>
 
 
