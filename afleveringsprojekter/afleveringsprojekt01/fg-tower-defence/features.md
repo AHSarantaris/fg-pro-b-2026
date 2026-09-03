@@ -3,31 +3,35 @@
 ## Features:
 - Towers
     - Forskellige typer
-        - Laver penge
-        - Lav range høj dps og omvendt
+        - Lave-penge tårn
+        - Lav range + høj dps tårn (og omvendt)
         - Ice tower
         - Firetower
         - Lyn tårn (chaining)
         - Luft tårn (push)
-        - 
+        - Poison tower
     - Special abilities
         - Cooldown
     - Opgraderinger
     - Merge/Kombinationer
     - Permanente opgrades/unlocks
-    
+
 - Shop menu
+
+- Waves
+
 - Monstre
-   - Waves
    - Forskellige typer
-        - Regen
-        - Shjold
+        - Regenerate
+        - Skjold
+        - High speed/low speed
    - Boss
    - Monstre giver penge/xp når de rammes
    
 - Sound effects
-- Vores health 
-- Penge
+- Brugeren
+    - Health 
+    - Penge
 - Map med en vej
     - Pile der indikerer hvor fjenderne kommer fra
 - Sprites
@@ -46,7 +50,8 @@
     - HP
     - Gøre skade når de kommer igennem banen
 - Map med en bane
-- Penge
-- Health for brugeren
+- Brugeren
+    - Health
+    - Penge
 - Forskellige waves
     - Bliver sværere

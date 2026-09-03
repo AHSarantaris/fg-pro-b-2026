@@ -20,6 +20,6 @@
 
 |  | **Lav interesse** | **Høj interesse** |
 |---|---|---|
-| **Høj indflydelse** | Ledelsen | Udviklerne, FG-elever, folkeskoleelver |
-| **Lav indflydelse** | IT-administration,Forældre til folkeskoleelever | - |
+| **Høj indflydelse** | **Holdes tilfredse:** Ledelsen | **Observer nøje:** Udviklerne, FG-elever, folkeskoleelver |
+| **Lav indflydelse** | **Hold øje med:** IT-administration, Forældre til folkeskoleelever | **Holdes informeret:** - |
 

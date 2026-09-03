@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1f1f1f" />
+  <title>FG ProB - Lektion 08: Brugergrænsefladedesign og Klassediagrammer</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/all.min.css">
+  <link rel="stylesheet" href="../../node_modules/reveal.js/dist/reveal.css">
+  <!-- <link rel="stylesheet" href="../../node_modules/reveal.js/dist/theme/black.css" id="theme"> -->
+  <!-- <link rel="stylesheet" href="../../node_modules/reveal.js/dist/plugin/highlight/vs-dark.css" /> -->
+  <link rel="stylesheet" href="../variables.css">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../highlight.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <section class="title-slide">
+        <h1><span hidden>Lektion 08: </span>Brugergrænsefladedesign og Klassediagrammer</h1>
+        <h3>Lektion 08</h3>
+        <p>Andreas Hussain Sarantaris · 01-09-2026</p>
+        <p style="font-size: 0.82em; color: var(--fg-muted);">Frederikssund Gymnasium · Programmering B</p>
+      </section>
+
+      <section data-slide-step="0">
+        <h2>(1U) Opsummering af SDLC</h2>
+        <div class="small-list" style="display: grid; grid-template-columns: 1.5fr 1fr;column-gap:1em;">
+          <div>
+            <h3>SDLC - Del 1</h3>
+            <ul>
+              <li>
+                <strong>1. Planlægning og analyse:</strong>
+                <div>Hvilket problem skal vi løse og hvordan kunne det løses?</div>
+              </li>
+              <li>
+                <strong>2. Kravspecifikation:</strong>
+                <div>Hvad er kravene for programmet så det løser problemet?</div>
+              </li>
+              <li>
+                <strong>3. Design:</strong>
+                <div>Hvordan strukturerer og designer vi programmet så det opfylder kravene?</div>
+              </li>
+            </ul>
+            <h3>SDLC - Del 2</h3>
+            <ul>
+              <li>
+                <strong>4. Implementering:</strong>
+                <div>Byg og dokumentér det program vi har designet.</div>
+              </li>
+              <li>
+                <strong>5. Test:</strong>
+                <div>Løser programmet problemet?</div>
+              </li>
+              <li>
+                <strong>6. Udrulning (Deployment):</strong>
+                <div>Hvilket problem skal vi løse og hvordan kunne det løses?</div>
+              </li>
+              <li>
+                <strong>7. Opretholdelse (Maintenance):</strong>
+                <div>Oprethold programmet og support brugerne så problemet fortsat løses.</div>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3>SDLC-modeller</h3>
+            <ul>
+              <li><strong>Eksempler:</strong> Vandfaldsmodellen, den Iterative Model og Agile.</li>
+              <li>Vi benytter <strong>den Iterative Model</strong> i dette projekt, da vi har en <strong>kort tidshorisont</strong> og som <strong>minimum</strong> skal have en <strong>MVP</strong> klar.</li>
+            </ul>
+            <img src="images/interative-model.jpg">
+            <p>Figur 2: Iterativ model. Kilde: <a href="https://www.geeksforgeeks.org/software-engineering/top-8-software-development-models-used-in-industry/">GeeksforGeeks</a>.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>(1U) Planlægning og Analyse</h2>
+        <div class="small-list" style="display: grid; grid-template-columns: 1.2fr 1fr;column-gap:2em;">
+          <div>
+            <h3>Planlægning</h3>
+            <ul>
+              <li><strong>Problemformulering:</strong> Anne Vedersø ønsker et Tower Defence-spil som kan vises til folkeskoleelever og FG-elever.</li>
+              <li><strong>Fremgangsmåde:</strong> 3 teams der udvikler et <strong>MVP</strong> parallelt. Vi tager det bedste fra hvert program og <strong>kombinerer</strong> det til ét program.</li></li>
+              <li><strong>Tidsplan:</strong>
+                <ul>
+                  <li><strong>Sidste lektion:</strong> Planlægning, kravspecifikation og lidt design.</li>
+                  <li><strong>Denne lektion:</strong> Design fortsat.</li>
+                  <li><strong>Næste uge (1 lektion):</strong> AI-genereret prototype.</li>
+                  <li><strong>Uge 38:</strong> Aktivitetsuge (ikke normal undervisning).</li>
+                  <li><strong>Uge 39:</strong> Implementering.</li>
+                  <li><strong>Uge 40:</strong> Test og udrulning. Inklusiv dokumentation (<strong>aflevér synopsis</strong>).</li>
+                  <li><strong>Uge 41:</strong> Fremlæggelse og feedback (<strong>mini-prøve</strong>).</li>
+                  <li><strong>Uge 42:</strong> Efterårsferie. </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3>Analyse</h3>
+            <div class="fragment">
+              <ol>
+                <li><strong>Interessentanalyse:</strong> Fælles markdown-dokument <code>stakeholder_analysis.md</code></li>
+                <li><strong>Konkurrentanalyse:</strong> I researchede nogle forskellige Tower Defence-spil.</li>
+                <li><strong>Featureliste brainstorm:</strong> Fælles markdown-dokument <code>features.md</code></li>
+              </ol>
+              <img src="images/stakeholder-matrix.png" style="margin-top:2em">
+              <p style="text-align: center;"><strong>Figur:</strong> Vores interessentmatrix.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      
+      <section>
+        <h2>(1U) Kravspecifikation og Design</h2>
+        <div class="small-list" style="display: grid; grid-template-columns: 1.2fr 1fr;column-gap:2em;">
+          <div>
+            <h3>Kravspecifikations-fasen</h3>
+            <ul>
+              <li>MVP: Vi lavede en liste af (<strong>funktionelle</strong>) krav ved at overveje hvad der gjorde et spil til et Tower Defence-spil.</li>
+              <li><strong>MoSCoW:</strong> Vi brugte den ikke helt, da vi kun overvejede hvad vi <strong>Skulle</strong> have med, men det ville være relevant i næste iteration.</li>
+              <li><strong>Ikke-funktionelle krav:</strong> Tempoet skal være højt, da det skal være et hurtigt spil. Andre?</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Design-fasen</h3>
+            <div class="fragment">
+              <ul>
+                <li><strong>Fil-struktur:</strong> Meget basalt design af systemarkitekturen. Hvilke filer har I lavet?</li>
+                <li><strong>Use cases:</strong> Hvordan brugeren skal interagere med programmet. Hvor mange fandt I? Hvad med når brugeren trykker på et felt som han ikke kan placere et tårn på, eller hvis han ikke har nok penge?</li>
+                <li><strong>Pseudokode:</strong> Algoritmer for hvordan objekterne i spillet interagerer med hinanden. Hvilke interaktioner fandt I?</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section data-slide-step="1">
+        <h2>(1Ø) Lektier til denne gang</h2>
+        <div class="homework-list small-list" style="width: 80%;" >
+          <!-- <h3>Færdiggør øvelserne</h3> -->
+          <h3>Analyse</h3>
+          <ul>
+            <li>Spil nogle tower defence spil og skriv ned hvilke features de har som I ikke har tilføjet til <code>features.md</code>.</li>
+          </ul>
+          <h3>Video</h3>
+          <ul>
+            <li>Se første video (eller flere) i denne playliste om design af Tower Defence-spil: 
+              <div><a href="https://www.youtube.com/watch?v=DL4tiI53IW4&list=PL-eCFrNZ9nlImCM7CdPpby8Ee2fVErVQO"> Game Design Principles - Tower Defense</a> af LtRandolph Games.</div>
+            </li>
+            <li>Hvad fik I ud af at se denne video?</li>
+          </ul>
+          <h3>Design brugergrænsefladen</h3>
+          <ul class="fragment">
+            <li>Tegn hvordan spillet skal se ud.</li>
+            <li><strong>Overvejelser:</strong>
+              <ul>
+                <li>Skal være simpelt at implementere, men opfylde kravene for MVP.</li>
+                <li>Hvordan kan tårnene, fjenderne og projektilerne tegnes simplest muligt?</li>
+                <li>Hvordan skal vi vise fjendernes liv simplest muligt?</li>
+                <li>Hvordan skal vi angive spillerens liv og penge?</li>
+                <li>Hvordan skal banen se ud?</li>
+              </ul>
+            </li>
+            <li>I får 10 minutter til lige at blive enige om et design.</li>
+        </div>
+      </section>
+
+      <!-- <section>
+        <h2>(1Ø) Mine forventninger til mig selv </h2>
+        <ol class="spaced-list" style="font-size: 1.1em;">
+          <li>At jeg er <strong>velforberedt</strong> og har <strong>overskud</strong>.</li>
+          <li>At jeg behandler alle med <strong>respekt</strong> og skaber et <strong>trygt</strong> og <strong>åbent læringsmiljø</strong>, hvor alle spørgsmål er velkomne (men <em>ikke nødvendigvis</em> besvares).</li>
+          <li>At jeg er <strong>tilgængelig</strong> for spørgsmål og vejledning - både i og uden for timerne, og at jeg <strong>ikke bliver irriteret</strong> hvis jeg bliver nødt til at forklare noget på <strong>forskellige måder</strong> før det giver mening.</li>
+          <li>At jeg er <strong>ærlig</strong>, hvis jeg ikke kender svaret på et spørgsmål, og <strong>anerkender</strong> hvis jeg har sagt noget forkert eller <strong>begået en fejl</strong>.</li>
+          <li>At jeg <strong>lytter</strong> til jeres <strong>feedback</strong> og <strong>justerer undervisningen</strong>, når det giver mening.</li>
+        </ol>
+
+      </section>
+
+      
+      <section>
+        <h2>(1Ø) Mine forventninger til jer</h2>
+        <ol class="spaced-list" style="font-size: 0.9em">
+          <h3>Undervisningen</h3>
+          <li>At I <strong>ikke laver andet</strong> i undervisningstiden (pånær noter eller andet fagligt relevant), og at I <strong>i stedet fortæller mig</strong> hvis I har behov for en pause eller I synes noget er <strong>uinteressant</strong> eller jeg har <strong>brugt for meget tid</strong> på noget.</li>
+          <li>At I <strong>respekterer</strong> hinandens og min <strong>tid</strong> ved at møde <strong>velforberedte</strong>, <em>især</em> hvis I ikke kunne være til sidste lektion. Som <em>minimum</em> kig i <strong>materialet</strong> (slides, uddelt kode, øvelser, etc) og dan jer et <strong>overblik</strong> over hvad vi gik igennem.</li>
+          <li>At I <strong>ikke taler med sidemakkeren</strong> i undervisningen, <strong>selv</strong> ved spørgsmål, men nævner det for <strong>hele klassen</strong>, eller stiller spørgsmålet til mig (<em>pånær hvis det bare er en kort intern kommentar</em>). </li>
+          <h3>Fejlfinding</h3>
+          <li>At I <strong>hjælper hinanden</strong> med at forstå stoffet og at kunne løse opgaverne, <strong>uden blot at give svaret</strong>, men har andres <strong>læring</strong> i mente.</li>
+          <li>At I <strong>spørger</strong> når der er noget I ikke forstår, eller <strong>tror</strong> jeg har begået en fejl, og at I ikke holder jer tilbage.</li>
+          <li>At I <strong>prøver selv</strong>, før I spørger om hjælp til opgaver.</li>
+          <li>At I <strong>tør begå fejl</strong>, og kan klare at blive fortalt at <strong>noget I har lavet er forkert</strong>.</li>
+          <li>At I <strong>bærer over med mig</strong> hvis jeg siger tingene lidt for <strong>direkte</strong>, og ikke tager det <strong>personligt</strong>, men at I kan tåle at tage fejl, siden at alle mennesker begår fejl, men anerkender at det er <strong>en del af læringen</strong>.</li>
+          <h3>Ansvar</h3>
+          <li>At I tager faget <strong>seriøst</strong> og bruger den <strong>nødvendige tid</strong> til at følge med i kurset, fremfor at springe over hvor gærdet er lavest.</li>
+          <li>At I <strong>ikke snyder</strong> men <strong>taler med mig</strong> hvis I er bekymrede for jeres karakterer eller om I består.</li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>(1Ø) Fremgangsmåde når man har problemer</h2>
+        <div class="homework-list small-list" style="display: grid;grid-template-columns: 1fr 1fr;gap:2em">
+          <div>
+            <h3>1. Prøv selv</h3>
+            <ol>
+              <li>
+                Kig i dokumentationen.
+                <ul>
+                  <li>Hvis I ikke ved hvor I skal lede så spørg mig</li>
+                  <li>Hvis I ikke forstår  dokumentationen så spørg mig</li>
+                </ul>
+              </li>
+              <li>
+                Søg på google
+                <ul>
+                  <li>Hvis I ikke ved hvad I skal søge på så spørg mig</li>
+                  <li>Hvis I ikke forstår det der står på google så spørg mig</li>
+                </ul>
+              </li>
+              <li>
+                Spørg en AI
+                <ul>
+                  <li>Hvis den ikke har alt kontekst der er nødvendigt for at stille spørgsmålet så spørg mig</li>
+                  <li>Hvis I er i tvivl om AI's svar så spørg mig</li>
+                </ul>
+              </li>
+            </ol>
+            <h3>2. Spørg jeres sidemakker</h3>
+            <ul>
+              <li>Hvis ikke han har lavet opgaven så spørg mig.</li>
+              <li>Hvis ikke han kan (eller vil) hjælpe så spørg mig.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Tilfælde hvor I skal spørge mig med det samme</h3>
+            <ul>
+              <li class="fragment">Hvis terminalen er igang med en nedtælling til at slette alt på jeres computer.</li>
+            </ul>
+            <div class="fragment">
+              <h3>Hvorfor I ikke skal spørge mig om hjælp som det første</h3>
+              <ul>
+                <li>I er ikke afhængige af mig. Programmering handler meget om at kunne løse problemer og søge på tingene selv (især nu med AI).</li>
+                <li>Nogle gange kender jeg ikke en præcis funktion, syntaks eller kommando.</li>
+                <li><strong>Vigtigt:</strong> 
+                  <ul>
+                    <li>I skal heller ikke holde jer tilbage med at spørge, for hvis I ikke er sikre på det som I har lavet så kan der opstå nogle problemer hen ad vejen som kan være svære at løse. </li>
+                    <li>Men I skal blot <strong>acceptere</strong> hvis jeg beder jer om lige at søge på det selv, og derefter vil jeg <strong>meget gerne</strong> hjælpe jer.</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+
+      </section> -->
+
+      <section data-slide-step="2" class="homework-list small-list">
+        <h2>(2U) Hvad er et klassediagram?</h2>
+        <div style="display: grid; grid-template-columns: 2fr 1fr;">
+          <div>
+            <h3>Elementer i et klassediagram</h3>
+            <ul>
+              <li><strong>Klasser: </strong>
+                <ul>
+                  <li><strong>Properties:</strong> Ligesom properties i JavaScript.</li>
+                  <li><strong>Metoder:</strong> Har jeg ikke introduceret endnu, men det er blot en funktion som et objekt har.</li>
+                  <li><strong>Visibility:</strong> Properties og metoder kan være <strong>public</strong> eller <strong>private</strong>, men det er ikke relevant i dette projekt.</li>
+                </ul>
+              </li>
+              <li><strong>Forbindelser mellem klasser:</strong>
+                <ul>
+                  <li>For nu er det kun relevant med <strong>associeringer</strong>, men der findes andre forbindelser.</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <img src="images/class-diagram.png" style="height: 900px">
+          </div>
+        </div>
+        
+      </section>
+
+      <section data-slide-step="3" class="homework-list small-list">
+        <h2>(2Ø) Lav et klassediagram for jeres spil</h2>
+        <div style="display: grid; grid-template-columns: 3fr 2fr 1fr; gap:2em;">
+          <div>
+            <h3>Markdown klassediagrammer</h3>
+            <ul>
+              <li>I markdown kan man nemt lave klassediagrammer med <a href="https://github.com/mermaid-js/mermaid">Mermaid.js</a></li>
+              <li>Lav en fil <code>class_diagram.md</code>, kopiér denne kode og udbyg klassediagrammet.</li>
+              <li><strong>Relevante klasser:</strong> Game, Player, Map, Tower, Projectile, Wave, Enemy.</li>
+            </ul>
+          </div>
+          <div style="background-color: var(--bg-card);">
+  <pre><code class="language-md" style="font-size: 0.8em;">```mermaid
+classDiagram
+
+class Tower {
+    x
+    y
+    range
+    damage
+    shoot()
+    findTarget()
+    draw()
+}
+
+class Enemy {
+    x
+    y
+    hp
+    speed
+    move()
+    draw()
+}
+
+Tower --&gt; Enemy : attacks
+```</code></pre>
+            </div>
+          <div>
+            <img src="images/class-diagram.png" style="height: 900px">
+          </div>
+        </div>
+        
+      </section>
+      
+      
+
+      
+      <!-- <section data-slide-step="P">
+        <h2>(P) Pause</h2>
+        <div style="display: grid; place-content: center; height: 80%; font-size: 2em;">
+            <h3>Vi starter igen</h3>
+        </div>
+      </section> -->
+
+
+
+      <section data-slide-step="6">
+        <h2>(3U) Lektier til næste gang</h2>
+        <div class="homework-list" style="display:grid; place-content: center; width: 70%; height: 40%">
+          <!-- <h3>Færdiggør øvelserne</h3> -->
+          <h3>1. Færdiggør klassediagrammet</h3>
+          <ul>
+            <li>Lav klassediagrammet færdigt, for vi skal bruge det når vi går igang med implementerings-fasen efter uge 38.</li>
+          </ul>
+          <h3>2. Video om AI</h3>
+          <ul>
+            <li>Se denne video om softwareudvikling i AI-tidsalderen: 
+              <div><a href="https://www.youtube.com/watch?v=xYU7zaaRjmE">The Vibe Coding Era: Why AI Won't Replace Software Engineers</a> af Bloomberg Television</div>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <h2>(3U) Næste lektion</h2>
+        <div class="homework-list" style="display: grid; place-content: center;width: 70%; height: 40%">
+          <h3>AI i udviklingsprocessen</h3>
+          <ul>
+            <li>Hvordan bruges AI i udviklingsprocessen?</li>
+            <li>Hvad er "Vibe Coding" og bliver programmører erstattet af AI?</li>
+            <li>Hvordan kan man best udnytte AI som et værktøj, og hvordan bør man ikke gøre?</li>
+            <li><strong>Øvelse:</strong> I skal lave en prototype af Tower Defence spillet, og I må <em>KUN</em> bruge AI.</li>
+          </ul>
+        </div>
+      </section>
+
+
+
+
+      <section data-slide-step="7">
+        <h2>(3Ø) Lektionen er slut</h2>
+        <div style="display: flex;flex-direction: column;justify-content: space-evenly; height: 80%;margin-left:10%;">
+          <h3>Læg en plan for hvornår I vil lave lektierne og sæt en påmindelse</h3>
+          <!-- <h3>... færdiggør og GEM jeres arbejde</h3> -->
+          <h3>... reflektér over det I har lært og saml jeres tanker</h3>
+          <h3>... I kan gå når I vil.</h3>
+        </div>
+      </section>
+      
+      
+
+    </div>
+
+    <template id="agenda-template">
+      <section class="agenda">
+        <!-- <h2 class="agenda-header" style="display: none">Program</h2> -->
+        <h2 class="agenda-header">Program</h2>
+        <!-- <h2>Program</h2> -->
+        <div class="flex-center" style="font-size: 1.05em;">
+          <table class="agenda-table">
+            <thead>
+              <tr>
+                <!-- Trin: Del, sektion,... -->
+                <th><strong>Punkt *</strong></th>
+                <th><strong>Start + varighed</strong></th>
+                <th><strong>Aktivitet</strong></th>
+                <th><strong>Indhold</strong></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr data-step="0"><td>1U</td><td>08:10 + 10</td><td>Opsamling fra sidst</td><td>Kort opsummering og hovedbudskaberne af sidste lektion.</td></tr>
+              <tr data-step="1"><td>1Ø</td><td>08:20 + 20</td><td>Gennemgang af lektier til i dag</td><td>Eventuelle spørgsmål om indholdet i sidste lektion, samt gennemgang af de projekter som I har fundet.</td></tr>
+              <tr data-step="2"><td>2U</td><td>08:40 + 10</td><td>Introduktion til klassediagrammer</td><td>Kort om hvad et klassediagram er.</td></tr>
+              <tr data-step="3"><td>2Ø</td><td>08:50 + 45 </td><td>Lav et klassediagram</td><td>I skal lave et klassediagram for jeres spil.</td></tr>              
+              <!-- <tr data-step="P"><td>P</td><td>13:40 + 10</td><td>Pause inden næste modul</td><td></td></tr> -->
+              <tr data-step="6"><td>3U</td><td>09:35 + 5</td><td>Opsamling, lektier og næste lektion</td><td>Hjemmearbejde til næste gang og emnerne for næste lektion.</td></tr>
+              <tr data-step="7"><td>3Ø</td><td>09:40 + 5</td><td>Afrunding</td><td>Færdiggør jeres arbejde og reflektér over jeres læring.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="text-sm muted"><strong>*</strong> (U=Undervisning, Ø=Øvelse)</div>
+      </section>
+    </template>
+
+  </div>
+  <script src="../../node_modules/reveal.js/dist/reveal.js"></script>
+  <script src="../../node_modules/reveal.js-menu/menu.js"></script>
+  <script src="../../node_modules/reveal.js-multimodal/plugin/multimodal/multimodal.js"></script>
+  <script src="../../node_modules/reveal.js/dist/plugin/notes.js"></script>
+  <script src="../../node_modules/reveal.js/dist/plugin/highlight.js"></script>
+  <script src="../../node_modules/reveal.js/dist/plugin/zoom.js"></script>
+  <script src="../../node_modules/reveal.js/dist/plugin/math.js"></script>
+  
+  <script src="../main.js"></script>
+</body>
+</html>
