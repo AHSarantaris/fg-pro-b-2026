@@ -3,12 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#1f1f1f" />
-  <title>FG ProB - Lektion 09: AI i Udviklingsprocessen</title>
+  <meta name="theme-color" content="#1f1f1f">
+  <title>FG ProB - Lektion 09: AI i udviklingsprocessen</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/all.min.css">
   <link rel="stylesheet" href="../../node_modules/reveal.js/dist/reveal.css">
-  <!-- <link rel="stylesheet" href="../../node_modules/reveal.js/dist/theme/black.css" id="theme"> -->
-  <!-- <link rel="stylesheet" href="../../node_modules/reveal.js/dist/plugin/highlight/vs-dark.css" /> -->
   <link rel="stylesheet" href="../variables.css">
   <link rel="stylesheet" href="../styles.css">
   <link rel="stylesheet" href="../highlight.css">
@@ -19,412 +17,366 @@
     <div class="slides">
 
       <section class="title-slide">
-        <h1><span hidden>Lektion 09: </span>AI i Udviklingsprocessen</h1>
+        <h1><span hidden>Lektion 09: </span>AI i udviklingsprocessen</h1>
         <h3>Lektion 09</h3>
         <p>Andreas Hussain Sarantaris · 08-09-2026</p>
-        <p style="font-size: 0.82em; color: var(--fg-muted);">Frederikssund Gymnasium · Programmering B</p>
+        <p style="font-size:0.82em;color:var(--fg-muted);">Frederikssund Gymnasium · Programmering B</p>
       </section>
 
       <section data-slide-step="0">
-        <h2>(1U) Opsummering af SDLC</h2>
-        <div class="small-list" style="display: grid; grid-template-columns: 1.5fr 1fr;column-gap:1em;">
+        <h2>(1U) Opsamling og dagens spørgsmål</h2>
+        <div class="small-list" style="display:grid;grid-template-columns:1fr 1fr;column-gap:2em;">
           <div>
-            <h3>SDLC - Del 1</h3>
+            <h3>Vi er her i SDLC</h3>
             <ul>
-              <li>
-                <strong>1. Planlægning og analyse:</strong>
-                <div>Hvilket problem skal vi løse og hvordan kunne det løses?</div>
-              </li>
-              <li>
-                <strong>2. Kravspecifikation:</strong>
-                <div>Hvad er kravene for programmet så det løser problemet?</div>
-              </li>
-              <li>
-                <strong>3. Design:</strong>
-                <div>Hvordan strukturerer og designer vi programmet så det opfylder kravene?</div>
-              </li>
-            </ul>
-            <h3>SDLC - Del 2</h3>
-            <ul>
-              <li>
-                <strong>4. Implementering:</strong>
-                <div>Byg og dokumentér det program vi har designet.</div>
-              </li>
-              <li>
-                <strong>5. Test:</strong>
-                <div>Løser programmet problemet?</div>
-              </li>
-              <li>
-                <strong>6. Udrulning (Deployment):</strong>
-                <div>Hvilket problem skal vi løse og hvordan kunne det løses?</div>
-              </li>
-              <li>
-                <strong>7. Opretholdelse (Maintenance):</strong>
-                <div>Oprethold programmet og support brugerne så problemet fortsat løses.</div>
-              </li>
+              <li>Vi har arbejdet med <strong>analyse, kravspecifikation og design</strong>.</li>
+              <li>Jeres Tower Defence-spil har nu en <strong>featureliste</strong>, en <strong>papir-prototype</strong> og et <strong>klassediagram</strong>.</li>
+              <li>Næste naturlige fase er <strong>implementering</strong>: at omsætte designet til kode.</li>
+              <li>I arbejder iterativt: en første løsning er ikke den sidste løsning.</li>
             </ul>
           </div>
           <div>
-            <h3>SDLC-modeller</h3>
+            <h3>Dagens spørgsmål</h3>
             <ul>
-              <li><strong>Eksempler:</strong> Vandfaldsmodellen, den Iterative Model og Agile.</li>
-              <li>Vi benytter <strong>den Iterative Model</strong> i dette projekt, da vi har en <strong>kort tidshorisont</strong> og som <strong>minimum</strong> skal have en <strong>MVP</strong> klar.</li>
+              <li>AI kan gøre det meget hurtigere at gå fra idé til prototype.</li>
+              <li>Men er en hurtig prototype det samme som et godt program?</li>
+              <li>Hvad skal en udvikler kunne, når AI kan skrive meget af koden?</li>
+              <li class="fragment"><strong>I dag:</strong> Vi diskuterer spørgsmålet og afprøver AI i praksis.</li>
             </ul>
-            <img src="images/interative-model.jpg">
-            <p>Figur 2: Iterativ model. Kilde: <a href="https://www.geeksforgeeks.org/software-engineering/top-8-software-development-models-used-in-industry/">GeeksforGeeks</a>.</p>
-          </div>
-        </div>
-      </section>
-
-      <section>
-        <h2>(1U) Planlægning og Analyse</h2>
-        <div class="small-list" style="display: grid; grid-template-columns: 1.2fr 1fr;column-gap:2em;">
-          <div>
-            <h3>Planlægning</h3>
-            <ul>
-              <li><strong>Problemformulering:</strong> Anne Vedersø ønsker et Tower Defence-spil som kan vises til folkeskoleelever og FG-elever.</li>
-              <li><strong>Fremgangsmåde:</strong> 3 teams der udvikler et <strong>MVP</strong> parallelt. Vi tager det bedste fra hvert program og <strong>kombinerer</strong> det til ét program.</li></li>
-              <li><strong>Tidsplan:</strong>
-                <ul>
-                  <li><strong>Sidste lektion:</strong> Planlægning, kravspecifikation og lidt design.</li>
-                  <li><strong>Denne lektion:</strong> Design fortsat.</li>
-                  <li><strong>Næste uge (1 lektion):</strong> AI-genereret prototype.</li>
-                  <li><strong>Uge 38:</strong> Aktivitetsuge (ikke normal undervisning).</li>
-                  <li><strong>Uge 39:</strong> Implementering.</li>
-                  <li><strong>Uge 40:</strong> Test og udrulning. Inklusiv dokumentation (<strong>aflevér synopsis</strong>).</li>
-                  <li><strong>Uge 41:</strong> Fremlæggelse og feedback (<strong>mini-prøve</strong>).</li>
-                  <li><strong>Uge 42:</strong> Efterårsferie. </li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h3>Analyse</h3>
-            <div class="fragment">
-              <ol>
-                <li><strong>Interessentanalyse:</strong> Fælles markdown-dokument <code>stakeholder_analysis.md</code></li>
-                <li><strong>Konkurrentanalyse:</strong> I researchede nogle forskellige Tower Defence-spil.</li>
-                <li><strong>Featureliste brainstorm:</strong> Fælles markdown-dokument <code>features.md</code></li>
-              </ol>
-              <img src="images/stakeholder-matrix.png" style="margin-top:2em">
-              <p style="text-align: center;"><strong>Figur:</strong> Vores interessentmatrix.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      
-      <section>
-        <h2>(1U) Kravspecifikation og Design</h2>
-        <div class="small-list" style="display: grid; grid-template-columns: 1.2fr 1fr;column-gap:2em;">
-          <div>
-            <h3>Kravspecifikations-fasen</h3>
-            <ul>
-              <li>MVP: Vi lavede en liste af (<strong>funktionelle</strong>) krav ved at overveje hvad der gjorde et spil til et Tower Defence-spil.</li>
-              <li><strong>MoSCoW:</strong> Vi brugte den ikke helt, da vi kun overvejede hvad vi <strong>Skulle</strong> have med, men det ville være relevant i næste iteration.</li>
-              <li><strong>Ikke-funktionelle krav:</strong> Tempoet skal være højt, da det skal være et hurtigt spil. Andre?</li>
-            </ul>
-          </div>
-          <div>
-            <h3>Design-fasen</h3>
-            <div class="fragment">
-              <ul>
-                <li><strong>Fil-struktur:</strong> Meget basalt design af systemarkitekturen. Hvilke filer har I lavet?</li>
-                <li><strong>Use cases:</strong> Hvordan brugeren skal interagere med programmet. Hvor mange fandt I? Hvad med når brugeren trykker på et felt som han ikke kan placere et tårn på, eller hvis han ikke har nok penge?</li>
-                <li><strong>Pseudokode:</strong> Algoritmer for hvordan objekterne i spillet interagerer med hinanden. Hvilke interaktioner fandt I?</li>
-              </ul>
-            </div>
           </div>
         </div>
       </section>
 
       <section data-slide-step="1">
-        <h2>(1Ø) Lektier til denne gang</h2>
-        <div class="homework-list small-list" style="width: 80%;" >
-          <!-- <h3>Færdiggør øvelserne</h3> -->
-          <h3>Analyse</h3>
+        <h2>(1Ø) Video: The Vibe Coding Era</h2>
+        <div class="homework-list small-list" style="width:86%;">
+          <h3>Gennemgang af lektien</h3>
+          <p><a href="https://www.youtube.com/watch?v=xYU7zaaRjmE">The Vibe Coding Era: Why AI Won't Replace Software Engineers — Bloomberg Television</a></p>
           <ul>
-            <li>Spil nogle tower defence spil og skriv ned hvilke features de har som I ikke har tilføjet til <code>features.md</code>.</li>
+            <li><strong>Start med sidemakkeren:</strong> Hvad var videoens vigtigste påstand?</li>
+            <li>Hvilke eksempler bruger videoen på, at AI gør udvikling hurtigere?</li>
+            <li>Hvilke problemer kan opstå, selv når en AI-lavet løsning ser overbevisende ud?</li>
+            <li>Hvilke dele af en udviklers arbejde bliver muligvis vigtigere?</li>
           </ul>
-          <h3>Video</h3>
-          <ul>
-            <li>Se første video (eller flere) i denne playliste om design af Tower Defence-spil: 
-              <div><a href="https://www.youtube.com/watch?v=DL4tiI53IW4&list=PL-eCFrNZ9nlImCM7CdPpby8Ee2fVErVQO"> Game Design Principles - Tower Defense</a> af LtRandolph Games.</div>
-            </li>
-            <li>Hvad fik I ud af at se denne video?</li>
-          </ul>
-          <h3>Design brugergrænsefladen</h3>
-          <ul class="fragment">
-            <li>Tegn hvordan spillet skal se ud.</li>
-            <li><strong>Overvejelser:</strong>
-              <ul>
-                <li>Skal være simpelt at implementere, men opfylde kravene for MVP.</li>
-                <li>Hvordan kan tårnene, fjenderne og projektilerne tegnes simplest muligt?</li>
-                <li>Hvordan skal vi vise fjendernes liv simplest muligt?</li>
-                <li>Hvordan skal vi angive spillerens liv og penge?</li>
-                <li>Hvordan skal banen se ud?</li>
-              </ul>
-            </li>
-            <li>I får 10 minutter til lige at blive enige om et design.</li>
+          <p class="fragment"><strong>Mens vi gennemgår:</strong> Læg mærke til forskellen mellem at få noget til at virke og at vide, at det virker korrekt.</p>
         </div>
       </section>
 
-      <!-- <section>
-        <h2>(1Ø) Mine forventninger til mig selv </h2>
-        <ol class="spaced-list" style="font-size: 1.1em;">
-          <li>At jeg er <strong>velforberedt</strong> og har <strong>overskud</strong>.</li>
-          <li>At jeg behandler alle med <strong>respekt</strong> og skaber et <strong>trygt</strong> og <strong>åbent læringsmiljø</strong>, hvor alle spørgsmål er velkomne (men <em>ikke nødvendigvis</em> besvares).</li>
-          <li>At jeg er <strong>tilgængelig</strong> for spørgsmål og vejledning - både i og uden for timerne, og at jeg <strong>ikke bliver irriteret</strong> hvis jeg bliver nødt til at forklare noget på <strong>forskellige måder</strong> før det giver mening.</li>
-          <li>At jeg er <strong>ærlig</strong>, hvis jeg ikke kender svaret på et spørgsmål, og <strong>anerkender</strong> hvis jeg har sagt noget forkert eller <strong>begået en fejl</strong>.</li>
-          <li>At jeg <strong>lytter</strong> til jeres <strong>feedback</strong> og <strong>justerer undervisningen</strong>, når det giver mening.</li>
-        </ol>
-
-      </section>
-
-      
       <section>
-        <h2>(1Ø) Mine forventninger til jer</h2>
-        <ol class="spaced-list" style="font-size: 0.9em">
-          <h3>Undervisningen</h3>
-          <li>At I <strong>ikke laver andet</strong> i undervisningstiden (pånær noter eller andet fagligt relevant), og at I <strong>i stedet fortæller mig</strong> hvis I har behov for en pause eller I synes noget er <strong>uinteressant</strong> eller jeg har <strong>brugt for meget tid</strong> på noget.</li>
-          <li>At I <strong>respekterer</strong> hinandens og min <strong>tid</strong> ved at møde <strong>velforberedte</strong>, <em>især</em> hvis I ikke kunne være til sidste lektion. Som <em>minimum</em> kig i <strong>materialet</strong> (slides, uddelt kode, øvelser, etc) og dan jer et <strong>overblik</strong> over hvad vi gik igennem.</li>
-          <li>At I <strong>ikke taler med sidemakkeren</strong> i undervisningen, <strong>selv</strong> ved spørgsmål, men nævner det for <strong>hele klassen</strong>, eller stiller spørgsmålet til mig (<em>pånær hvis det bare er en kort intern kommentar</em>). </li>
-          <h3>Fejlfinding</h3>
-          <li>At I <strong>hjælper hinanden</strong> med at forstå stoffet og at kunne løse opgaverne, <strong>uden blot at give svaret</strong>, men har andres <strong>læring</strong> i mente.</li>
-          <li>At I <strong>spørger</strong> når der er noget I ikke forstår, eller <strong>tror</strong> jeg har begået en fejl, og at I ikke holder jer tilbage.</li>
-          <li>At I <strong>prøver selv</strong>, før I spørger om hjælp til opgaver.</li>
-          <li>At I <strong>tør begå fejl</strong>, og kan klare at blive fortalt at <strong>noget I har lavet er forkert</strong>.</li>
-          <li>At I <strong>bærer over med mig</strong> hvis jeg siger tingene lidt for <strong>direkte</strong>, og ikke tager det <strong>personligt</strong>, men at I kan tåle at tage fejl, siden at alle mennesker begår fejl, men anerkender at det er <strong>en del af læringen</strong>.</li>
-          <h3>Ansvar</h3>
-          <li>At I tager faget <strong>seriøst</strong> og bruger den <strong>nødvendige tid</strong> til at følge med i kurset, fremfor at springe over hvor gærdet er lavest.</li>
-          <li>At I <strong>ikke snyder</strong> men <strong>taler med mig</strong> hvis I er bekymrede for jeres karakterer eller om I består.</li>
-        </ol>
-      </section>
-
-      <section>
-        <h2>(1Ø) Fremgangsmåde når man har problemer</h2>
-        <div class="homework-list small-list" style="display: grid;grid-template-columns: 1fr 1fr;gap:2em">
+        <h2>(1Ø) AI øger tempoet — og hvem kan nu bygge software?</h2>
+        <div class="small-list" style="display:grid;grid-template-columns:1fr 1fr;column-gap:2em;align-items:start;">
           <div>
-            <h3>1. Prøv selv</h3>
+            <h3>Addy Osmani: produktivitet og adgang</h3>
+            <blockquote>“In the earlier days of AI, I would have said, you know, that boost is 10 to 15 percent. These days, it's anywhere from 30 to 50 percent. And I see that number only continuing to go up.”</blockquote>
+            <ul><li>AI-værktøjer kan gøre udviklere hurtigere, især i den første del af et projekt.</li><li>Et tal for produktivitet siger dog ikke i sig selv noget om kvaliteten af resultatet.</li></ul>
+            <blockquote>“Vibe coding is enabling people to go from idea to execution faster than ever.”</blockquote>
+            <ul><li><strong>Budskab:</strong> AI sænker barrieren for at komme i gang — den fjerner ikke behovet for at vurdere resultatet.</li></ul>
+          </div>
+          <div>
+            <h3>Jamie Grove: en virksomhedsejer bygger selv</h3>
+            <blockquote>“For the initial run to take some spreadsheets that we had that we were working with to get an actual workable sample ready to go took me less than a day.”</blockquote>
+            <blockquote>“There's absolutely no way I could have done any of this without AI.”</blockquote>
+            <blockquote>“Even someone who is a very fast coder could not have built all these solutions. Impossible.”</blockquote>
+            <blockquote>“If I were to do it with a team of programmers, I could have five programmers working on this full-time and still not deliver as many results.”</blockquote>
+            <blockquote>“We might be talking about an annual license of anywhere between $6,000 and $10,000 a year, scaling all the way up to maybe $30,000 to $50,000 a year... Now, for about $20 a month, business owners like Grove are building their own software solutions.”</blockquote>
+            <p><strong>Budskab:</strong> AI kan gøre specialiserede løsninger tilgængelige uden et udviklingsteam. Det er ikke det samme som, at løsningerne har samme kvalitet som professionelt udviklet software.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>(1Ø) Hvad AI kan — og hvad ansvar betyder</h2>
+        <div class="small-list" style="display:grid;grid-template-columns:1fr 1fr;column-gap:2em;align-items:start;">
+          <div>
+            <h3>AI kan sagtens levere noget, der...</h3>
+            <ul>
+              <li>ser flot og færdigt ud</li>
+              <li>fungerer i de normale tilfælde</li>
+              <li>har mange synlige features</li>
+              <li>kan demonstreres overbevisende</li>
+              <li>er hurtigt at producere og ændre i starten</li>
+            </ul>
+            <h3>... men det kan stadig have</h3>
+            <ul><li>dårlig arkitektur og skjulte bugs</li><li>sikkerhedsproblemer og dårlig performance</li><li>uventede afhængigheder</li><li>kode, der er vanskelig at ændre</li><li>problemer, når programmet skal skaleres eller vedligeholdes</li></ul>
+            <p><strong>Derfor:</strong> Test, forståelse og kvalitetssikring bliver vigtigere — ikke mindre vigtige.</p>
+          </div>
+          <div>
+            <h3>Addy Osmani: engineering kræver ansvar</h3>
+            <blockquote>“If you are vibe coding, you're pretty much just giving into the vibes.”</blockquote>
+            <blockquote>“If you are engineering, that's where you have to apply rigor to it. You have to have this clear set of requirements. You are testing.”</blockquote>
+            <blockquote>“If you're building any kind of serious software, you still need to have some idea of what is the quality bar? What are my quality gates?”</blockquote>
+            <blockquote>“How am I making sure this is actually going to meet the needs of my users in a consistent way?”</blockquote>
+            <blockquote>“You're going to have effectively a virtual team of agents that you're responsible for.”</blockquote>
+            <blockquote>“And you have to own the outcomes.”</blockquote>
+            <p><strong>Budskab:</strong> Udvikleren sætter kravene, vælger hvad der er “godt nok”, tester resultatet og tager ansvaret, hvis det fejler.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>(1Ø) Hvad tæller som produktivitet? — og hvem skal gøre hvad?</h2>
+        <div class="small-list" style="display:grid;grid-template-columns:1fr 1fr;column-gap:2em;align-items:start;">
+          <div>
+            <h3>Produktivitet er mere end antal linjer kode</h3>
+            <blockquote>“How many lines of code are being generated? Which is not in any way a good proxy for productivity.”</blockquote>
+            <ul><li>Mere kode er ikke automatisk et bedre program.</li><li>Et stort output kan også skabe mere kode, der skal læses, testes og vedligeholdes.</li><li>Spørgsmålet bør være: <em>Løser det brugerens problem enkelt og pålideligt?</em></li></ul>
+            <blockquote>“Today it's all about quality.”</blockquote>
+            <blockquote>“They don't care if a human has been authoring it or AI has been authoring it.”</blockquote>
+            <blockquote>“It doesn't help them get the job done in a reliable way.”</blockquote>
+          </div>
+          <div>
+            <h3>Cynthia Chen og Frank Nagle</h3>
+            <blockquote>“It's like technically I can make it, but an engineer probably could have made this in a much shorter timeline and probably with, like, much more robust code.”</blockquote>
+            <p><strong>Budskab:</strong> At noget kan lade sig gøre, betyder ikke, at det er bygget robust.</p>
+            <blockquote>“When coders started using these types of tools, they massively shift the amount of their time that they allocate to coding.”</blockquote>
+            <blockquote>“And they take away a whole lot of their allocated time from project management.”</blockquote>
+            <p><strong>Spørgsmål:</strong> Hvis AI flytter tiden væk fra både kodning og projektstyring, hvad bruger udvikleren så mere tid på?</p>
+          </div>
+        </div>
+      </section>
+
+      <section data-slide-step="2">
+        <h2>(2U) Vil AI erstatte softwareudviklere?</h2>
+        <div class="small-list" style="display:grid;grid-template-columns:1.15fr 1fr;column-gap:2em;">
+          <div>
+            <h3>Da “computer” var en person</h3>
+            <ul>
+              <li>Ordet <em>computer</em> betød fra 1600-tallet “en person, der beregner”.</li>
+              <li>Før elektroniske computere lavede hold af mennesker — ofte kvinder — lange beregninger i parallel.</li>
+              <li>To hold kunne udføre den samme beregning uafhængigt for at kontrollere, om resultatet var korrekt.</li>
+              <li>Under 1. Verdenskrig blev dette et egentligt erhverv: kort, navigation, landmåling og artilleritabeller.</li>
+              <li>Elektroniske computere erstattede mange af de opgaver.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>En analogi — ikke et facit</h3>
+            <ul>
+              <li>Ny teknologi kan fjerne opgaver og job, men også skabe nye roller og muligheder.</li>
+              <li>Softwareudviklere kan måske i højere grad blive dem, der definerer problemer, styrer værktøjer og kvalitetssikrer.</li>
+              <li>Spørgsmål: Er det godt eller dårligt, hvis arbejdet ændrer sig? For hvem?</li>
+            </ul>
+            <p class="text-sm muted">Kilde: <a href="https://en.wikipedia.org/wiki/Computer_(occupation)">Wikipedia: Computer (occupation)</a></p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>(2U) Vibe coding: Karpathys oprindelige beskrivelse</h2>
+        <blockquote style="font-size:0.54em;line-height:1.3;text-align:left;">“There's a new kind of coding I call ‘vibe coding’, where you fully give in to the vibes, embrace exponentials, and forget that the code even exists. It's possible because the LLMs (e.g. Cursor Composer w Sonnet) are getting too good. Also I just talk to Composer with SuperWhisper so I barely even touch the keyboard. I ask for the dumbest things like ‘decrease the padding on the sidebar by half’ because I'm too lazy to find it. I ‘Accept All’ always, I don't read the diffs anymore. When I get error messages I just copy paste them in with no comment, usually that fixes it. The code grows beyond my usual comprehension, I'd have to really read through it for a while. Sometimes the LLMs can't fix a bug so I just work around it or ask for random changes until it goes away. It's not too bad for throwaway weekend projects, but still quite amusing. I'm building a project or webapp, but it's not really coding — I just see stuff, say stuff, run stuff, and copy paste stuff, and it mostly works.”</blockquote>
+        <p><strong>Budskab:</strong> “Vibe coding” blev ikke oprindeligt brugt som et ideal. Det beskriver en situation, hvor programmet vokser hurtigere end ens forståelse af det — acceptabelt for et kort eksperiment, men risikabelt for noget, der skal vedligeholdes.</p>
+      </section>
+
+      <section>
+        <h2>(2U) Fra vibe coding til agentic engineering</h2>
+        <div class="small-list" style="display:grid;grid-template-columns:1fr 1fr;column-gap:2em;align-items:start;">
+          <div>
+            <h3>Karpathy, 2026</h3>
+            <blockquote>“Today (1 year later), programming via LLM agents is increasingly becoming a default workflow for professionals, except with more oversight and scrutiny. The goal is to claim the leverage from the use of agents but without any compromise on the quality of the software.”</blockquote>
+            <blockquote>“‘agentic’ because the new default is that you are not writing the code directly 99% of the time, you are orchestrating agents who do and acting as oversight.”</blockquote>
+            <blockquote>“‘engineering’ to emphasize that there is an art & science and expertise to it. It's something you can learn and become better at, with its own depth of a different kind.”</blockquote>
+            <ul><li><strong>Agentic:</strong> Du uddelegerer, samler og følger op på opgaver.</li><li><strong>Engineering:</strong> Du anvender faglig viden til at stille krav, vælge løsninger og kontrollere kvalitet.</li><li><strong>Budskab:</strong> AI kan flytte arbejdet væk fra tastaturet, men ikke fjerne behovet for faglig dømmekraft.</li></ul>
+          </div>
+          <div>
+            <h3>Værdien og grænsen</h3>
+            <blockquote>“If AI can write code, then what is the role of the software engineer?”</blockquote>
+            <blockquote>“Absolutely not. I think that vibe coding has a lot of value.”</blockquote>
+            <blockquote>“It has completely changed how many teams approach prototyping.”</blockquote>
+            <blockquote>“Vibe coding a thing does not necessarily mean that you have a production ready artifact that's going to be battle hardened.”</blockquote>
+            <p><strong>Budskab:</strong> Brug AI til at eksperimentere og prototype hurtigt, men forveksl ikke en prototype med et driftssikkert produkt.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>(2U) Hvordan fik “vibe coding” en negativ klang?</h2>
+        <blockquote style="font-size:0.48em;line-height:1.25;text-align:left;">“More than anything, it’s a signal that many engineering teams have added AI to their stacks and are struggling with the quality of its output and its downstream effects. In fact, the use of vibe coding to describe the generation of code for production-grade systems has taken on somewhat negative connotations.<br><br>The term was invoked by many precisely to emphasize that, in some cases, relying too much on AI-generated code at work was trusting an LLM’s vibes in a way better suited for a weekend project, rather than for customer-facing applications of a publicly listed company.<br><br>For example, as AI coding agents were adopted by more teams in 2025, devs on LinkedIn renamed themselves Vibe Code Cleanup Specialists in their profiles. What’s more, Collins’ competitor Merriam Webster went in another direction for their word of the year choice. They chose slop, highlighting the large gulf that still existed between AI optimism and AI output.<br><br>Indeed, for many, the promise of AI coding agents have translated into hours spent reviewing AI slop, reworking code due to unclear prompts or intent, and dealing with incidents or bugs in production.”</blockquote>
+        <p class="text-sm muted">Kilde: David Kravets, <a href="https://www.coderabbit.ai/blog/a-semantic-history-how-the-term-vibe-coding-went-from-a-tweet-to-prod">CodeRabbit: A semantic history</a>. <strong>Budskab:</strong> Når AI-kode bruges i rigtige produkter uden tilstrækkeligt review, kan den flytte arbejdet fra at bygge til at rydde op.</p>
+      </section>
+
+      <section>
+        <h2>(2U) Karpathy et år senere</h2>
+        <blockquote style="font-size:0.48em;line-height:1.25;text-align:left;">“A lot of people quote tweeted this as 1 year anniversary of vibe coding. Some retrospective — I've had a Twitter account for 17 years now (omg) and I still can't predict my tweet engagement basically at all. This was a shower of thoughts throwaway tweet that I just fired off without thinking but somehow it minted a fitting name at the right moment for something that a lot of people were feeling at the same time, so here we are: vibe coding is now mentioned on my Wikipedia as a major memetic ‘contribution’ and even its article is longer. lol<br><br>The one thing I'd add is that at the time, LLM capability was low enough that you'd mostly use vibe coding for fun throwaway projects, demos and explorations. It was good fun and it almost worked. Today (1 year later), programming via LLM agents is increasingly becoming a default workflow for professionals, except with more oversight and scrutiny. The goal is to claim the leverage from the use of agents but without any compromise on the quality of the software. Many people have tried to come up with a better name for this to differentiate it from vibe coding, personally my current favorite ‘agentic engineering’.”</blockquote>
+        <p class="text-sm muted"><strong>Budskab:</strong> Karpathy skelner selv mellem den løse, eksperimenterende brug og en professionel arbejdsgang med review, ansvar og kvalitet.</p>
+      </section>
+
+      <section>
+        <h2>(2U) Kildekritik, hype og udviklerens rolle</h2>
+        <div class="small-list" style="display:grid;grid-template-columns:1fr 1fr;column-gap:2em;">
+          <div>
+            <h3>Vær kritisk over for fortællingen</h3>
+            <ul>
+              <li>AI-virksomheder ønsker naturligt at vise deres produkt fra den bedste side.</li>
+              <li>At ansættelsen af nyuddannede softwareingeniører er faldet med næsten 20 % siden 2022, betyder ikke, at virksomhederne ansætter <strong>ingen</strong>.</li>
+              <li>Spørg altid: Hvem siger det? Hvad måler de? Hvad mangler i tallene?</li>
+              <li>DTU har ledige pladser på softwareteknologi for første gang — men én observation forklarer ikke hele arbejdsmarkedet.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Udvikleren som projektleder</h3>
+            <ul>
+              <li>Man behøver ikke kunne alt, som “teamet” kan, men det er en stor fordel at forstå outputtet.</li>
+              <li>Så kan man formulere præcisere krav, vurdere hvad der er muligt og selv rette småting.</li>
+              <li>Flaskehalse er stadig tid, kapital, evnen til at styre agenter og fantasi.</li>
+              <li><strong>Konklusion:</strong> Brug AI som en hjælper, men lær selv stoffet, så du kan reviewe og guide den.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>(2U) Prompt engineering og context engineering</h2>
+        <div class="small-list" style="display:grid;grid-template-columns:1fr 1fr;column-gap:2em;">
+          <div>
+            <h3>Prompt engineering</h3>
+            <ul>
+              <li>Hvordan formulerer jeg opgaven, så AI'en forstår, hvad jeg vil have?</li>
+              <li>Dårligt eksempel: “Lav det bedste Tower Defence-spil.”</li>
+              <li>Bedre eksempel: Beskriv målgruppe, spilregler, MVP-features, design, teknologi og hvordan spillet skal testes.</li>
+              <li>Et præcist prompt mindsker AI'ens gætteri.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Context engineering</h3>
+            <ul>
+              <li>Hvilken viden skal AI'en have, før den kan træffe gode valg?</li>
+              <li>Giv fx kravliste, klassediagram, papirprototype, eksisterende kode og projektets regler.</li>
+              <li>Det kan også være regler i <a href="https://agents.md/">AGENTS.md</a>, skills eller værktøjer via MCP.</li>
+              <li>Harness engineering handler om de rammer, der får en agent til at arbejde sikkert og systematisk.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>(2U) AI er kun så god som sin kontekst</h2>
+        <div class="small-list" style="display:grid;grid-template-columns:1fr 1fr;column-gap:2em;">
+          <div>
+            <blockquote>“The reason for the failure of any AI model is never a bad prompt. AI models fail because of the absence of any context. Future advancements in large language models, or LLMs, will come from the area of context rather than prompts.”</blockquote>
+            <p class="text-sm muted">Kilde: <a href="https://www.ibm.com/think/topics/vibe-coding#675692303">IBM Think: Vibe coding</a></p>
+          </div>
+          <div>
+            <h3>Tænk på AI som en kollega</h3>
+            <ul>
+              <li>Den har meget viden, men kender ikke nødvendigvis <strong>jeres</strong> projekt.</li>
+              <li>Output afhænger af dens generelle viden og den kontekst, I giver den i samtalen og filerne.</li>
+              <li>I kan forbedre resultatet ved at forklare præcist og ved at give relevant baggrundsviden.</li>
+              <li><strong>Spørgsmål:</strong> Hvilken kontekst ville jeres AI have brug for, før den kunne bygge jeres spil ordentligt?</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section data-slide-step="3">
+        <h2>(2Ø) Øvelse: Byg spillet — kun med AI</h2>
+        <div class="small-list" style="display:grid;grid-template-columns:1fr 1fr;gap:2em;align-items:start;">
+          <div>
+            <h3>Formål og regler</h3>
+            <ul>
+              <li>Lav det bedste Tower Defence-spil, I kan.</li>
+              <li>Alt er tilladt, undtagen at I <strong>selv skriver kode</strong>.</li>
+              <li>Alle får én stemme ved afslutningen; man må ikke stemme på sit eget spil.</li>
+              <li>Arbejd som om AI'en er jeres udviklingsteam.</li>
+            </ul>
+            <h3>Værktøjer</h3>
+            <ul>
+              <li><a href="https://p5js.org/">p5.js</a> og VS Code.</li>
+              <li>Cline-udvidelsen med en gratis model, fx DeepSeek Flash v4.</li>
+              <li>Brug et <strong>tomt p5.js-workspace</strong>, før I giver AI'en brede tilladelser.</li>
+              <li>Sig til, hvis I har et problem, I ikke kan løse med AI.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Arbejdsgang</h3>
             <ol>
-              <li>
-                Kig i dokumentationen.
-                <ul>
-                  <li>Hvis I ikke ved hvor I skal lede så spørg mig</li>
-                  <li>Hvis I ikke forstår  dokumentationen så spørg mig</li>
-                </ul>
-              </li>
-              <li>
-                Søg på google
-                <ul>
-                  <li>Hvis I ikke ved hvad I skal søge på så spørg mig</li>
-                  <li>Hvis I ikke forstår det der står på google så spørg mig</li>
-                </ul>
-              </li>
-              <li>
-                Spørg en AI
-                <ul>
-                  <li>Hvis den ikke har alt kontekst der er nødvendigt for at stille spørgsmålet så spørg mig</li>
-                  <li>Hvis I er i tvivl om AI's svar så spørg mig</li>
-                </ul>
-              </li>
+              <li>Beskriv spillets mål, regler og prioriterede features.</li>
+              <li>Få en lille spilbar version først.</li>
+              <li>Tilføj én feature ad gangen.</li>
+              <li>Test efter hver ændring og skriv ned, hvad der går galt.</li>
             </ol>
-            <h3>2. Spørg jeres sidemakker</h3>
+            <h3>Forvent problemer — og observer dem</h3>
             <ul>
-              <li>Hvis ikke han har lavet opgaven så spørg mig.</li>
-              <li>Hvis ikke han kan (eller vil) hjælpe så spørg mig.</li>
+              <li>En feature virker ikke helt, selv om AI'en siger, at den er færdig.</li>
+              <li>AI'en ændrer noget andet, når den retter en fejl, eller glemmer tidligere krav.</li>
+              <li>Variabler og klasser bliver inkonsistente, og koden bliver mere kompleks.</li>
+              <li>En ændring ét sted kan ødelægge en anden del af spillet.</li>
+              <li>I kan ende med kode, som I ikke selv forstår.</li>
             </ul>
-          </div>
-          <div>
-            <h3>Tilfælde hvor I skal spørge mig med det samme</h3>
-            <ul>
-              <li class="fragment">Hvis terminalen er igang med en nedtælling til at slette alt på jeres computer.</li>
-            </ul>
-            <div class="fragment">
-              <h3>Hvorfor I ikke skal spørge mig om hjælp som det første</h3>
-              <ul>
-                <li>I er ikke afhængige af mig. Programmering handler meget om at kunne løse problemer og søge på tingene selv (især nu med AI).</li>
-                <li>Nogle gange kender jeg ikke en præcis funktion, syntaks eller kommando.</li>
-                <li><strong>Vigtigt:</strong> 
-                  <ul>
-                    <li>I skal heller ikke holde jer tilbage med at spørge, for hvis I ikke er sikre på det som I har lavet så kan der opstå nogle problemer hen ad vejen som kan være svære at løse. </li>
-                    <li>Men I skal blot <strong>acceptere</strong> hvis jeg beder jer om lige at søge på det selv, og derefter vil jeg <strong>meget gerne</strong> hjælpe jer.</li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
-
+            <p><strong>Vigtigt:</strong> Det er data til vores refleksion om, hvad AI er god og dårlig til.</p>
           </div>
         </div>
-
-      </section> -->
-
-      <section data-slide-step="2" class="homework-list small-list">
-        <h2>(2U) Hvad er et klassediagram?</h2>
-        <div style="display: grid; grid-template-columns: 2fr 1fr;">
-          <div>
-            <h3>Elementer i et klassediagram</h3>
-            <ul>
-              <li><strong>Klasser: </strong>
-                <ul>
-                  <li><strong>Properties:</strong> Ligesom properties i JavaScript.</li>
-                  <li><strong>Metoder:</strong> Har jeg ikke introduceret endnu, men det er blot en funktion som et objekt har.</li>
-                  <li><strong>Visibility:</strong> Properties og metoder kan være <strong>public</strong> eller <strong>private</strong>, men det er ikke relevant i dette projekt.</li>
-                </ul>
-              </li>
-              <li><strong>Forbindelser mellem klasser:</strong>
-                <ul>
-                  <li>For nu er det kun relevant med <strong>associeringer</strong>, men der findes andre forbindelser.</li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <img src="images/class-diagram.png" style="height: 900px">
-          </div>
-        </div>
-        
       </section>
-
-      <section data-slide-step="3" class="homework-list small-list">
-        <h2>(2Ø) Lav et klassediagram for jeres spil</h2>
-        <div style="display: grid; grid-template-columns: 3fr 2fr 1fr; gap:2em;">
-          <div>
-            <h3>Markdown klassediagrammer</h3>
-            <ul>
-              <li>I markdown kan man nemt lave klassediagrammer med <a href="https://github.com/mermaid-js/mermaid">Mermaid.js</a></li>
-              <li>Lav en fil <code>class_diagram.md</code>, kopiér denne kode og udbyg klassediagrammet.</li>
-              <li><strong>Relevante klasser:</strong> Game, Player, Map, Tower, Projectile, Wave, Enemy.</li>
-            </ul>
-          </div>
-          <div style="background-color: var(--bg-card);">
-  <pre><code class="language-md" style="font-size: 0.8em;">```mermaid
-classDiagram
-
-class Tower {
-    x
-    y
-    range
-    damage
-    shoot()
-    findTarget()
-    draw()
-}
-
-class Enemy {
-    x
-    y
-    hp
-    speed
-    move()
-    draw()
-}
-
-Tower --&gt; Enemy : attacks
-```</code></pre>
-            </div>
-          <div>
-            <img src="images/class-diagram.png" style="height: 900px">
-          </div>
-        </div>
-        
-      </section>
-      
-      
-
-      
-      <!-- <section data-slide-step="P">
-        <h2>(P) Pause</h2>
-        <div style="display: grid; place-content: center; height: 80%; font-size: 2em;">
-            <h3>Vi starter igen</h3>
-        </div>
-      </section> -->
-
-
 
       <section data-slide-step="6">
-        <h2>(3U) Lektier til næste gang</h2>
-        <div class="homework-list" style="display:grid; place-content: center; width: 70%; height: 50%">
-          <!-- <h3>Færdiggør øvelserne</h3> -->
-          <h3>1. Færdiggør designet af brugergrænsefladen</h3>
-          <ul>
-            <li>Lav tegningen (<strong>papir-prototypen</strong>) af jeres spil færdig, så I har noget at sammenligne brugergrænsefladen af jeres implementerede program med.</li>
-          </ul>
-          <h3>2. Færdiggør klassediagrammet</h3>
-          <ul>
-            <li>Lav klassediagrammet færdigt, for vi skal bruge det når vi går igang med implementerings-fasen efter uge 38.</li>
-            <li>Jeg laver en opgave der skal afleveres inden søndag kl. 21:00.</li>
-          </ul>
-          <h3>3. Video om AI</h3>
-          <ul>
-            <li>Se denne video om softwareudvikling i AI-tidsalderen: 
-              <div><a href="https://www.youtube.com/watch?v=xYU7zaaRjmE">The Vibe Coding Era: Why AI Won't Replace Software Engineers</a> af Bloomberg Television</div>
-            </li>
-          </ul>
+        <h2>(3U) Refleksion efter øvelsen</h2>
+        <div class="homework-list small-list" style="width:90%;"><ul>
+          <li>Hvor hurtigt kom I fra idé til prototype?</li>
+          <li>Hvor mange features kunne AI lave, og hvilke blev reelt færdige?</li>
+          <li>Hvor mange fejl opstod? Opstod der nye fejl, når AI'en rettede gamle?</li>
+          <li>Forstod I den kode, AI'en skrev? Hvis ikke: Hvornår holdt I op med at forstå den?</li>
+          <li>Hvad skete der, da I bad AI'en om at ændre en eksisterende feature?</li>
+          <li>Hvilken programmeringsviden ville have gjort jer bedre til at styre AI'en?</li>
+          <li>Var AI bedst til at <strong>skabe</strong> noget nyt eller til at <strong>vedligeholde</strong> noget eksisterende?</li>
+          <li>Kan man bygge et stort komplekst spil på denne måde? Hvad skulle der til, før I ville stole på det?</li>
+        </ul></div>
+      </section>
+
+      <section>
+        <h2>(3U) AI i Programmering B</h2>
+        <div class="small-list" style="display:grid;grid-template-columns:1fr 1fr;column-gap:2em;">
+          <div>
+            <h3>I må gerne bruge AI til</h3>
+            <ul>
+              <li>Generelle spørgsmål: “Hvad betyder dette ord?” og “Hvad er forskellen på disse koncepter?”</li>
+              <li>At få forklaret kode: “Hvad gør denne funktion?” og “Hvor i koden sker dette?”</li>
+              <li>At planlægge projekter, finde struktur og undersøge biblioteker.</li>
+              <li>Visuelle hjælpemidler: noter, oversigter og slides.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>I må ikke bruge AI til</h3>
+            <ul>
+              <li>At generere kode, som er en del af pensum eller en opgave.</li>
+              <li>“Lav denne opgave i Programmering B for mig.”</li>
+              <li>“Lav hele dette projekt fra start til slut.”</li>
+              <li>“Skriv denne rapport for mig.”</li>
+            </ul>
+            <p><strong>Tommelfingerregel:</strong> Brug AI for at forstå, lære, komme i gang og aflaste gentagelser — ikke for at springe læringen over. Er I i tvivl, så spørg mig.</p>
+          </div>
         </div>
       </section>
 
       <section>
-        <h2>(3U) Næste lektion</h2>
-        <div class="homework-list" style="display: grid; place-content: center;width: 70%; height: 40%">
-          <h3>AI i udviklingsprocessen</h3>
+        <h2>(3U) Næste skridt</h2>
+        <div class="homework-list" style="display:grid;place-content:center;width:72%;height:48%;">
+          <h3>Efter aktivitetsugen</h3>
           <ul>
-            <li>Hvordan bruges AI i udviklingsprocessen?</li>
-            <li>Hvad er "Vibe Coding" og bliver programmører erstattet af AI?</li>
-            <li>Hvordan kan man best udnytte AI som et værktøj, og hvordan bør man ikke gøre?</li>
-            <li><strong>Øvelse:</strong> I skal lave en prototype af Tower Defence spillet (med <strong>alle</strong> features, <strong>ikke</strong> MVP), og I må <em>KUN</em> bruge AI.</li>
+            <li>Vi starter <strong>implementeringsfasen</strong> af Tower Defence-spillet.</li>
+            <li>Jeres papir-prototype, featureliste og klassediagram er den kontekst, I selv skal bruge til at bygge videre.</li>
+            <li>AI kan være et hjælperedskab, men I skal stadig kunne forklare jeres valg og teste jeres løsning.</li>
           </ul>
         </div>
       </section>
-
-
-
 
       <section data-slide-step="7">
         <h2>(3Ø) Lektionen er slut</h2>
-        <div style="display: flex;flex-direction: column;justify-content: space-evenly; height: 80%;margin-left:10%;">
-          <h3>Læg en plan for hvornår I vil lave lektierne og sæt en påmindelse</h3>
-          <!-- <h3>... færdiggør og GEM jeres arbejde</h3> -->
-          <h3>... reflektér over det I har lært og saml jeres tanker</h3>
-          <h3>... I kan gå når I vil.</h3>
+        <div style="display:flex;flex-direction:column;justify-content:space-evenly;height:80%;margin-left:10%;">
+          <h3>Gem jeres spil og jeres observationer fra øvelsen.</h3>
+          <h3>Reflektér over én ting, AI gjorde godt, og én ting, I stadig selv skal kunne.</h3>
+          <h3>... I kan gå, når I vil.</h3>
         </div>
       </section>
-      
-      
-
     </div>
 
     <template id="agenda-template">
-      <section class="agenda">
-        <!-- <h2 class="agenda-header" style="display: none">Program</h2> -->
-        <h2 class="agenda-header">Program</h2>
-        <!-- <h2>Program</h2> -->
-        <div class="flex-center" style="font-size: 1.05em;">
-          <table class="agenda-table">
-            <thead>
-              <tr>
-                <!-- Trin: Del, sektion,... -->
-                <th><strong>Punkt *</strong></th>
-                <th><strong>Start + varighed</strong></th>
-                <th><strong>Aktivitet</strong></th>
-                <th><strong>Indhold</strong></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr data-step="0"><td>1U</td><td>10:00 + 10</td><td>Opsamling fra sidst</td><td>Kort opsummering og hovedbudskaberne af sidste lektion.</td></tr>
-              <tr data-step="1"><td>1Ø</td><td>10:10 + 20</td><td>Gennemgang af lektier til i dag</td><td>Eventuelle spørgsmål om indholdet i sidste lektion, samt gennemgang af lektierne.</td></tr>
-              <tr data-step="2"><td>2U</td><td>08:40 + 10</td><td>Introduktion til klassediagrammer</td><td>Kort om hvad et klassediagram er.</td></tr>
-              <tr data-step="3"><td>2Ø</td><td>08:50 + 45 </td><td>Lav et klassediagram</td><td>I skal lave et klassediagram for jeres spil.</td></tr>              
-              <!-- <tr data-step="P"><td>P</td><td>13:40 + 10</td><td>Pause inden næste modul</td><td></td></tr> -->
-              <tr data-step="6"><td>3U</td><td>09:35 + 5</td><td>Opsamling, lektier og næste lektion</td><td>Hjemmearbejde til næste gang og emnerne for næste lektion.</td></tr>
-              <tr data-step="7"><td>3Ø</td><td>09:40 + 5</td><td>Afrunding</td><td>Færdiggør jeres arbejde og reflektér over jeres læring.</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="text-sm muted"><strong>*</strong> (U=Undervisning, Ø=Øvelse)</div>
-      </section>
+      <section class="agenda"><h2 class="agenda-header">Program</h2><div class="flex-center" style="font-size:1.05em;"><table class="agenda-table"><thead><tr><th><strong>Punkt *</strong></th><th><strong>Start + varighed</strong></th><th><strong>Aktivitet</strong></th><th><strong>Indhold</strong></th></tr></thead><tbody>
+        <tr data-step="0"><td>1U</td><td>08:10 + 10</td><td>Opsamling</td><td>Fra designfasen til dagens spørgsmål om AI og implementering.</td></tr>
+        <tr data-step="1"><td>1Ø</td><td>08:20 + 25</td><td>Video om AI</td><td>Citater, produktivitet, kvalitet og udviklerens ansvar.</td></tr>
+        <tr data-step="2"><td>2U</td><td>08:45 + 25</td><td>AI og udviklerens rolle</td><td>Vibe coding, agentic engineering, kildekritik, prompts og kontekst.</td></tr>
+        <tr data-step="3"><td>2Ø</td><td>09:10 + 30</td><td>Byg spillet kun med AI</td><td>Tower Defence-øvelse med AI som udviklingsteam.</td></tr>
+        <tr data-step="6"><td>3U</td><td>09:40 + 10</td><td>Refleksion og AI-regler</td><td>Erfaringer fra øvelsen og rammer for AI i faget.</td></tr>
+        <tr data-step="7"><td>3Ø</td><td>09:50 + 5</td><td>Afrunding</td><td>Gem arbejdet og saml op på dagens læring.</td></tr>
+      </tbody></table></div><div class="text-sm muted"><strong>*</strong> (U = undervisning, Ø = øvelse)</div></section>
     </template>
-
   </div>
   <script src="../../node_modules/reveal.js/dist/reveal.js"></script>
   <script src="../../node_modules/reveal.js-menu/menu.js"></script>
@@ -433,7 +385,6 @@ Tower --&gt; Enemy : attacks
   <script src="../../node_modules/reveal.js/dist/plugin/highlight.js"></script>
   <script src="../../node_modules/reveal.js/dist/plugin/zoom.js"></script>
   <script src="../../node_modules/reveal.js/dist/plugin/math.js"></script>
-  
   <script src="../main.js"></script>
 </body>
 </html>
