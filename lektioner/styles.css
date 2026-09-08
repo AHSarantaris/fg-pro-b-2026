@@ -165,12 +165,12 @@ html {
     color: var(--fg);
     padding: 0.6em 1.2em;
     border-radius: 0 6px 6px 0;
-    font-style: italic;
-    font-size: 0.9em;
+    /* font-style: italic; */
+    font-size: 0.85em;
 }
 
 .math, .MathJax {
-    color: var(--red) !important;
+    /* color: var(--red) !important; */
 }
 
 .card {

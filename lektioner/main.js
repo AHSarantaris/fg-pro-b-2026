@@ -601,6 +601,10 @@ Reveal.initialize({
     // and the menu will not attempt to load the font-awesome library.
     loadIcons: true
   },
-  
+  mathjax2: {
+    tex2jax: {
+      inlineMath: [ ['\\(','\\)'] ],   // only \(...\) opens inline math
+    },
+  },
   plugins: [ RevealMenu, Multimodal, RevealHighlight, RevealNotes, RevealMath, RevealZoom],
 });
