@@ -301,7 +301,8 @@
             <ul>
               <li>Hvilken viden skal AI'en have, før den kan træffe gode valg?</li>
               <li>Giv fx kravliste, klassediagram, papirprototype, eksisterende kode og projektets regler.</li>
-              <li>Det kan også være regler i <a href="https://agents.md/">AGENTS.md</a>, skills eller værktøjer via MCP.</li>
+              <li>Det kan også være regler i en AGENTS.md fil (se <a href="https://agents.md/">https://agents.md/</a>), skills i en SKILL.md fil (se <a href="https://agentskills.io/">https://agentskills.io/</a>) eller værktøjer via MCP-servere (Model Context Protocol).</li>
+              <li></li>
               <!-- <li>Harness engineering handler om de rammer, der får en agent til at arbejde sikkert og systematisk.</li> -->
             </ul>
           </div>
@@ -358,7 +359,6 @@
             <ul>
               <li>En feature virker ikke helt, selv om AI'en siger, at den er færdig.</li>
               <li>AI'en ændrer noget andet, når den retter en fejl, eller glemmer tidligere krav.</li>
-              <li>Variabler og klasser bliver inkonsistente, og koden bliver mere kompleks.</li>
               <li>En ændring ét sted kan ødelægge en anden del af spillet.</li>
               <li>I kan ende med kode, som I ikke selv forstår.</li>
             </ul>
@@ -372,12 +372,10 @@
         <div class="homework-list small-list" style="width:90%;"><ul>
           <li>Hvor hurtigt kom I fra idé til prototype?</li>
           <li>Hvor mange features kunne AI lave, og hvilke blev reelt færdige?</li>
-          <li>Hvor mange fejl opstod? Opstod der nye fejl, når AI'en rettede gamle?</li>
-          <li>Forstod I den kode, AI'en skrev? Hvis ikke: Hvornår holdt I op med at forstå den?</li>
+          <li>Opstod der nye fejl, når AI'en rettede gamle?</li>
           <li>Hvad skete der, da I bad AI'en om at ændre en eksisterende feature?</li>
-          <li>Hvilken programmeringsviden ville have gjort jer bedre til at styre AI'en?</li>
-          <li>Var AI bedst til at <strong>skabe</strong> noget nyt eller til at <strong>vedligeholde</strong> noget eksisterende?</li>
-          <li>Kan man bygge et stort komplekst spil på denne måde? Hvad skulle der til, før I ville stole på det?</li>
+          <li>Var AI bedst til at skabe noget nyt eller til at vedligeholde noget eksisterende?</li>
+          <li>Kan man bygge et stort komplekst spil på denne måde? Hvad skulle der til, før I ville stole på at spillet fungerede uden problemer?</li>
         </ul></div>
       </section>
 
@@ -385,23 +383,33 @@
         <h2>(3U) AI i Programmering B</h2>
         <div class="small-list" style="display:grid;grid-template-columns:1fr 1fr;column-gap:2em;">
           <div>
-            <h3>I må gerne bruge AI til</h3>
+            <h3>I må gerne (og bør) bruge AI til</h3>
             <ul>
-              <li>Generelle spørgsmål: “Hvad betyder dette ord?” og “Hvad er forskellen på disse koncepter?”</li>
-              <li>At få forklaret kode: “Hvad gør denne funktion?” og “Hvor i koden sker dette?”</li>
-              <li>At planlægge projekter, finde struktur og undersøge biblioteker.</li>
-              <li>Visuelle hjælpemidler: noter, oversigter og slides.</li>
+              <li><strong>Generelle spørgsmål:</strong> “Hvad betyder dette begreb?” og “Hvad er forskellen på disse koncepter?”</li>
+              <li><strong>Planlægning:</strong> At planlægge projekter, finde struktur og undersøge biblioteker.</li>
+              <li><strong>Visuelle hjælpemidler:</strong> Noter og oversigter til jer selv og slides til præsentationer.</li>
+              <li><strong>At få forklaret kode:</strong> “Hvad gør denne funktion?” og “Hvor i koden sker dette?”</li>
+              <li><strong>At hjælpe med programmering:</strong> "Hvordan kan jeg implementere denne feature? Men lad være med at implementere den for mig." (Sæt AI agenten i "plan mode").</li>
+              <li><strong>Debugging:</strong> Finde fejl i koden og spørge den om fejl-meddelelser.</li>
+              <li><strong>Skrive dokumentation:</strong> I må gerne få AI til at skrive kommentarer og påbegynde README-filer, så længe at I sørger for at det er korrekt og justerer i det.</li>
+              <!-- <li><strong>Generere ubetydelige kodedele:</strong> I må gerne få AI til at skrive dele af koden der ikke er , så længe at I sætter jer ind i hvad koden gør og sørger for at den er korrekt, og justerer i den.</li> -->
             </ul>
           </div>
           <div>
             <h3>I må ikke bruge AI til</h3>
             <ul>
-              <li>At generere kode, som er en del af pensum eller en opgave.</li>
-              <li>“Lav denne opgave i Programmering B for mig.”</li>
-              <li>“Lav hele dette projekt fra start til slut.”</li>
-              <li>“Skriv denne rapport for mig.”</li>
+              <li>At <strong>generere</strong> kode, som er en del af <strong>pensum</strong> eller en <strong>opgave</strong>.</li>
+              <li><strong>Eksempler:</strong>
+                <ul>
+                  <li>“Lav denne opgave i Programmering B for mig.”</li>
+                  <li>“Lav hele dette projekt fra start til slut.”</li>
+                  <li>“Skriv denne rapport for mig.”</li>
+                </ul>
+              </li>
+              <li><strong>Tommelfingerregel:</strong> 
+                <div>Brug AI for at <strong>forstå</strong>, <strong>lære</strong>, <strong>komme i gang</strong> og <strong>aflaste gentagelser</strong> — ikke for at springe læringen over. I er <strong>ansvarlige</strong> for resultatet. </div></li>
+              <li>Er I i tvivl om I må bruge AI til noget, så spørg mig.</li>
             </ul>
-            <p><strong>Tommelfingerregel:</strong> Brug AI for at forstå, lære, komme i gang og aflaste gentagelser — ikke for at springe læringen over. Er I i tvivl, så spørg mig.</p>
           </div>
         </div>
       </section>
