@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1f1f1f">
+  <title>FG ProB - Lektion 10: Implementering af Tower Defence-Spillet</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/all.min.css">
+  <link rel="stylesheet" href="../../node_modules/reveal.js/dist/reveal.css">
+  <link rel="stylesheet" href="../variables.css">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../highlight.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <section class="title-slide">
+        <h1><span hidden>Lektion 10: </span>Implementering af Tower Defence-Spillet</h1>
+        <h3>Lektion 10</h3>
+        <p>Andreas Hussain Sarantaris · 22-09-2026</p>
+        <p style="font-size:0.82em;color:var(--fg-muted);">Frederikssund Gymnasium · Programmering B</p>
+      </section>
+
+      <section data-slide-step="0">
+        <h2>(1U) Hovedbudskaberne fra sidste lektion</h2>
+        <div class="small-list" style="display:grid;grid-template-columns:1fr 1fr;column-gap:2em;">
+          <div>
+            <h3>Vigtige begreber</h3>
+            <ul>
+              <li><strong>Vibe Coding:</strong> 
+                <ul class="fragment">
+                  <li>At lave et program <strong>udelukkende</strong> ved brug af AI til at at skrive alt kode.</li>
+                  <li>Man kan hurtigt lave en <strong>prototype</strong> og <strong>afprøve idéer</strong> ved blot at <strong>fortælle AI</strong> hvad man ønsker og få et resultat på meget kort tid.</li>
+                  <li>Der er <strong>ingen garanti</strong> for at programmet fungerer da man ikke selv har <strong>tjekket koden igennem</strong> eller sørget for at <strong>teste</strong> at koden fungerer i alle tilfælde.</li>
+                </ul>
+              </li>
+              <li><strong>Agentic engineering:</strong> 
+                <ul class="fragment">
+                  <li>At bruge AI agenter som <strong>programmeringsteam</strong> der skriver det meste af koden, mens man selv fungerer som <strong>projektleder</strong>, der har <strong>ansvar</strong> for resultatet.</li>
+                </ul>
+              </li>
+              <li><strong>Prompt engineering:</strong> 
+                <ul class="fragment">
+                  <li>At formulere inputtet til AI agenten således at den giver et optimalt output.  </li>
+                </ul>
+              </li>
+              <li><strong>Context engineering:</strong> 
+                <ul class="fragment">
+                  <li>At sørge for at AI agenten har de nødvendige informationer for at give et optimalt output.</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3>Fordele med AI</h3>
+            <ul class="fragment">
+              <li>Øget produktivitet</li>
+              <li>Bedre idégenerering</li>
+              <li>Billigere at få gjort noget som man normalt ville betale andre mennesker at gøre.</li>
+            </ul>
+            <h3>Problemer med AI</h3>
+            <ul class="fragment">
+              <li>Man outsourcer sin tænkning til AI agenter, så man ikke lærer det selv,ikke længere kan gøre noget som man kunne før, og bliver afhængig af AI. 
+                <ul>
+                  <li>Løsning: Man skal lære de fundamentale begreber og metoder selv, så man ved hvad der er god og dårlig kvalitet, og så bruge AI til at forøge sin produktivitet.</li>
+                </ul>
+              </li>
+              <li>Arbejdsmarkedet vil ændre sig markant.
+                <ul>
+                  <li>Løsning: Man skal være god til at udnytte mulighederne AI giver, så man ikke erstattes af den.</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>(1U) Mere om AI - Aktuelle Nyheder</h2>
+        <div class="small-list" style="display:grid;grid-template-columns:1.3fr 1fr;column-gap:2em;">
+          <div>
+            <h3>Et af de største matematik-problemer løst af OpenAI</h3>
+            <ul>
+              <li>De fandt et eksempel hvor <strong>Navier Stokes-ligningen</strong> bryder ned da den forudsiger at en væske (under visse forhold) kunne have et punkt hvor hastigheden blev <strong>uendelig stor</strong> og har derved løst et af de 7 <strong>Millenium-problemer</strong> som <strong>Clay Maths-instituttet</strong> udlover en dusør på <strong>1 million dollars</strong> for at løse.</li>
+              <li class="fragment" data-fragment-index="2s">... med 10.000 agenter der kørte parallelt i 88 timer og en estimeret pris på <a href="https://www.businessinsider.com/openai-math-problem-solved-tokens-cost-altman-2026-9">10-40 millioner dollars</a> i regnekraft.</span></li>
+              <li class="fragment" data-fragment-index="3">Men andre mener de har snydt...</li>
+              <li class="fragment" data-fragment-index="3">Fra Wikipedia &gt; <a href="https://en.wikipedia.org/wiki/Navier%E2%80%93Stokes_priority_controversy">Navier–Stokes priority controversy</a>:
+              </li>
+              <blockquote class="fragment" data-fragment-index="3">
+                <p>On 8 September 2026, artificial intelligence company OpenAI claimed a solution to the <strong>Navier-Stokes existence and smoothness problem</strong>.</p>
+                <p>However, approximately 12 hours before OpenAI's announcement, mathematician Tristan Buckmaster made a statement on behalf of himself and partly Levent Alpöge, claiming that their recent advances on Euler equations (a special case of Navier Stokes), reported in the same post, <strong>were leaked to OpenAI</strong> a few days earlier and may have <strong>inspired OpenAI's prompts</strong> for the agents in the process that led to the solution.</p>
+                <p>OpenAI <strong>denied such direct use of their work</strong>, claiming "significant" differences in proof methods in the Euler case.</p>
+              </blockquote>
+            </ul>
+          </div>
+          <div class="fragment">
+            <h3>Eksperter advarer om at AI kan slå alle mennesker ihjel</h3>
+            <strong>Jacob Coxon tweet fra 09/09:</strong> 
+            <blockquote>
+              "I resigned from <strong>Anthropic</strong> today. I spent the last three years doing pretraining research at both <strong>OpenAI</strong> and <strong>Anthropic</strong>. <strong>Neither</strong> company is <strong>acting responsibly</strong>. They are <strong>racing</strong> straight to <strong>self-improving superintelligence</strong> and <strong>gambling with our lives</strong>.[...]"
+            </blockquote>
+            <blockquote>"<strong>The people building AI earnestly believe</strong> that it could <strong>kill us all</strong> by the <strong>end of the decade</strong>. This is not a <strong>marketing stunt</strong>. If anything, many <strong>executives</strong> and <strong>senior researchers</strong> will couch their phrasing in <strong>the press</strong> to sound sensible - but I hear the same people <strong>express fear privately</strong>. No other human activity poses <strong>this level of danger</strong>."</blockquote>
+            <strong>Evan Hubinger (alignment science lead hos Anthropic):</strong> 
+            <blockquote>"Jacob is <strong>correct here</strong>—we <strong>really do earnestly believe</strong> AI could <strong>kill all humans!</strong> I personally think it is <strong>>10% within the next decade</strong>. I believe Anthropic is trying its best, but we do not yet have a plan to solve <strong>alignment</strong> for <strong>superintelligence</strong> and are not clearly on track to."</blockquote>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>(1U) Brug af AI i Programmering B</h2>
+        <div class="small-list" style="display:grid;grid-template-columns:1fr 1fr;column-gap:2em;">
+          <div>
+            <h3>I må gerne (og bør) bruge AI til</h3>
+            <ul>
+              <li><strong>Generelle spørgsmål:</strong> “Hvad betyder dette begreb?” og “Hvad er forskellen på disse koncepter?”</li>
+              <li><strong>Planlægning:</strong> At planlægge projekter, finde struktur og undersøge biblioteker.</li>
+              <li><strong>Visuelle hjælpemidler:</strong> Noter og oversigter til jer selv og slides til præsentationer.</li>
+              <li><strong>At få forklaret kode:</strong> “Hvad gør denne funktion?” og “Hvor i koden sker dette?”</li>
+              <li><strong>At hjælpe med programmering:</strong> "Hvordan kan jeg implementere denne feature? Men lad være med at implementere den for mig." (Sæt AI agenten i "plan mode").</li>
+              <li><strong>Debugging:</strong> Finde fejl i koden og spørge den om fejl-meddelelser.</li>
+              <li><strong>Skrive dokumentation:</strong> I må gerne få AI til at skrive kommentarer og påbegynde README-filer, så længe at I sørger for at det er korrekt og retter i det.</li>
+              <!-- <li><strong>Generere ubetydelige kodedele:</strong> I må gerne få AI til at skrive dele af koden der ikke er , så længe at I sætter jer ind i hvad koden gør og sørger for at den er korrekt, og justerer i den.</li> -->
+            </ul>
+          </div>
+          <div>
+            <h3>I må ikke bruge AI til</h3>
+            <ul>
+              <li>At <strong>generere</strong> kode, som er en del af <strong>pensum</strong> eller en <strong>opgave</strong>.</li>
+              <li><strong>Eksempler:</strong>
+                <ul>
+                  <li>“Lav denne opgave i Programmering B for mig.”</li>
+                  <li>“Lav hele dette projekt fra start til slut.”</li>
+                  <li>“Skriv denne rapport for mig.”</li>
+                </ul>
+              </li>
+              <li><strong>Tommelfingerregel:</strong> 
+                <div>Brug AI for at <strong>forstå</strong>, <strong>lære</strong>, <strong>komme i gang</strong> og <strong>aflaste gentagelser</strong> — ikke for at springe læringen over. I er <strong>ansvarlige</strong> for resultatet. </div></li>
+              <li>Er I i tvivl om I må bruge AI til noget, så spørg mig.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+
+      <section data-slide-step="2">
+        <h2>(2U) Regler for eksamensprojektet og afleveringsprojekt 1</h2>
+        <div class="small-list">
+          <table>
+            <thead>
+              <th>Læreplan &gt; 3.2 Arbejdsformer &gt; Eksamensprojekt</th>
+              <th>Afleveringsprojekt 1</th>
+            </thead>
+            <tbody>
+              <tr>
+                <td>I den afsluttende periode af undervisningen afsættes <strong>20 timers undervisningstid</strong> til, at eleverne - med <strong>vejledning</strong> fra læreren - udarbejder et eksamensprojekt i <strong>grupper</strong> på to til tre.</td>
+                <td>Jeg har afsat <strong>12 timers undervisningstid</strong> (8 moduler) og jeres grupper vil være de samme til <strong>alle projekter</strong>.</td>
+              </tr>
+              <tr class="fragment">
+                <td>I eksamensprojektet <strong>vælger eleverne [grupperne]</strong> deres <strong>problemstilling</strong> ud fra det <strong>projektoplæg</strong> som <strong>underviseren udarbejder</strong>.</td>
+                <td>Her har vi i <strong>fællesskab</strong> besluttet at lave et <strong>Tower Defence</strong>-spil ud fra mit projektoplæg om at vi skulle lave et <strong>simpelt 2D spil</strong>.</td>
+              </tr>
+              <tr class="fragment">
+                <td>Eksamensprojektet består af et <strong>produkt</strong> og en <strong>synopsis</strong>.</td>
+                <td>Her består projektet <strong>også</strong> af et produkt (<strong>spillet</strong>) og en synopsis.</td>
+              </tr>
+              <tr class="fragment">
+                <td>Synopsen skal <strong>dokumentere udviklingen</strong> af det <strong>færdige produkt</strong> og har et omfang på <strong>5-8 normalsider</strong>, eksklusiv <strong>koder</strong>, rutediagrammer [<strong>figurer</strong>], <strong>bilag mm.</strong></td>
+                <td>Her skal synopsen være <strong>2-5 normalsider</strong>, igen eksklusiv <strong>koder</strong>, <strong>figurer</strong>, <strong>bilag mm.</strong></td>
+              </tr>
+              <tr class="fragment">
+                <td>Synopsen skal <strong>udarbejdet individuelt</strong>.</td>
+                <td>Her skal synopsen <strong>også</strong> udarbejdes individuelt.</td>
+              </tr>
+              <tr class="fragment">
+                <td><strong>Afleveringstidspunktet</strong> skal normalt være senest en uge før eksamensperiodens begyndelse.</td>
+                <td>Her er det søndag den 4. oktober kl. 21:00 (<strong>se opgaven på Lectio</strong>), og så skal I til "<strong>eksamen</strong>" torsdag den 8. oktober.</td>
+              </tr>
+              <tr class="fragment">
+                <td>Når eleverne vælger arbejdsgrupper, er det hensigtsmæssigt, at de er opmærksomme på at få <strong>delt opgaverne ligeligt</strong>, så hvert gruppemedlem er klar over, hvordan vedkommende skal bidrage til softwareløsningen.</td>
+                <td>Her skal I <strong>også fordele opgaverne</strong>, og I skal<strong> skrive i synopsen</strong> hvem der er <strong>ansvarlig</strong> for hvilke <strong>afsnit</strong> og <strong>kodedele</strong>. Men I skal have <strong>sat jer ind i</strong> de andres dele, og sørge for at det <strong>de andre har lavet</strong> er korrekt.</td>
+              </tr>
+              <tr class="fragment">
+                <td>Det er vigtigt, at eleverne lærer <strong>arbejdsmetoder</strong> til at arbejde sammen i grupper, fx. at bruge <strong>repositories</strong>, fx. via et <strong>Git system</strong>.</td>
+                <td>I skal <strong>også</strong> samarbejde vha. <strong>Git</strong> og <strong>GitHub</strong> her.</td>
+              </tr>
+              <tr class="fragment">
+                <td>Eleverne [skal] inden eksamensprojektet have <strong>afprøvet projektarbejdsformen</strong>, eksempelvis gennem <strong>flere forudgående projekter</strong> af <strong>mindre omfang</strong> med god mulighed for <strong>feedback</strong> og <strong>erfaringsudveksling</strong> mellem lærer og elev, <strong>og</strong> eleverne imellem.</td>
+                <td>Det er <strong>netop</strong> det vi gør i dette projekt<strong>!</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        
+        <!-- <div style="display:grid;grid-template-columns: 2fr 1fr; gap: 2em">
+          <div class="small-list">
+            <h3>3.2 Arbejdsformer > Eksamensprojekt</h3>
+            <ul>
+              <li>I den afsluttende periode af undervisningen afsættes <strong>20 timers undervisningstid</strong> til,
+                at eleverne - med <strong>vejledning</strong> fra læreren -
+                udarbejder et eksamensprojekt i <strong>grupper</strong> på to til tre.
+              </li>
+              <li>I eksamensprojektet <strong>vælger eleverne</strong> deres problemstilling ud fra det <strong>projektoplæg</strong> som <strong>underviseren udarbejder</strong>. </li>
+              <li>Eksamensprojektet består af et <strong>produkt</strong> og en <strong>synopsis</strong>.</li>
+              <li>Synopsen skal <strong>dokumentere udviklingen</strong> af det <strong>færdige produkt</strong> og har et omfang på <strong>5-8 normalsider</strong>, eksklusiv koder, rutediagrammer, bilag mm.
+              </li>
+              <li>
+                Synopsen skal <strong>udarbejdet individuelt</strong>.
+              </li>
+              <li>
+                 <strong>Afleveringstidspunktet</strong> skal normalt være senest en uge før eksamensperiodens begyndelse.
+              </li>
+              <li>
+                Når eleverne vælger arbejdsgrupper, er det hensigtsmæssigt, at de er opmærksomme på at få <strong>delt opgaverne ligeligt</strong>, så hvert gruppemedlem er klar over, hvordan vedkommende skal bidrage til softwareløsningen.
+              </li>
+              <li>
+                Det er vigtigt, at eleverne lærer <strong>arbejdsmetoder</strong> til at arbejde sammen i grupper, fx. at bruge <strong>repositories</strong>, fx. via et <strong>Git system</strong>.
+              </li>
+              <li>Eleverne [skal] inden eksamensprojektet have <strong>afprøvet projektarbejdsformen</strong>, eksempelvis gennem flere <strong>forudgående projekter</strong> af mindre omfang med god mulighed for <strong>feedback</strong> og <strong>erfaringsudveksling</strong> mellem lærer og elev, og eleverne imellem.</li>
+
+
+            </ul>
+          </div>
+          <div>
+          </div>
+        </div> -->
+      </section>
+
+
+      <!-- <section>
+        <h2>(2U) Synopsis</h2>
+        <div style="display:grid;grid-template-columns: 2fr 1fr; gap: 2em">
+          <div class="small-list">
+            Synopsen der omtales er en skriftlig opgave hvor eksaminandens problemstilling opridses og hvor hele processen fra planlægning over design til udvikling og afprøvning dokumenteres. I synopsen inddrages der diagrammer og andre visualiseringer der kan billedliggøre elevernes tanker om struktureringen af deres software. Endvidere gennemgås udvalgte dele af softwaren på kode niveau. 
+
+          </div>
+          <div>
+            <h3>Synopsis:</h3>
+            <ul class="fragment">
+              <li>Forblad</li>
+              <li>Kort abstract</li>
+              <li>Problemformulering</li>
+              <li>Funktionsbeskrivelse</li>
+              <li>Dokumentation</li>
+              <li>Test</li>
+              <li>Konklusion</li>
+              <li>Bilag</li>
+            </ul>
+          </div>
+        </div>
+      </section> -->
+
+
+      <section>
+        <h2>(2U) Mine forventninger til mig selv (Genopfriskning)</h2>
+        <ol class="spaced-list" style="font-size: 1.1em; width:70%">
+          <li>At jeg er <strong>velforberedt</strong> og har <strong>overskud</strong>.</li>
+          <li>At jeg behandler alle med <strong>respekt</strong> og skaber et <strong>trygt</strong> og <strong>åbent læringsmiljø</strong>, hvor alle spørgsmål er velkomne (men <em>ikke nødvendigvis</em> besvares).</li>
+          <li>At jeg er <strong>tilgængelig</strong> for spørgsmål og vejledning - både i og uden for timerne, og at jeg <strong>ikke bliver irriteret</strong> hvis jeg bliver nødt til at forklare noget på <strong>forskellige måder</strong> før det giver mening.</li>
+          <li>At jeg er <strong>ærlig</strong>, hvis jeg ikke kender svaret på et spørgsmål, og <strong>anerkender</strong> hvis jeg har sagt noget forkert eller <strong>begået en fejl</strong>.</li>
+          <li>At jeg <strong>lytter</strong> til jeres <strong>feedback</strong> og <strong>justerer undervisningen</strong>, når det giver mening.</li>
+        </ol>
+
+      </section>
+
+      
+      <section>
+        <h2>(2U) Mine forventninger til jer (Genopfriskning)</h2>
+        <ol class="spaced-list" style="font-size: 0.9em">
+          <h3>Undervisningen</h3>
+          <li>At I <strong>ikke laver andet</strong> i undervisningstiden (pånær noter eller andet fagligt relevant), og at I <strong>i stedet fortæller mig</strong> hvis I har behov for en pause eller I synes noget er <strong>uinteressant</strong> eller jeg har <strong>brugt for meget tid</strong> på noget.</li>
+          <li>At I <strong>respekterer</strong> hinandens og min <strong>tid</strong> ved at møde <strong>velforberedte</strong>, <em>især</em> hvis I ikke kunne være til sidste lektion. Som <em>minimum</em> kig i <strong>materialet</strong> (slides, uddelt kode, øvelser, etc) og dan jer et <strong>overblik</strong> over hvad vi gik igennem.</li>
+          <li>At I <strong>ikke taler med sidemakkeren</strong> i undervisningen, <strong>selv</strong> ved spørgsmål, men nævner det for <strong>hele klassen</strong>, eller stiller spørgsmålet til mig (<em>pånær hvis det bare er en kort intern kommentar</em>). </li>
+          <h3>Fejlfinding</h3>
+          <li>At I <strong>hjælper hinanden</strong> med at forstå stoffet og at kunne løse opgaverne, <strong>uden blot at give svaret</strong>, men har andres <strong>læring</strong> i mente.</li>
+          <li>At I <strong>spørger</strong> når der er noget I ikke forstår, eller <strong>tror</strong> jeg har begået en fejl, og at I ikke holder jer tilbage.</li>
+          <li>At I <strong>prøver selv</strong>, før I spørger om hjælp til opgaver.</li>
+          <li>At I <strong>tør begå fejl</strong>, og kan klare at blive fortalt at <strong>noget I har lavet er forkert</strong>.</li>
+          <li>At I <strong>bærer over med mig</strong> hvis jeg siger tingene lidt for <strong>direkte</strong>, og ikke tager det <strong>personligt</strong>, men at I kan tåle at tage fejl, siden at alle mennesker begår fejl, men anerkender at det er <strong>en del af læringen</strong>.</li>
+          <h3>Ansvar</h3>
+          <li>At I tager faget <strong>seriøst</strong> og bruger den <strong>nødvendige tid</strong> til at følge med i kurset, fremfor at springe over hvor gærdet er lavest.</li>
+          <li>At I <strong>ikke snyder</strong> men <strong>taler med mig</strong> hvis I er bekymrede for jeres karakterer eller om I består.</li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>(2U) Jeres forventninger til mig og jer selv (fra lektion 03)</h2>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2em;">
+          <div>
+            <h3>Undervisning</h3>
+            <ul class="spaced-list">
+              <li><strong>Tempo:</strong> Langsomt nok til at alle kan følge med, men hurtigt nok til at alle arbejder.</li>
+              <li><strong>Hjælp til forståelse:</strong> Forklar tingene på forskellige måder, gerne visuelt.</li>
+              <li><strong>Undervisning vs. opgaver:</strong> Tal ikke for hurtigt eller for meget, men giv os nogle opgaver.</li>
+              <li><strong>Feedback:</strong> ”Kunne godt tænke mig at få feedback på alle opgaver, så jeg kan se, hvad jeg har gjort rigtigt, godt og hvad der er forkert, og eventuelt hvad jeg kunne have gjort anderledes.”</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Egen indsats</h3>
+            <ul class="spaced-list">
+              <li><strong>Lektier:</strong> Nogle vil bruge den tid, det tager, andre 1-3 timer, og andre minimalt.</li>
+              <li><strong>Karakterforventninger:</strong> Nogle er tilfredse, hvis de får mindst 4, mens andre helst vil have 7 eller over.</li>
+              <li><strong>Fremmøde:</strong> Nogle ville komme, hvis de ville få 100%, andre ville nok ikke.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>(2U) Fremgangsmåde når man har problemer</h2>
+        <div class="small-list" style="display: grid;grid-template-columns: 1fr 1fr;gap:2em">
+          <div>
+            <h3>1. Prøv selv</h3>
+            <ol>
+              <li>
+                <strong>Kig i dokumentationen.</strong>
+                <ul>
+                  <li>Hvis I ikke ved hvor I skal lede så spørg mig</li>
+                  <li>Hvis I ikke forstår  dokumentationen så spørg mig</li>
+                </ul>
+              </li>
+              <li>
+                <strong>Søg på google</strong>
+                <ul>
+                  <li>Hvis I ikke ved hvad I skal søge på så spørg mig</li>
+                  <li>Hvis I ikke forstår det der står på google så spørg mig</li>
+                </ul>
+              </li>
+              <li>
+                <strong>Spørg en AI</strong>
+                <ul>
+                  <li>Hvis den ikke har alt kontekst der er nødvendigt for at stille spørgsmålet så spørg mig</li>
+                  <li>Hvis I er i tvivl om AI's svar så spørg mig</li>
+                </ul>
+              </li>
+            </ol>
+            <h3>2. Spørg jeres sidemakker</h3>
+            <ul>
+              <li>Hvis ikke han har lavet opgaven så spørg mig.</li>
+              <li>Hvis ikke han kan (eller vil) hjælpe så spørg mig.</li>
+            </ul>
+            <h3>3. Tilfælde hvor I skal spørge mig med det samme</h3>
+            <ul>
+              <li class="fragment">Hvis terminalen er igang med en nedtælling til at slette alt på jeres computer.</li>
+            </ul>
+          </div>
+          <div>
+            <div class="fragment">
+              <h3>Hvorfor I ikke skal spørge mig om hjælp som det første</h3>
+              <ul>
+                <li><strong>Fra Læreplanen (og vejledningen): </strong>
+                  <ul>
+                    <li>"I arbejdet med stof om konkrete teknologier og standardiseringer skal eleverne anvende <strong>originale kilder</strong> (eksempelvis <strong>dokumentation af programmeringssprog</strong>, data og diagrammer)."</li>
+                    <li>"Det er en god ide at eleverne trænes i at slå op i <strong>relevante referencer</strong> til <strong>API'er</strong> og andre <strong>eksterne biblioteker</strong> samt <strong>dokumentere brugen</strong> heraf og i at <strong></strong>tage udgangspunkt i flowdiagrammer</strong>, når de programmerer."</li>
+                  </ul>
+                </li>
+                <li>I er ikke afhængige af mig. Programmering handler meget om at kunne løse problemer og søge på tingene selv (især nu med AI).</li>
+                <li>Nogle gange kender jeg ikke en præcis funktion, syntaks eller kommando.</li>
+                <li><strong>Vigtigt:</strong> 
+                  <ul>
+                    <li>I skal heller ikke holde jer tilbage med at spørge, for hvis I ikke er sikre på det som I har lavet så kan der opstå nogle problemer hen ad vejen som kan være svære at løse. </li>
+                    <li>Men I skal blot <strong>acceptere</strong> hvis jeg beder jer om lige at søge på det selv, og derefter vil jeg <strong>meget gerne</strong> hjælpe jer.</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <section>
+        <h2>(2U) Officielle Referencer</h2>
+        <div class="homework-list small-list" style="display:grid;grid-template-columns:1fr 1fr;column-gap:2em;">
+          <div>
+            <h3>p5.js</h3>
+            <ul>
+              <li><strong>Reference:</strong> <a href="https://p5js.org/reference/" target="_blank" rel="noopener">https://p5js.org/reference/</a></li>
+              <li><strong>Tutorials:</strong> <a href="https://p5js.org/tutorials/" target="_blank" rel="noopener">https://p5js.org/tutorials/</a></li>
+              <li><strong>Eksempler:</strong> <a href="https://p5js.org/examples/" target="_blank" rel="noopener">https://p5js.org/examples/</a></li>
+            </ul>
+            <h3>JavaScript</h3>
+            <ul>
+              <li><strong>MDN:</strong> Mozilla Developer Network (Dem der opretholder JavaScript sproget).</li>
+              <li><strong>Reference:</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference" target="_blank" rel="noopener">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference</a></li>
+              <li><strong>Guide:</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide" target="_blank" rel="noopener">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide</a></li>
+            </ul>
+            <h3>Chrome DevTools</h3>
+            <ul>
+              <li><strong>Reference:</strong> <a href="https://developer.chrome.com/docs/devtools/" target="_blank" rel="noopener">https://developer.chrome.com/docs/devtools/</a></li>
+              <li><strong>Debugging af JavaScript:</strong> <a href="https://developer.chrome.com/docs/devtools/javascript" target="_blank" rel="noopener">https://developer.chrome.com/docs/devtools/javascript</a> 
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3>Git</h3>
+            <ul>
+              <li><strong>Cheat-sheet:</strong> <a href="https://git-scm.com/cheat-sheet" target="_blank" rel="noopener">https://git-scm.com/cheat-sheet</a></li>
+            </ul>
+            <h3>GitHub</h3>
+            <ul>
+              <li><strong>Reference:</strong> <a href="https://docs.github.com/" target="_blank" rel="noopener">https://docs.github.com/</a></li>
+              <li><strong>GitHub repositories:</strong> <a href="https://docs.github.com/en/repositories/creating-and-managing-repositories/about-repositories" target="_blank" rel="noopener">https://docs.github.com/en/repositories/creating-and-managing-repositories/about-repositories</a></li>
+              <li><strong>GitHub issues:</strong> <a href="https://docs.github.com/en/issues/tracking-your-work-with-issues/learning-about-issues/quickstart" target="_blank" rel="noopener">https://docs.github.com/en/issues/tracking-your-work-with-issues/learning-about-issues/quickstart</a></li>
+            </ul>
+            <h3>Markdown</h3>
+            <ul>
+              <li><strong>Basal syntaks og formatering:</strong> <a href="https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax" target="_blank" rel="noopener">https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax</a></li>
+              <li><strong>Om at lave READMEs:</strong> <a href="https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/quickstart-for-writing-on-github" target="_blank" rel="noopener">https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/quickstart-for-writing-on-github</a></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section data-slide-step="3">
+        <h2>(2Ø) Generel arbejdsgang med Git (fra lektion 6)</h2>
+        <div class="homework-list" style="display:grid;grid-template-columns:2fr 1fr;gap:3em">
+          <div>
+            <h3>Branches i Git</h3>
+            <ul>
+              <li>Lav en ny branch <strong>hver gang</strong> du arbejder på en <strong>ny feature</strong> til et program.</li>
+              <li>Brug <strong>korte, beskrivende navne</strong> med <strong>bindestreger</strong> og <strong>små bogstaver</strong>, fx. <code>branch-navn</code>.</li>
+            </ul>
+            <h3>Workflow</h3>
+            <ul>
+              <li>Lav altid en ny branch <strong>fra <code>main</code></strong>: Kør <code>git switch main</code> først, ellers arver din nye branch ændringer fra den gamle.</li>
+              <li>Hold branches <strong>små og afgrænsede</strong>: Én feature pr. branch, og lav mange <strong>små commits</strong> undervejs.</li>
+              <li><strong>Undgå</strong> generelt at arbejde i <code>main</code>-branchen. <code>main</code> skal <em>kun</em> altid indeholde et <strong>fuldt fungerende</strong> og <strong>gennemtestet</strong> program.</li>
+              <li>Når man er sikker på at <strong>alt fungerer</strong> merger man feature-branchen ind i <strong>main</strong>.</li>
+            </ul>
+            <!-- <h3>Samarbejde over GitHub</h3>
+            <ul>
+              <li><strong>Pull</strong> de seneste ændringer (<code>git pull</code>) fra <code>main</code>, før du merger - så undgår du flest <strong>merge-konflikter</strong>.</li>
+              <li><strong>Push</strong> din feature-branch til GitHub (<code>git push -u origin branch-navn</code>) - også mens du stadig arbejder på den, så dit arbejde er i sikkerhed.</li>
+            </ul> -->
+          </div>
+          <div>
+            <img src="images/git-branches-features.webp">
+            <p style="margin-bottom: 2em">Kilde: <a href="https://www.sitepoint.com/use-git-branches-buddy/">SitePoint</a></p>
+            <img src="images/git-branches-merge.avif">
+            <p>Kilde: <a href="https://blog.nobledesktop.com/learn/git/git-branches">Noble Desktop Buddy</a></p>
+          </div>
+        </div>
+      </section>
+
+      <section >
+        <h2>(2Ø) Fremgangsmåde til implementeringen</h2>
+        <div class="homework-list" style="display: grid;grid-template-columns: 1fr 1fr; gap:2em">
+          <div>
+            <h3>1. Opsætning af GitHub repo</h3>
+            <ul>
+              <li class="muted">(Hvis I ikke har gjort det endnu)</li>
+              <li>En af jer laver et repository på GitHub der hedder <strong>fg-tower-defence</strong> og tilføjer de andre som "<strong>collaborators</strong>".</li>
+              <li>Alle <strong>kloner</strong> repoet til deres egen computer og laver <strong>deres egen branch</strong>.</li>
+            </ul>
+            <h3>2. Planlægning og opgavefordeling</h3>
+            <ul>
+              <li><strong>Planlæg</strong> hvordan og hvornår I vil implementere de forskellige features i kravspecifikationen (se <code>mvp_requirements.md</code> og <code>game_loop_flowdiagram.md</code> på Lectio), og <strong>del problemet op</strong> i opgaver ved brug af <strong>issues</strong> på GitHub.</li>
+              <li>Beslut hvordan opgaverne skal <strong>fordeles</strong>, og hvem der skriver på hvilken <strong>kodedel</strong>, og skriv jer på en <strong>issue</strong> på GitHub når I vil arbejde på den.</li>
+            </ul>
+            <h3>3. Påbegynd implementeringen</h3>
+            <ul>
+              <li>Nu kan I hver især gå igang med jeres første <strong>issue</strong>.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Generel arbejdsgang</h3>
+            <ul class="fragment">
+              <li>I arbejder på jeres egen branch og laver <strong>nye branches</strong> ud fra den <strong>hver gang</strong> I skal lave en <strong>ny feature</strong>.</li>
+              <li>I <strong>committer</strong> hver gang I laver en <strong>delopgave</strong> på jeres feature.</li>
+              <li>I <strong>merger</strong> jeres branch ind i <code>main</code>/<code>master</code> hver gang I er færdige med en feature der er <strong>fuldt fungerende</strong> og <strong>testet</strong>, og vil give featuren til de andre i gruppen.</li>
+              <li>Når nogen har <strong>merget</strong> ind i <code>main</code>/<code>master</code> så fortæller de til de andre at de skal <strong>fetche</strong>, så de kan se de nye ændringer i deres repo.</li>
+              <li>Hvis der er ændringer i <code>main</code>/<code>master</code> som man skal bruge så <strong>merger</strong> man <code>main</code>/<code>master</code> ind i sin egen branch, <em>EFTER</em> at have <strong>committet</strong> (eller i hvert fald <strong>stashet</strong>) sine egne ændringer.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section data-slide-step="6">
+        <h2>(3U) Lektier til næste gang</h2>
+        <div class="homework-list" style="display:grid; place-content: center; width: 70%; height: 50%">
+          <!-- <h3>Færdiggør øvelserne</h3> -->
+          <h3>1. Send mig et link til jeres GitHub repository</h3>
+          <ul>
+            <li>Jeg har lavet en opgave på Lectio så I kan allerede nu sende mig linket.</li>
+          </ul>
+          <h3>2. Arbejd videre på jeres egne kodedele</h3>
+          <ul>
+            <li>Lav videre på programmet da næste lektion er sidste gang I får tid til at lave på programmet, og kan stille mig spørgsmål til det.</li>
+          </ul>
+        </div>
+      </section>
+      
+      <section>
+        <h2>(3U) Næste lektion</h2>
+        <div class="homework-list" style="display:grid;place-content:center; width: 70%; height: 50%">
+          <h3>I fortsætter implementeringsfasen</h3>
+          <ul>
+            <li>I får det meste af lektionen til at færdiggøre jeres program.</li>
+          </ul>
+          <h3>Informationer om synopsen</h3>
+          <ul>
+            <li>I slutningen af lektionen fortæller jeg om synopsen, og hvad den skal indeholde.</li>
+            <li>I kan så <strong>påbegynde synopsen</strong> efter lektionen på torsdag, da der <strong>ikke</strong> er undervisning på tirsdag, så I har <strong>en uge</strong> til at lave på den.</li>
+            <li>Ellers har I <strong>kun 4 dage</strong> til at lave <strong>hele</strong> synopsen, hvis I <strong>venter</strong> til <strong>næste torsdag</strong>.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section data-slide-step="7">
+        <h2>(3Ø) Lektionen er slut</h2>
+        <div style="display: flex;flex-direction: column;justify-content: space-evenly; height: 80%;margin-left:10%;">
+          <h3>Læg en plan for hvornår I vil lave lektierne og sæt en påmindelse</h3>
+          <h3>... færdiggør, gem og commit jeres arbejde</h3>
+          <h3>... reflektér over det I har lært og saml jeres tanker</h3>
+          <h3>... I kan gå når I vil.</h3>
+        </div>
+      </section>
+
+    <template id="agenda-template">
+      <section class="agenda"><h2 class="agenda-header">Program</h2><div class="flex-center" style="font-size:1.05em;"><table class="agenda-table"><thead><tr><th><strong>Punkt *</strong></th><th><strong>Start + varighed</strong></th><th><strong>Aktivitet</strong></th><th><strong>Indhold</strong></th></tr></thead><tbody>
+        <tr data-step="0"><td>1U</td><td>10:00 + 10</td><td>Opsamling fra sidst</td><td>Kort opsummering og hovedbudskaberne af sidste lektion.</td></tr>
+        <!-- <tr data-step="1"><td>1Ø</td><td>10:10 + 10</td><td>Lektier til denne lektion</td><td>Gennemgang af lektierne til i dag.</td></tr> -->
+        <tr data-step="2"><td>2U</td><td>10:20 + 20</td><td>Formaliteter for projektet og forventningsafstemning for hjælp</td><td>Gennemgang af formaliteterne for ekamensprojektet i læreplanen og for dette projekt, genopfriskning af forventningsafstemningen, samt guidelines og referencer for hjælp til problemer.</td></tr>
+        <tr data-step="3"><td>2Ø</td><td>10:40 + 45</td><td>Implementér Tower Defence-spillet</td><td>I skal påbegynde implementeringsfasen og skrive koden til spillet ud fra jeres specifikationsmodeller</td></tr>
+        <tr data-step="6"><td>3U</td><td>11:25 + 5</td><td>Opsamling, lektier og næste lektion</td><td>Hjemmearbejde til næste gang og emnerne for næste lektion.</td></tr>
+        <tr data-step="7"><td>3Ø</td><td>11:30 + 5</td><td>Afrunding</td><td>Færdiggør jeres arbejde og reflektér over jeres læring.</td></tr>
+      </tbody></table></div><div class="text-sm muted"><strong>*</strong> (U = undervisning, Ø = øvelse)</div></section>
+    </template>
+  </div>
+  <script src="../../node_modules/reveal.js/dist/reveal.js"></script>
+  <script src="../../node_modules/reveal.js-menu/menu.js"></script>
+  <script src="../../node_modules/reveal.js-multimodal/plugin/multimodal/multimodal.js"></script>
+  <script src="../../node_modules/reveal.js/dist/plugin/notes.js"></script>
+  <script src="../../node_modules/reveal.js/dist/plugin/highlight.js"></script>
+  <script src="../../node_modules/reveal.js/dist/plugin/zoom.js"></script>
+  <script src="../../node_modules/reveal.js/dist/plugin/math.js"></script>
+  <script src="../main.js"></script>
+</body>
+</html>
