@@ -373,7 +373,7 @@
 
       <section>
         <h2>(2U) Officielle Referencer</h2>
-        <div class="homework-list small-list" style="display:grid;grid-template-columns:1fr 1fr;column-gap:2em;">
+        <div class="header-list small-list" style="display:grid;grid-template-columns:1fr 1fr;column-gap:2em;">
           <div>
             <h3>p5.js</h3>
             <ul>
@@ -395,6 +395,11 @@
             </ul>
           </div>
           <div>
+            <h3>VS Code</h3>
+            <ul>
+              <li><strong>Reference:</strong> <a href="https://code.visualstudio.com/docs">https://code.visualstudio.com/docs</a></li>
+              <li><strong>Git branches:</strong> <a href="https://code.visualstudio.com/docs/sourcecontrol/branches-worktrees">https://code.visualstudio.com/docs/sourcecontrol/branches-worktrees</a></li>
+            </ul>
             <h3>Git</h3>
             <ul>
               <li><strong>Cheat-sheet:</strong> <a href="https://git-scm.com/cheat-sheet" target="_blank" rel="noopener">https://git-scm.com/cheat-sheet</a></li>
@@ -408,7 +413,7 @@
             <h3>Markdown</h3>
             <ul>
               <li><strong>Basal syntaks og formatering:</strong> <a href="https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax" target="_blank" rel="noopener">https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax</a></li>
-              <li><strong>Om at lave READMEs:</strong> <a href="https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/quickstart-for-writing-on-github" target="_blank" rel="noopener">https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/quickstart-for-writing-on-github</a></li>
+              <!-- <li><strong>Om at lave READMEs:</strong> <a href="https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/quickstart-for-writing-on-github" target="_blank" rel="noopener">https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/quickstart-for-writing-on-github</a></li> -->
             </ul>
           </div>
         </div>
@@ -468,9 +473,10 @@
           <div>
             <h3>Generel arbejdsgang</h3>
             <ul class="fragment">
-              <li>I arbejder på jeres egen branch og laver <strong>nye branches</strong> ud fra den <strong>hver gang</strong> I skal lave en <strong>ny feature</strong>.</li>
-              <li>I <strong>committer</strong> hver gang I laver en <strong>delopgave</strong> på jeres feature.</li>
-              <li>I <strong>merger</strong> jeres branch ind i <code>main</code>/<code>master</code> hver gang I er færdige med en feature der er <strong>fuldt fungerende</strong> og <strong>testet</strong>, og vil give featuren til de andre i gruppen.</li>
+              <li>I laver en <strong>ny branch</strong> ud fra <code>main</code>/<code>master</code> <strong>hver gang</strong> I skal lave en <strong>ny feature</strong>/<strong>løse en issue</strong>.</li>
+              <li>Der er kun <strong>én person</strong> der må arbejde på en given branch.</li>
+              <li>I <strong>committer</strong> hver gang I laver en <strong>delopgave</strong> på jeres feature/issue.</li>
+              <li>I <strong>merger</strong> jeres branch ind i <code>main</code>/<code>master</code> hver gang I er færdige med en feature/issue der er <strong>fuldt fungerende</strong> og <strong>testet</strong>, og vil give featuren til de andre i gruppen.</li>
               <li>Når nogen har <strong>merget</strong> ind i <code>main</code>/<code>master</code> så fortæller de til de andre at de skal <strong>fetche</strong>, så de kan se de nye ændringer i deres repo.</li>
               <li>Hvis der er ændringer i <code>main</code>/<code>master</code> som man skal bruge så <strong>merger</strong> man <code>main</code>/<code>master</code> ind i sin egen branch, <em>EFTER</em> at have <strong>committet</strong> (eller i hvert fald <strong>stashet</strong>) sine egne ændringer.</li>
             </ul>

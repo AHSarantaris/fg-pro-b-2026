@@ -325,6 +325,14 @@ html {
     margin-top: 1.5em;
 }
 
+.reveal .header-list ul {
+    margin-bottom: 1.0em;
+}
+
+.reveal .header-list h3 {
+    margin: 1.0em 0 0.5em;
+}
+
 div hr {
     margin-block: 1em 2em;
 }
