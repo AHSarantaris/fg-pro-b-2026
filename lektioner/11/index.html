@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1f1f1f">
+  <title>FG ProB - Lektion 11: Implementering og Dokumentation af Tower Defence-Spillet</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/all.min.css">
+  <link rel="stylesheet" href="../../node_modules/reveal.js/dist/reveal.css">
+  <link rel="stylesheet" href="../variables.css">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../highlight.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <section class="title-slide">
+        <h1><span hidden>Lektion 11: </span>Implementering og Dokumentation af Tower Defence-Spillet</h1>
+        <h3>Lektion 11</h3>
+        <p>Andreas Hussain Sarantaris · 24-09-2026</p>
+        <p style="font-size:0.82em;color:var(--fg-muted);">Frederikssund Gymnasium · Programmering B</p>
+      </section>
+
+      <section data-slide-step="0">
+        <h2>(1U) Fra sidst: Fremgangsmåde når man har problemer</h2>
+        <div class="header-list" style="display: grid;grid-template-columns: 1fr 1fr;gap:2em">
+          <div>
+            <h3>1. Prøv selv</h3>
+            <ol>
+              <li>
+                <strong>Kig i dokumentationen.</strong>
+                <ul>
+                  <li>Hvis I ikke ved hvor I skal lede så spørg mig</li>
+                  <li>Hvis I ikke forstår  dokumentationen så spørg mig</li>
+                </ul>
+              </li>
+              <li>
+                <strong>Søg på google</strong>
+                <ul>
+                  <li>Hvis I ikke ved hvad I skal søge på så spørg mig</li>
+                  <li>Hvis I ikke forstår det der står på google så spørg mig</li>
+                </ul>
+              </li>
+              <li>
+                <strong>Spørg en AI</strong>
+                <ul>
+                  <li>Hvis den ikke har alt kontekst der er nødvendigt for at stille spørgsmålet så spørg mig</li>
+                  <li>Hvis I er i tvivl om AI's svar så spørg mig</li>
+                </ul>
+              </li>
+            </ol>
+            <h3>2. Spørg jeres sidemakker</h3>
+            <ul>
+              <li>Hvis ikke han har lavet opgaven så spørg mig.</li>
+              <li>Hvis ikke han kan (eller vil) hjælpe så spørg mig.</li>
+            </ul>
+            <h3>3. Tilfælde hvor I skal spørge mig med det samme</h3>
+            <ul>
+              <li>Hvis terminalen er igang med en nedtælling til at slette alt på jeres computer.</li>
+            </ul>
+          </div>
+          <div class="fragment">
+            <h3>Gode vaner fra (vejledningen til læreplanen)</h3>
+            <blockquote>
+              <p>Nogle <strong>gode vaner</strong> vil også kunne støtte eleven i at <strong>beskrive programudviklingen</strong> i sin synopsis, så de bliver i stand til at <strong>reflektere</strong> over- samt <strong>dokumentere</strong> deres arbejde på en <strong>præcis</strong> og <strong>forståelig</strong> måde.</p>
+              <p>Det er eksempelvis en hjælp at vænne eleverne til at skrive velordnede programmer med fornuftige <strong>sigende variabelnavne</strong>, anvende <strong>indrykninger</strong> der angiver strukturen i programmet, <strong>undgå duplikeret kode</strong> og <strong>for lange kodesegmenter</strong>, samt at <strong>kommentere programmet</strong>, så <strong>andre dels kan læse det</strong>, men også [selv] vil være i stand til at <strong>arbejde videre</strong> på koden.</p>
+              <p>Det er med andre ord væsentligt at betone overfor eleven vigtigheden af <strong>systematisk dokumentation</strong> i forhold til facilitering af <strong>kollaborative udviklingsmiljøer</strong>, samt at <strong>ens programmeringsstil</strong> kan påvirke hvor let det er at <strong>afgøre korrektheden</strong> af programmet.</p>
+            </blockquote>
+          </div>
+        </div>
+
+      </section>
+
+      <section>
+        <h2>(1U) Fra sidst: Officielle Referencer</h2>
+        <div class="header-list small-list" style="display:grid;grid-template-columns:1fr 1fr;column-gap:2em;">
+          <div>
+            <h3>p5.js</h3>
+            <ul>
+              <li><strong>Reference:</strong> <a href="https://p5js.org/reference/" target="_blank" rel="noopener">https://p5js.org/reference/</a></li>
+              <li><strong>Tutorials:</strong> <a href="https://p5js.org/tutorials/" target="_blank" rel="noopener">https://p5js.org/tutorials/</a></li>
+              <li><strong>Eksempler:</strong> <a href="https://p5js.org/examples/" target="_blank" rel="noopener">https://p5js.org/examples/</a></li>
+            </ul>
+            <h3>JavaScript</h3>
+            <ul>
+              <li><strong>MDN:</strong> Mozilla Developer Network (Dem der opretholder JavaScript sproget).</li>
+              <li><strong>Reference:</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference" target="_blank" rel="noopener">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference</a></li>
+              <li><strong>Guide:</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide" target="_blank" rel="noopener">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide</a></li>
+            </ul>
+            <h3>Chrome DevTools</h3>
+            <ul>
+              <li><strong>Reference:</strong> <a href="https://developer.chrome.com/docs/devtools/" target="_blank" rel="noopener">https://developer.chrome.com/docs/devtools/</a></li>
+              <li><strong>Debugging af JavaScript:</strong> <a href="https://developer.chrome.com/docs/devtools/javascript" target="_blank" rel="noopener">https://developer.chrome.com/docs/devtools/javascript</a> 
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3>VS Code</h3>
+            <ul>
+              <li><strong>Reference:</strong> <a href="https://code.visualstudio.com/docs">https://code.visualstudio.com/docs</a></li>
+              <li><strong>Git branches:</strong> <a href="https://code.visualstudio.com/docs/sourcecontrol/branches-worktrees">https://code.visualstudio.com/docs/sourcecontrol/branches-worktrees</a></li>
+            </ul>
+            <h3>Git</h3>
+            <ul>
+              <li><strong>Cheat-sheet:</strong> <a href="https://git-scm.com/cheat-sheet" target="_blank" rel="noopener">https://git-scm.com/cheat-sheet</a></li>
+            </ul>
+            <h3>GitHub</h3>
+            <ul>
+              <li><strong>Reference:</strong> <a href="https://docs.github.com/" target="_blank" rel="noopener">https://docs.github.com/</a></li>
+              <li><strong>GitHub repositories:</strong> <a href="https://docs.github.com/en/repositories/creating-and-managing-repositories/about-repositories" target="_blank" rel="noopener">https://docs.github.com/en/repositories/creating-and-managing-repositories/about-repositories</a></li>
+              <li><strong>GitHub issues:</strong> <a href="https://docs.github.com/en/issues/tracking-your-work-with-issues/learning-about-issues/quickstart" target="_blank" rel="noopener">https://docs.github.com/en/issues/tracking-your-work-with-issues/learning-about-issues/quickstart</a></li>
+            </ul>
+            <h3>Markdown</h3>
+            <ul>
+              <li><strong>Basal syntaks og formatering:</strong> <a href="https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax" target="_blank" rel="noopener">https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax</a></li>
+              <!-- <li><strong>Om at lave READMEs:</strong> <a href="https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/quickstart-for-writing-on-github" target="_blank" rel="noopener">https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/quickstart-for-writing-on-github</a></li> -->
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section data-slide-step="3">
+        <h2>(1Ø) Fortsæt implementeringen</h2>
+        <div class="homework-list" style="display: grid;grid-template-columns: 1fr 1fr; gap:2em">
+          <div>
+            <h3>1. Opsætning af GitHub repo</h3>
+            <ul>
+              <li class="muted">(Hvis I ikke har gjort det endnu)</li>
+              <li>En af jer laver et repository på GitHub der hedder <strong>fg-tower-defence</strong> og tilføjer de andre som "<strong>collaborators</strong>".</li>
+              <li>Alle <strong>kloner</strong> repoet til deres egen computer og laver <strong>deres egen branch</strong>.</li>
+            </ul>
+            <h3>2. Planlægning og opgavefordeling</h3>
+            <ul>
+              <li><strong>Planlæg</strong> hvordan og hvornår I vil implementere de forskellige features i kravspecifikationen (se <code>mvp_requirements.md</code> og <code>game_loop_flowdiagram.md</code> på Lectio), og <strong>del problemet op</strong> i opgaver ved brug af <strong>issues</strong> på GitHub.</li>
+              <li>Beslut hvordan opgaverne skal <strong>fordeles</strong>, og hvem der skriver på hvilken <strong>kodedel</strong>, og skriv jer på en <strong>issue</strong> på GitHub når I vil arbejde på den.</li>
+            </ul>
+            <h3>3. Påbegynd implementeringen</h3>
+            <ul>
+              <li>Nu kan I hver især gå igang med jeres første <strong>issue</strong>.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Generel arbejdsgang</h3>
+            <ul>
+              <li>I laver en <strong>ny branch</strong> ud fra <code>main</code>/<code>master</code> <strong>hver gang</strong> I skal lave en <strong>ny feature</strong>/<strong>løse en issue</strong>.</li>
+              <li>Der er kun <strong>én person</strong> der må arbejde på en given branch.</li>
+              <li>I <strong>committer</strong> hver gang I laver en <strong>delopgave</strong> på jeres feature/issue.</li>
+              <li>I <strong>merger</strong> jeres branch ind i <code>main</code>/<code>master</code> hver gang I er færdige med en feature/issue der er <strong>fuldt fungerende</strong> og <strong>testet</strong>, og vil give featuren til de andre i gruppen.</li>
+              <li>Når nogen har <strong>merget</strong> ind i <code>main</code>/<code>master</code> så fortæller de til de andre at de skal <strong>fetche</strong>, så de kan se de nye ændringer i deres repo.</li>
+              <li>Hvis der er ændringer i <code>main</code>/<code>master</code> som man skal bruge så <strong>merger</strong> man <code>main</code>/<code>master</code> ind i sin egen branch, <em>EFTER</em> at have <strong>committet</strong> (eller i hvert fald <strong>stashet</strong>) sine egne ændringer.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      
+      <section data-slide-step="2">
+        <h2>(2U) Synopsens formål, indhold og krav (fra vejledningen til læreplanen)</h2>
+        <div class="header-list" style="display:grid;grid-template-columns: 1fr 1fr; gap: 2em">
+          <div>
+            <h3>Formål</h3>
+            <blockquote>
+              <p>En <strong>synopsis</strong> skal forstås som en tekst, der skrives <strong>til eksaminator</strong> og <em>censor</em> som <strong>forberedelse</strong> til den <strong>mundtlige eksamen</strong>. </p>
+              <p>Det vil sige, at en synopsis giver censor og eksaminator et <strong>overblik over projektet</strong> i form af <strong>relevante abstrakte dokumentationsformer</strong> og <strong>passende forklaringer</strong> i almindelig tekst.</p>
+            </blockquote> 
+            <h3>Indhold</h3>
+            <blockquote>
+              <p>Synopsen der omtales er en skriftlig opgave hvor <strong>eksaminandens problemstilling opridses</strong> og hvor <strong>hele processen</strong> fra <strong>planlægning</strong> over <strong>design</strong> til <strong>udvikling</strong> og <strong>[test]</strong> dokumenteres.</p>
+              <p>I synopsen inddrages der <strong>diagrammer</strong> og <strong>andre visualiseringer</strong> der kan billedliggøre elevernes <strong>tanker om struktureringen</strong> af deres software. Endvidere <strong>gennemgås udvalgte dele</strong> af softwaren <strong>på kode niveau</strong>.</p>
+            </blockquote>
+          </div>
+          <div  class="fragment">
+            <h3>Formelle krav (i dette projekt)</h3>
+            <ul class="small-list">
+              <li><strong>Udarbejdelse:</strong> 
+                <p>I skal lave synopsen sammen i grupperne <strong>(i modsætning til eksamensprojektet)</strong>, og angive hvilke <strong>afsnit</strong> og <strong>kodedele</strong> I hver især er <strong>ansvarlige</strong> for. Men I skal sørge for at <strong>de andres dele</strong> er korrekte, og <strong>hjælpe hinanden</strong>.</p>
+              </li>
+              <li><strong>Længde:</strong> 
+                <p>Synopsen være <strong>2-5 normalsider</strong>, eksklusiv <strong>koder</strong>, <strong>figurer</strong>, <strong>bilag</strong>, etc.</p>
+              </li>
+              <li><strong>Datoer:</strong> 
+                <p>Synopsen skal afleveres søndag den <strong>4. oktober</strong> kl. 21:00 (<strong>se opgaven på Lectio</strong>), og så skal I til <strong>"eksamen"</strong> torsdag den <strong>8. oktober</strong>.</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>(2U) Synopsens struktur</h2>
+        <div style="display:grid;grid-template-columns: 1.2fr 1fr; gap: 2em">
+          <div>
+            <ul class="small-list">
+              <li><strong>Forblad:</strong> En forside med titel på projektet, forløbstitel, jeres navne, og datoen for aflevering, etc.</li>
+              <li><strong>Abstract:</strong> Giv en kort introduktion, opsummering og konklusion af jeres synopsis så man nemt og hurtigt kan orientere sig om projektets indhold.</li>
+              <li><strong>Indholdsfortegnelse:</strong> En overskuelig liste af synopsens afsnit (evt. underafsnit) med links så man hurtigt kan navigere til et givent afsnit.</li>
+              <li><strong>Problemformulering og Analyse:</strong> Beskriv hvilket problem I forsøger at løse. Hvorfor laver I et Tower Defence-spil? Inkludér interessentanalysen og beskriv den.</li>
+              <li><strong>Funktionsbeskrivelse:</strong> Beskriv programmets funktionaliteter ud fra kravspecifikationen og angiv hvilke I ikke lavede, eller tilføjede og hvorfor.</li>
+              <li><strong>Design:</strong> Beskriv hvordan I har designet programmet, herunder brugergrænsefladen, og hvordan I brugte forskellige specifikationsmodeller (papirprototype, klassediagram, flowdiagram, pseudokode, etc.), og hvilke ændringer I lavede til dem og hvorfor.</li>
+            </ul>
+          </div>
+          <div>
+            <ul class="small-list">
+              <li><strong>Implementering:</strong> Beskriv hvordan I implementerede programmet og forklar de vigtigste algoritmer/funktioner. Her skal I vise selve kodedelene som I omtaler.</li>
+              <li><strong>Test:</strong> Beskriv hvordan I testede programmet for om det opfyldte kravene og hvad I kan bruge de tests til. Var der noget der ikke fungerede som I forventede, og hvad ville I gøre for at løse det, eller teste yderligere hvis I havde mere tid?</li>
+              <li><strong>Konklusion:</strong> Giv en kort opsummering af synopsen og redegør for til hvilken grad at I har løst det problem som I formulerede.</li>
+              <li><strong>Bilag: </strong>Alt der er for langt til at inkluderes i synopsen, såsom kravspecifikationen, flowdiagrammet, alt koden (JavaScript-filerne), etc. </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+
+      <section data-slide-step="6">
+        <h2>(3U) Lektier til næste gang</h2>
+        <div class="homework-list" style="display:grid; place-content: center; width: 70%; height: 50%">
+          <!-- <h3>Færdiggør øvelserne</h3> -->
+          <h3>1. Send mig et link til jeres GitHub repository</h3>
+          <ul>
+            <li>På Lectio, hvis I ikke allerede har gjort det.</li>
+          </ul>
+          <h3>2. Lav programmet færdigt</h3>
+          <ul>
+            <li>Implementeringen af resten af programmet bliver <strong>hjemmearbejde</strong> da vi skal videre til <strong>test-fasen</strong> næste gang, så brug så meget tid som muligt <strong>derhjemme</strong>. De <strong>næste 10 dage</strong> er <strong>slutspurten</strong>.</li>
+          </ul>
+        </div>
+      </section>
+      
+      <section>
+        <h2>(3U) Næste lektion</h2>
+        <div class="homework-list" style="display:grid;place-content:center; width: 70%; height: 50%">
+          <h3>Vi går videre til testfasen</h3>
+          <ul>
+            <li>I skal være færdige med at implementere programmet til næste gang så vi kan teste det.</li>
+          </ul>
+          <h3>Vi afslutter med Udrulningsfasen</h3>
+          <ul>
+            <li>Vi lægger jeres spil på jeres egen hjemmeside ved hjælp af GitHub Pages.</li>
+          </ul>
+          <h3>Lidt tid til planlægning af synopsen</h3>
+          <ul>
+            <li>I får lidt tid til at tale sammen om hvem der skriver hvad på synopsen, og lave et fælles dokument som I kan skrive i.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section data-slide-step="7">
+        <h2>(3Ø) Lektionen er slut</h2>
+        <div style="display: flex;flex-direction: column;justify-content: space-evenly; height: 80%;margin-left:10%;">
+          <h3>Læg en plan for hvornår I vil lave lektierne og sæt en påmindelse</h3>
+          <h3>... færdiggør, gem og commit jeres arbejde</h3>
+          <h3>... reflektér over det I har lært og saml jeres tanker</h3>
+          <h3>... I kan gå når I vil.</h3>
+        </div>
+      </section>
+
+    <template id="agenda-template">
+      <section class="agenda"><h2 class="agenda-header">Program</h2><div class="flex-center" style="font-size:1.05em;"><table class="agenda-table"><thead><tr><th><strong>Punkt *</strong></th><th><strong>Start + varighed</strong></th><th><strong>Aktivitet</strong></th><th><strong>Indhold</strong></th></tr></thead><tbody>
+        <tr data-step="0"><td>1U</td><td>08:10 + 5</td><td>Opsamling fra sidst</td><td>Kort opsummering af det fra sidste lektion I skal bruge til implementeringen.</td></tr>
+        <!-- <tr data-step="1"><td>1Ø</td><td>10:10 + 10</td><td>Lektier til denne lektion</td><td>Gennemgang af lektierne til i dag.</td></tr> -->
+        <tr data-step="3"><td>1Ø</td><td>08:15 + 70</td><td>Fortsæt implementeringen af Tower Defence-spillet</td><td>I skal fortsætte implementeringsfasen og skrive koden til spillet ud fra jeres specifikationsmodeller.</td></tr>
+        <tr data-step="2"><td>2U</td><td>9:25 + 10</td><td>Formaliteter for synopsen</td><td>Gennemgang af formålet, indholdet, kravene og strukturen af synopsen.</td></tr>
+        <tr data-step="6"><td>3U</td><td>9:35 + 5</td><td>Opsamling, lektier og næste lektion</td><td>Hjemmearbejde til næste gang og emnerne for næste lektion.</td></tr>
+        <tr data-step="7"><td>3Ø</td><td>9:40 + 5</td><td>Afrunding</td><td>Færdiggør jeres arbejde og reflektér over jeres læring.</td></tr>
+      </tbody></table></div><div class="text-sm muted"><strong>*</strong> (U = undervisning, Ø = øvelse)</div></section>
+    </template>
+  </div>
+  </div>
+  <script src="../../node_modules/reveal.js/dist/reveal.js"></script>
+  <script src="../../node_modules/reveal.js-menu/menu.js"></script>
+  <script src="../../node_modules/reveal.js-multimodal/plugin/multimodal/multimodal.js"></script>
+  <script src="../../node_modules/reveal.js/dist/plugin/notes.js"></script>
+  <script src="../../node_modules/reveal.js/dist/plugin/highlight.js"></script>
+  <script src="../../node_modules/reveal.js/dist/plugin/zoom.js"></script>
+  <script src="../../node_modules/reveal.js/dist/plugin/math.js"></script>
+  <script src="../main.js"></script>
+</body>
+</html>
