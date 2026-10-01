@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1f1f1f">
+  <title>FG ProB - Lektion 12: Test og Udrulning af Tower Defence-Spillet</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/all.min.css">
+  <link rel="stylesheet" href="../../node_modules/reveal.js/dist/reveal.css">
+  <link rel="stylesheet" href="../variables.css">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../highlight.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <section class="title-slide">
+        <h1><span hidden>Lektion 12: </span>Test og Udrulning af Tower Defence-Spillet</h1>
+        <h3>Lektion 12</h3>
+        <p>Andreas Hussain Sarantaris · 01-10-2026</p>
+        <p style="font-size:0.82em;color:var(--fg-muted);">Frederikssund Gymnasium · Programmering B</p>
+      </section>
+
+      <section data-slide-step="0">
+        <h2>(1U) Opsamling fra sidst og lektier til denne gang</h2>
+        <div class="homework-list" style="display: grid;grid-template-columns: 1fr 1fr; gap:2em">
+          <div>
+            <h3>Trin i implementeringsfasen</h3>
+            <ol>
+              <li>Opsætning af GitHub repo</li>
+              <li>Planlægning og opgavefordeling</li>
+              <li>Påbegynd implementeringen</li>
+            </ol>
+            <h3>Generel arbejdsgang</h3>
+            <ul>
+              <li>Ny branch for hver feature.</li>
+              <li>Hver branch arbejdes kun på af én person.</li>
+              <li>Commit efter hver delopgave til en feature.</li>
+              <li>Merge feature-branch ind i <code>main</code>/<code>master</code> hver gang I er færdige med en fuldt fungerende feature/issue.</li>
+              <li>Fetch og/eller merge når I vil se andres ændringer</li>
+              <li>Hvis man skal bruge noget fra <code>main</code>/<code>master</code> i sin egen feature så merger man <code>main</code>/<code>master</code> ind i sin egen branch.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Lektier til denne gang</h3>
+            <ul class="fragment">
+              <li>Færdiggør implementeringsfasen ved brug en agentic engineering-fremgangsmåde.</li>
+              <li>Brug AI til at generere koden til hver enkelt kravspecifikation, men sørg for at tjekke koden igennem og sørg for at I forstår den, og at programmet virker hver gang AI laver en ny feature. </li>
+              <li>I er ansvarlige for koden, og det forventes at I har ligeså godt styr på koden som hvis I selv havde skrevet den, så lad være med at få AI til at generere noget som I ikke kan forstå.</li>
+              <li>Det er ikke meningen at I skal lave en virkelig godt Tower Defence-spil, eller at det skal være ligeså godt som jeres vibe-codede spil. Det er derimod meningen at I skal vise at I kan udvikle et program systematisk og inkrementelt, der opfylder de krav som der er sat i kravspecifikationen, ud fra forskellige specifikationsmodeller (klassediagram, flowdiagram, etc.).</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section data-slide-step="1">
+        <h2>(2U) Testtyper og V-modellen</h2>
+        
+        <div class="header-list small-list" style="display:grid;grid-template-columns: 1fr 1fr; gap: 2em">
+          <div>
+            <h3>Test ud fra testgrupper</h3>
+            <ul>
+              <li><strong>Alfatest:</strong> 
+                <div>Testen udføres af <strong>udviklerne selv</strong>.</div>
+              </li>
+              <li><strong>Betatest:</strong> 
+                <div>Testen udføres af <strong>brugerne</strong> eller andre <strong>eksterne interessenter</strong>.</div>
+              </li>
+            </ul>
+            <h3>Test ud fra teknikker</h3>
+            <ul>
+              <li><strong>Black box:</strong> 
+                <div>Tester om en funktion/program giver <strong>det rigtige output</strong> ud fra <strong>forskellige input</strong>, <strong>uden viden</strong> om funktionen/programmet. </div>
+              </li>
+              <li><strong>White box:</strong> 
+                <div>Tester en funktion/program ud fra viden om den <strong>interne logik</strong>. Eksempelvis kan man teste forskellige <strong>grene af en funktion</strong> ud fra viden om hvilke <strong>if-statements</strong> den har. </div>
+              </li>
+              <li><strong>Grey box:</strong> 
+                <div>Tester en funktion/program ud fra viden om den <strong>overordnede struktur</strong>, men <strong>ikke</strong> den interne logik. Eksempelvis kan man teste om forskellige klasser <strong>interagerer korrekt</strong> ud fra informationerne i et <strong>klassediagram</strong>.</div>
+              </li>
+            </ul>
+            <p class="muted text-sm">Ressourcer: <a href="https://www.geeksforgeeks.org/software-testing/types-software-testing/">GeeksforGeeks &gt; Types of Software Testing</a></p>
+          </div>
+          <div>
+            <h3>Test ud fra niveauer</h3>
+            <ul>
+              <li><strong>Enhedstest:</strong> 
+                Tester en <strong>enhed</strong>/en <strong>funktion</strong>/en <strong>klasse</strong> om den fungerer <strong>isoleret set</strong>.
+              </li>
+              <li><strong>Integrationstest:</strong> 
+                Tester <strong>flere enheder</strong>/<strong>klasser</strong> om de fungerer <strong>sammen</strong>.
+              </li>
+              <li><strong>Systemtest:</strong> 
+                Tester om <strong>programmet</strong> fungerer som <strong>en helhed</strong>.
+              </li>
+              <li><strong>User Acceptance Test:</strong>
+              Tester om programmet opfylder <strong>kravene</strong> hos brugerne, og om det er <strong>brugervenligt</strong>.</li>
+            </ul>
+            <h3>V-modellen</h3>
+            <div class="fragment" style="margin-top: 1em; display: flex;flex-direction: column; align-items: center;">
+              <img src="images/v_model.webp" style="width:80%">
+              <p class="muted text-sm">Kilde: <a href="https://www.geeksforgeeks.org/software-engineering/software-engineering-sdlc-v-model/">GeeksforGeeks &gt; SDLC V-Model - Software Engineering</a></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>(2U) User Experience Questionnaire (UEQ)</h2>
+        
+        <div class="header-list small-list" style="display:grid;grid-template-columns: 1fr 1.2fr; gap: 2em">
+          <div>
+            <h3>Hvad er UEQ?</h3>
+            <ul>
+              <li><strong>Fra den officielle hjemmeside:</strong>
+                <div>A fast and reliable questionnaire to measure the User Experience of interactive products. Available in more than 30 languages. Easy to use due to rich supplementary material.</div>
+              </li>
+            </ul>
+            <h3>Parametre</h3>
+            <ul>
+              <li><strong>Attractiveness:</strong> Overall impression of the product. Do users like or dislike it?</li>
+
+              <li><strong>Perspicuity:</strong> Is it easy to get familiar with the product and to learn how to use it?</li>
+
+              <li><strong>Efficiency:</strong> Can users solve their tasks without unnecessary effort? Does it react fast?</li>
+
+              <li><strong>Dependability:</strong> Does the user feel in control of the interaction? Is it secure and predictable?</li>
+
+              <li><strong>Stimulation:</strong> Is it exciting and motivating to use the product? Is it fun to use?</li>
+
+              <li><strong>Novelty:</strong> Is the design of the product creative? Does it catch the interest of users?</li>
+            </ul>
+          </div>
+          <div>
+            <img src="images/ueq.png">
+            <p class="text-sm">Kilde: <a href="https://www.ueq-online.org/Material/Handbook.pdf">UEQ Handbook</a> figur 1.</p>
+            <h3>Links</h3>
+            <ul>
+              <li><a href="https://www.ueq-online.org/">https://www.ueq-online.org/</a></li>
+              <li><a href="https://www.researchgate.net/figure/User-experience-questionnaire_fig1_324256858">Link til selve spørgeskemaet</a></li>
+            </ul>
+          </div>
+        </div>
+        
+      </section>
+
+      <section data-slide-step="2">
+        <h2>(2Ø) User Acceptance Test (UAT)</h2>
+        <div class="header-list small-list" style="display:grid;grid-template-columns: 1fr 1fr; gap: 2em">
+          <div>
+            <h3>1. Download excel-filerne til analysen af UEQ</h3>
+            <ul>
+              <li>Gå ind på <a href="https://www.ueq-online.org/">ueq-online.org</a> og download filerne under <strong>Data Analysis Tools</strong>.</li>
+              <li>Udpak alle og åbn filen <code>UEQ_Data_Analysis_Tool_V14.xlsx</code>.</li>
+              <li>Slet alle rækkerne med tal i fanen <strong>Data</strong>.</li>
+              <li>Nu er I klar til at skrive de andres testdata ind, når de har testet jeres program.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>2. Planlæg en UAT</h3>
+            <ul>
+              <li>Udvælg hvilke af featurene fra kravspecifikationen I vil teste, og vælg en passende testform til hver.</li>
+              <li>Kvalitativ eller kvantitativ, eller et mix?</li>
+              <li>Lav et spørgeskema med jeres spørgsmål til det som I vil teste.</li>
+              <li>Skal det være word, excel eller noget tredje?</li>
+              <li>De andre grupper skal udføre jeres test og besvare spørgeskemaet senere.</li>
+            </ul>
+          </div>
+        </div>
+
+      </section>
+
+      <section data-slide-step="3">
+        <h2>(3U) Udruldningsfasen og Vedligeholdelsesfasen</h2>
+        <div class="header-list small-list" style="display:grid;grid-template-columns: 1fr 1fr; gap: 2em">
+          <div>
+            <h3>Delelementer i udrulningsfasen</h3>
+            <!-- <p>Udrulningsfasen handler om at gøre det færdige system tilgængeligt for de faktiske brugere.</p> -->
+            <ul>
+              <li><strong>Deployment:</strong>
+                <ul>
+                  <li>Systemet installeres eller publiceres, så brugerne kan tilgå det. </li>
+                  <li>Hjemmesider hostes på et domæne.</li>
+                </ul>
+              </li>
+              <li><strong>Release:</strong>
+                <ul>
+                  <li>En bestemt, færdig version af systemet udgives. Fx version 1.0. </li>
+                  <li>I Git gøres dette ved brug af tags.</li>
+                </ul>
+              </li>
+              <li><strong>Dokumentation:</strong>
+                <ul>
+                  <li>Brugerne skal kunne forstå, hvordan programmet bruges. </li>
+                  <li>Dokumentation på GitHub i form af READMEs eller videnskabelig dokumentation i form af rapporter/synopser.</li>
+                </ul>
+              </li>
+              <li><strong>Sidste kontrol:</strong>
+                <ul>
+                  <li>Inden release bør man sikre, at de vigtigste funktioner stadig fungerer i den version, der bliver udgivet.</li>
+                </ul>
+              </li>
+              <li><strong>Feedback:</strong>
+                <ul>
+                  <li>Efter udgivelsen kan brugernes oplevelser afsløre fejl eller problemer, som ikke blev fundet under testen.</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3>Vedligeholdelsesfasen</h3>
+
+            <!-- <p>Vedligeholdelsesfasen begynder, når systemet er taget i brug. Formålet er at holde systemet funktionelt og videreudvikle det på baggrund af erfaringer fra brugerne.</p> -->
+
+            <ul class="fragment">
+              <li><strong>Fejlrettelse:</strong> 
+                <ul>
+                  <li>Fejl der opdages efter release identificeres og rettes.</li>
+                </ul>
+              </li>
+              <li><strong>Brugerfeedback:</strong> 
+                <ul>
+                  <li>Brugernes erfaringer bruges til at finde problemer og forbedringsmuligheder.</li>
+                </ul>
+              </li>
+              <li><strong>Opdateringer:</strong> 
+                <ul>
+                  <li>Nye versioner kan indeholde fejlrettelser, forbedringer eller nye funktioner.</li>
+                </ul>
+              </li>
+              <li><strong>Tilpasning:</strong> 
+                <ul>
+                  <li>Systemet kan ændres, hvis brugerbehov eller tekniske krav ændrer sig.</li>
+                </ul>
+              </li>
+              <li><strong>Versionsstyring:</strong> 
+                <ul>
+                  <li>Ændringer dokumenteres og udgives som nye versioner.</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section data-slide-step="4">
+        <h2>(3Ø) Udfør udrulning og test </h2>
+        <div class="header-list spaced-list" style="display:grid;grid-template-columns: 1fr 1fr; gap: 2em">
+          <div>
+            <h3>1. Læg jeres spil på GitHub Pages</h3>
+            <ul class="spaced-list">
+              <li>Følg guiden i dokumentationen: <a href="https://docs.github.com/en/pages/quickstart">https://docs.github.com/en/pages/quickstart</a></li>
+              <li>Jeres spil burde nu være på følgende addresser:
+                <ul class="spaced-list">
+                  <li>Gruppe 1: <a href="https://sirgy0708.github.io/fg_tower_defense">https://sirgy0708.github.io/fg_tower_defense/</a></li>
+                  <li>Gruppe 2: <a href="https://alexandervaar.github.io/tower-defence/">https://alexandervaar.github.io/tower-defence/</a></li>
+                  <li>Gruppe 3: <a href="https://kingcookie98.github.io/Tower-defense-group-project">https://kingcookie98.github.io/Tower-defense-group-project/</a></li>
+                </ul>
+              </li>
+              <li>Sørg for at jeres <code>index.html</code> fil er i <strong>den øverste mappe/niveau</strong> i repositoriet.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>2. Test de andres spil</h3>
+            <ul class="spaced-list">
+              <li>a. Test <strong>de andre gruppers spil</strong> ud fra de tests som <strong>de selv har lavet</strong> og lagt <strong>i deres GitHub repo</strong>.</li>
+              <li>b. Test <strong>de andre gruppers spil</strong> ved brug af <strong>User Experience Questionnaire</strong> (<strong>UEQ</strong>), og giv gruppen <strong>jeres testresultater</strong> ved at oprette en <strong>issue</strong> i deres repository.</li>
+              <li>Links til gruppernes GitHub repos:
+                <ul class="spaced-list">
+                  <li>Gruppe 1: <a href="https://github.com/Sirgy0708/fg_tower_defense">https://github.com/Sirgy0708/fg_tower_defense</a></li>
+                  <li>Gruppe 2: <a href="https://github.com/Alexandervaar/tower-defence/">https://github.com/Alexandervaar/tower-defence/</a></li>
+                  <li>Gruppe 3: <a href="https://github.com/KingCookie98/Tower-defense-group-project/">https://github.com/KingCookie98/Tower-defense-group-project/</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section data-slide-step="5">
+        <h2>(P) Pausen er slut</h2>
+        <div style="display: grid; place-content: center; height: 80%; font-size: 2em;">
+            <h3>Vi starter igen</h3>
+        </div>
+      </section>
+      
+      <section data-slide-step="6">
+        <h2>(4U) Synopsens formål, indhold og krav (fra vejledningen til læreplanen)</h2>
+        <div class="header-list" style="display:grid;grid-template-columns: 1fr 1fr; gap: 2em">
+          <div>
+            <h3>Formelle krav (i dette projekt)</h3>
+            <ul>
+              <li><strong>Udarbejdelse:</strong> 
+                <p>I skal lave synopsen sammen i grupperne <strong>(i modsætning til eksamensprojektet)</strong>, og angive hvilke <strong>afsnit</strong> og <strong>kodedele</strong> I hver især er <strong>ansvarlige</strong> for. Men I skal sørge for at <strong>de andres dele</strong> er korrekte, og <strong>hjælpe hinanden</strong>.</p>
+              </li>
+              <li><strong>Længde:</strong> 
+                <p>Synopsen være <strong>2-5 normalsider</strong>, eksklusiv <strong>koder</strong>, <strong>figurer</strong>, <strong>bilag</strong>, etc.</p>
+              </li>
+              <li><strong>Afleveringstidspunkt for synopsen:</strong> 
+                <p>Synopsen skal afleveres søndag den <strong>4. oktober</strong> kl. 21:00 (<strong>se opgaven på Lectio</strong>).</p>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3>Tidspunkter for fremlæggelser</h3>
+            <div class="fragment">
+              <p>I skal til <strong>"eksamen"</strong> enten tirsdag den <strong>6. oktober</strong> eller torsdag den <strong>8. oktober</strong>.</p>
+              <ul>
+                <li><strong>Gruppe 1:</strong> Tirsdag den 6. oktober klokken 11:00.</li>
+                <li><strong>Gruppe 2:</strong> Torsdag den 8. oktober klokken 8:30.</li>
+                <li><strong>Gruppe 3:</strong> Torsdag den 8. oktober klokken 9:10.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section><h2>(4U) Synopsens struktur</h2>
+        <div style="display:grid;grid-template-columns: 1fr 1fr; gap: 2em">
+          <div>
+            <ul class="spaced-list">
+              <li><strong>Forblad:</strong> En forside med titel på projektet, forløbstitel, jeres navne, og datoen for aflevering, etc.</li>
+              <li><strong>Forord:</strong> En separat side hvor I angiver hvem der har lavet hvad på koden og på synopsen, og hvem der har hvilke ansvar. Skriv også om hvordan I har brugt AI.</li>
+              <li><strong>Abstract:</strong> Giv en kort introduktion, opsummering og konklusion af jeres synopsis så man nemt og hurtigt kan orientere sig om projektets indhold.</li>
+              <li><strong>Indholdsfortegnelse:</strong> En overskuelig liste af synopsens afsnit (evt. underafsnit) med links så man hurtigt kan navigere til et givent afsnit.</li>
+              <li><strong>Problemformulering og Analyse:</strong> Beskriv hvilket problem I forsøger at løse. Hvorfor laver I et Tower Defence-spil? Inkludér interessentanalysen og beskriv den.</li>
+              <li><strong>Funktionsbeskrivelse:</strong> Beskriv programmets funktionaliteter ud fra kravspecifikationen og angiv hvilke I ikke lavede, eller tilføjede og hvorfor.</li>
+            </ul>
+          </div>
+          <div>
+            <ul class="spaced-list">
+              <li><strong>Design:</strong> Beskriv hvordan I har designet programmet, herunder brugergrænsefladen, og hvordan I brugte forskellige specifikationsmodeller (papirprototype, klassediagram, flowdiagram, pseudokode, etc.), og hvordan I afveg fra dem og hvorfor.</li>
+              <li><strong>Implementering:</strong> Beskriv hvordan I implementerede programmet og forklar de vigtigste algoritmer/funktioner. Her skal I vise selve kodedelene som I omtaler.</li>
+              <li><strong>Test:</strong> Beskriv hvordan I testede programmet for om det opfyldte kravene og hvad I kan bruge de tests til. Hvordan ville I bruge testresultaterne til at videreudvikle på programmet?</li>
+              <li><strong>Konklusion:</strong> Giv en kort opsummering af synopsen og redegør for til hvilken grad at I har løst det problem som I formulerede.</li>
+              <li><strong>Bilag: </strong>Alt der er for langt til at inkluderes i synopsen, såsom kravspecifikationen, flowdiagrammet, alt koden (JavaScript-filerne), etc. </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section data-slide-step="7">
+        <h2>(4Ø) Læg en plan og påbegynd synopsen</h2>
+        <div class="header-list" style="display:grid;grid-template-columns: 1fr 1fr; gap: 2em">
+          <div>
+            <h3>Planlægning</h3>
+            <ul>
+              <li>Hvem skriver hvad?</li>
+              <li>Hvornår skriver I på synopsen?</li>
+              <li>Skal I skrive den sammen fysisk, eller online eller blot hver for sig?</li>
+              <li>Mangler I at færdiggøre noget på programmet, og hvem laver det hvornår?</li>
+              <li><strong>Bemærk:</strong> I skal alle skrive et underafsnit i implementerinsafsnittet om den kode I selv har skrevet.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Påbegynd synopsen</h3>
+            <ul>
+              <li>Lav et fælles worddokument og del det med de andre.</li>
+              <li>Lav den overordnede struktur på synopsen, og skriv jer på de dele som I har ansvaret for.</li>
+              <li>Begynd at sætte figurer og kode ind som I tænker er relevant.</li>
+              <li>Skriv nogle stikord til hvad I kunne skrive i de forskellige afsnit og om de forskellige figurer.</li>
+              <li>Vent med Abstract og Konklusion indtil I har skrevet alt andet.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+
+      <section data-slide-step="8">
+        <h2>(5U) Lektier til næste gang</h2>
+        <div class="homework-list" style="display:grid; place-content: center; width: 70%; height: 50%">
+          <!-- <h3>Færdiggør øvelserne</h3> -->
+          <h3>Lav programmet færdigt</h3>
+          <ul>
+            <li>Hvis I ikke allerede har gjort det så brug noget tid på at færdiggøre programmet før I skriver synopsen.</li>
+          </ul>
+          <h3>Lav synopsen færdig</h3>
+          <ul>
+            <li>Færdiggør synopsen og <strong>aflevér</strong> den inden <strong>søndag den 4. oktober</strong> kl. 21:00.</li>
+            <li>Hvis I ikke kan nå at aflevere til tiden så skriv en mail til mig.</li>
+          </ul>
+        </div>
+      </section>
+      
+      <section>
+        <h2>(5U) Næste lektion</h2>
+        <div class="homework-list" style="display:grid;place-content:center; width: 70%; height: 70%">
+          <h3>Forberedelse til jeres fremlæggelse</h3>
+          <ul>
+            <li>I får noget tid til at forberede til jeres præsentation af projektet.</li>
+            <li>I kan lave slides, planlægge hvem der siger hvad, og genlæse synopsen og sætte jer ind i jeres program.</li>
+          </ul>
+          <h3>Fremlæggelse</h3>
+          <ul>
+            <li><strong>Gruppe 1</strong> skal til mundtlig prøve fra klokken <strong>11:00-11:30</strong>.</li>
+            <li>De første 10 minutter er en gruppefremlæggelse af projektet, og de resterende 20 minutter er spørgsmål.</li>
+            <li>Jeg stopper jer efter præcis 10 minutter, så den skal helst være lidt kortere end 10 minutter.</li>
+            <li>De andre grupper fortsætter deres forberedelse.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section data-slide-step="9">
+        <h2>(5Ø) Lektionen er slut</h2>
+        <div style="display: flex;flex-direction: column;justify-content: space-evenly; height: 80%;margin-left:10%;">
+          <h3>Læg en plan for hvornår I vil lave lektierne og sæt en påmindelse</h3>
+          <h3>... færdiggør, gem og commit jeres arbejde</h3>
+          <h3>... reflektér over det I har lært og saml jeres tanker</h3>
+          <h3>... I kan gå når I vil.</h3>
+        </div>
+      </section>
+
+    <template id="agenda-template">
+      <section class="agenda"><h2 class="agenda-header">Program</h2><div class="flex-center" style="font-size:1.0em;"><table class="agenda-table"><thead><tr><th><strong>Punkt *</strong></th><th><strong>Start + varighed</strong></th><th><strong>Aktivitet</strong></th><th><strong>Indhold</strong></th></tr></thead><tbody>
+        <tr data-step="0"><td>1U</td><td>08:10 + 10</td><td>Status på hvor I er nu</td><td>Kort opsummering fra sidste lektion og status på hvor langt I er nået.</td></tr>
+        <!-- <tr data-step="1"><td>1Ø</td><td>10:10 + 10</td><td>Lektier til denne lektion</td><td>Gennemgang af lektierne til i dag.</td></tr> -->
+        <tr data-step="1"><td>2U</td><td>08:20 + 10</td><td>Introduktion til test-fasen</td><td>Introduktion til forskellige testtyper og V-modellen.</td></tr>
+        <tr data-step="2"><td>2Ø</td><td>08:30 + 20</td><td>Påbegynd test-fasen</td><td>I skal planlægge en User Acceptance Test som en anden gruppe skal udføre.</td></tr>
+        <tr data-step="3"><td>3U</td><td>08:50 + 5</td><td>Introduktion til udrulnings-fasen</td><td>Introduktion til delelementer i udrulning- og vedligeholdelsesfasen.</td></tr>
+        <tr data-step="4"><td>3Ø</td><td>08:55 + 50</td><td>Offentliggør jeres program og test hinandens spil.</td><td>I skal offentliggøre spillet med GitHub Pages og teste en anden gruppes spil ud fra de tests som de har planlagt.</td></tr>
+        <tr data-step="5"><td>P</td><td>9:45 + 15</td><td>Pause inden næste modul</td><td>.</td></tr>
+        <tr data-step="6"><td>4U</td><td>10:00 + 10</td><td>Genopfriskning af formaliteterne for synopsen</td><td>Genopfriskning af kravene og strukturen af synopsen.</td></tr>
+        <tr data-step="7"><td>4Ø</td><td>10:10 + 75</td><td>Planlæg og påbegynd synopsen</td><td>I får resten af timen til at påbegynde synopsen og planlægge hvem der gør hvad, samt færdiggøre jeres program.</td></tr>
+        <tr data-step="8"><td>5U</td><td>11:25 + 5</td><td>Opsamling, lektier og næste lektion</td><td>Hjemmearbejde til næste gang og emnerne for næste lektion.</td></tr>
+        <tr data-step="9"><td>5Ø</td><td>11:30 + 5</td><td>Afrunding</td><td>Færdiggør jeres arbejde og reflektér over jeres læring.</td></tr>
+      </tbody></table></div><div class="text-sm muted"><strong>*</strong> (U = undervisning, Ø = øvelse, P = Pause)</div></section>
+    </template>
+  </div>
+  </div>
+  <script src="../../node_modules/reveal.js/dist/reveal.js"></script>
+  <script src="../../node_modules/reveal.js-menu/menu.js"></script>
+  <script src="../../node_modules/reveal.js-multimodal/plugin/multimodal/multimodal.js"></script>
+  <script src="../../node_modules/reveal.js/dist/plugin/notes.js"></script>
+  <script src="../../node_modules/reveal.js/dist/plugin/highlight.js"></script>
+  <script src="../../node_modules/reveal.js/dist/plugin/zoom.js"></script>
+  <script src="../../node_modules/reveal.js/dist/plugin/math.js"></script>
+  <script src="../main.js"></script>
+</body>
+</html>
