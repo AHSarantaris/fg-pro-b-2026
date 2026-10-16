@@ -7,7 +7,7 @@ flowchart TD
     --> init[Initialisér alle variable og konstanter]
     --> sætstartskærm[Sæt tilstand = Startskærm]
     --> nyframe[Start ny frame]
-    --> tilstand{Hvad er spillets tilstand}
+    --> tilstand{Hvad er spillets tilstand?}
     tilstand -->|Startskærm| startskærm[Tegn startskærm] 
     startskærm --> klikstartskærm{Klikker spilleren med musen?}
     -->|Nej| afvent
@@ -47,7 +47,7 @@ flowchart TD
     
     tilstand -->|Game over| gameover[Tegn game over-skærm]
     
-    klikbane --> tegnbane
+    klikbane -->|Nej| tegnbane
 
     
 ```
