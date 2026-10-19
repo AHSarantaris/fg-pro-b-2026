@@ -24,7 +24,7 @@ function shortestPathBFS(s,t,g) {
                 path.push(n);
             }
             path.reverse();
-            return path;
+            break;
         }
         let neighbors = g.neighbors(n);
         //     Add the neighbors of n to Q, and mark n as the node they came from.
@@ -37,8 +37,7 @@ function shortestPathBFS(s,t,g) {
             }
         }
     }
-    // Return the shortest-path tree rooted at node s.
-    return prevMap;
+    return path;
 }  
 
 class BinaryMatrixGraph {
