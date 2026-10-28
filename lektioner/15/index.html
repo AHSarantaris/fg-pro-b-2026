@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1f1f1f">
+  <title>Lektion 15: Afslutning på Forløb 14 og opstart af Forløb 15</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/all.min.css">
+  <link rel="stylesheet" href="../../node_modules/reveal.js/dist/reveal.css">
+  <link rel="stylesheet" href="../variables.css">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../highlight.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <section class="title-slide">
+        <h1><span hidden>Lektion 15: </span>Afslutning på Forløb 14 og opstart af Forløb 15</h1>
+        <h3>Lektion 15</h3>
+        <p>Andreas Hussain Sarantaris · 27-10-2026</p>
+        <p style="font-size:0.82em;color:var(--fg-muted);">Frederikssund Gymnasium · Programmering B</p>
+      </section>
+
+      <section data-slide-step="0">
+        <h2>(1Ø) Fælles mundtlig prøve</h2>
+        <div class="spaced-list header-list" style="display: grid;grid-template-columns: 1fr 1fr; gap:2em">
+          <div>
+            <h3>Formaliteter</h3>
+            <ul>
+              <li>Hvis man kender svaret rækker man hånden op.</li>
+              <li>Jeg vælger en af dem der har hånden op til at svare.</li>
+              <li>Hvis man har noget at tilføje eller mener at svaret var forkert så rækker man hånden op.</li>
+            </ul>
+            <div class="fragment">
+              <h3>JavaScript</h3>
+              <ol><li>Hvad hedder den hjemmeside eller organisation der opretholder og dokumenterer Javascript-sproget (dem der har den officielle reference til JavaScript).</li> </ol>
+            </div>
+            <div class="fragment">
+              <h3>SDLC</h3>
+              <ol>
+                <li>Hvad står SDLC for og hvad er det? </li>
+                <li>Hvilke delelementer er der i SDLC'en? </li>
+                <li>Hvilke SDLC modeller kender I?</li>
+              </ol>
+            </div>
+            <div class="fragment">
+              <h3>Problemanalyse</h3>
+              <ol>
+                <li>Hvilke akser er der i en interessentmatrix? </li>
+                <li>Hvilket felt i interessentmatricen indeholder de interessenter der er vigtigst at overveje? </li>
+              </ol>
+            </div>
+          </div>
+          <div>
+            <div class="fragment">
+              <h3>Kravspecifikation</h3>
+              <ol>
+                <li>Hvad står MVP for og hvad er det? </li>
+              </ol>
+            </div>
+            <div class="fragment">
+              <h3>Design</h3>
+              <ol>
+                <li>Hvad indeholder et klassediagram? </li>
+              </ol>
+            </div>
+            <div class="fragment">
+              <h3>Test</h3>
+              <ol>
+                <li>Hvad står UAT for og hvad tester den? </li>
+                <li>Forklar forskellen på alpha og beta tests.</li>
+              </ol>
+            </div>
+            <div class="fragment">
+              <h3>Git og GitHub </h3>
+              <ol>
+                <li>Hvad skal man huske at gøre før man puller? </li>
+                <li>Når man samarbejder med andre over Git, skal man så pushe sine egne ændringer før man puller andres ændringer, eller omvendt? Hvorfor?</li>
+                <li>Hvad er forskellen på en fork, en clone og en branch? </li>
+              </ol>
+            </div>
+            <div class="fragment">
+              <h3>Agentic engineering</h3>
+              <ol>
+                <li>Hvad er forskellen på Agentic Engineering og Vibe Coding?</li>
+                <li>Hvad er fremgangsmåden for Agentic Engineering?</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section data-slide-step="1">
+        <h2>(2Ø) Skriv logbog og noter</h2>
+        <div class="spaced-list header-list" style="display: grid;grid-template-columns: 1fr 1fr; gap:2em">
+          <div>
+            <h3>Logbogen</h3>
+            <ul>
+              <li>Åben mappen med jeres logbog i VS Code. I påbegyndte logbogen i lektion 05.</li>
+              <li>Logbogen er blot en mappestruktur med README-filer.</li>
+              <li>Lav en ny mappe <code>14</code> med en <code>README.md</code>-fil.</li>
+            </ul>
+            <h3>Markdown</h3>
+            <ul>
+              <li>Man kan nemt indsætte billeder i Markdown ved det normale <code>ctrl+v</code>.</li>
+              <li>Man kan indsætte formatteret kode på en linje (inline code) ved at sætte backticks (``) omkring, fx. 
+                <div>`tower.shoot()` =&gt; <code>tower.shoot()</code></div></li>
+              <li>Man kan indsætte en formatteret kode-blok ved at sætte den mellem to linjer med tre backticks:
+                <div>
+<blockquote>
+<pre>
+  ```
+  let x = 1;
+  x += 3;
+  ```
+</pre>
+</blockquote>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3>Forslag til indhold</h3>
+            <ul>
+              <li><strong>Slides:</strong> Tag nogle skærmbilleder af vigtige slides. </li>
+              <li><strong>p5.js tutorials:</strong> De p5.js tutorials som I har været igennem <a href="https://p5js.org/tutorials/">https://p5js.org/tutorials/</a>.</li>
+              <li><strong>Synopser og specifikationsmodeller: </strong> Det vigtigste fra jeres synopser, såsom specifikationsmodellerne, samt mine kommentarer til dem.</li>
+              <li><strong>Kodedele:</strong> Indsæt noget kode fra forskellige programmer, eksempelvis jeres Tower Defence-programmer, samt mine kommentarer til den.</li>
+              <li><strong>Forløbsbeskrivelserne:</strong> Jeg har skrevet nogle forløbsbeskrivelser inde på Lectio under "Studieplan" som I kan bruge til at se hvad vi har været igennem og hvad I skulle have lært.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section data-slide-step="2">
+        <h2>(3Ø) Individuel skriftlig prøve</h2>
+        <div class="spaced-list header-list homework-list" style="display: grid;grid-template-columns: 1fr 1fr; gap:2em">
+          <div>
+            <h3>Opgaven</h3>
+            <ul>
+              <li>I får opgaven på papir.</li>
+              <li>Der er 15 delopgaver fordelt på 5 emner.</li>
+              <li>I skal skrive besvarelsen på et blankt stykke papir.</li>
+              <li>Besvarelsen skal tydeligt angive hvilket svar der besvares (fx. 2.1), og svaret må ikke være tvetydigt.</li>
+              <li>Skriv jeres navn i toppen.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Formaliteter</h3>
+            <ul>
+              <li>I har 20 minutter.</li>
+              <li>Ingen hjælpemidler. Jeres bærbar skal være lukket i.</li>
+              <li>Ingen toiletbesøg.</li>
+              <li>Ingen kommunikation.</li>
+              <li>Ved tvivl om spørgsmålene kan I række hånden op. I må ikke sige noget som kan hjælpe andre under jeres spørgsmål.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section data-slide-step="3">
+        <h2>(P) Pausen er slut</h2>
+        <div style="display: grid; place-content: center; height: 80%; font-size: 2em;">
+            <h3>Vi starter igen</h3>
+        </div>
+      </section>
+
+      <section data-slide-step="4">
+        <h2>(4U) Overblik over Forløb 15</h2>
+        <div class="spaced-list header-list" style="display: grid;grid-template-columns: 1.5fr 1fr; gap:4em">
+          <div>
+            <h3>I dag:</h3>
+            <ul>
+              <li>Repetition af algoritmik-forløbet fra programmering C.</li>
+              <li>Rekursion vs iteration.</li>
+              <li>Algoritme-mønstre (divide and conquer, grådige algoritmer, etc).</li>
+              <li>Implementering af sorteringsalgoritmer i JavaScript.</li>
+            </ul>
+            <h3>På torsdag: Shortest Path i Tower Defence-spil</h3>
+            <ul>
+              <li>Vi skal implementere en algoritme der finder den korteste vej i et 2d grid.</li>
+              <li>Følgende repository indeholder ufærdig kode til at implementere dette: <a href="https://github.com/AHSarantaris/shortest-path-exercise">https://github.com/AHSarantaris/shortest-path-exercise</a></li>
+            </ul>
+            <h3>Næste uge: Udvid Tower Defence-spil</h3>
+            <ul>
+              <li>I skal udvide jeres Tower Defence-spil til at have et åbent grid hvor monstrene selv finder den hurtigste vej til målet ved brug af BFS.</li>
+              <li>Hvis vi når det skal vi også gøre at der er felter på griddet hvor monstrene bevæger sig hurtigere/langsommere (eksempelvis søer på griddet), hvorved vi skal implementere Dijkstra's algoritme.</li>
+            </ul>
+          </div>
+          <div >
+            <!-- https://www.youtube.com/watch?v=MFhxShGxHWc -->
+             <h3>Løsning til opgaven næste lektion</h3>
+              <iframe data-external="0" src="../../solutions/shortest-path-td/" width="540" height="460" style="zoom: 1.5"></iframe>
+               
+              
+          </div>
+        </div>
+      </section>
+
+      <section data-slide-step="5">
+        <h2>(5U) Repetition af Algoritmik-forløbet</h2>
+        <div class="homework-list" style="display:grid; place-content: center; height: 80%; font-size: 2em">
+          <h3>Gennemgang af Kristians slides</h3>
+        </div>
+      </section>
+
+      
+      <section data-slide-step="6">
+        <h2>(5Ø) Små algoritme-opgaver</h2>
+        <div class="homework-list" style="display:grid; place-content: center;">
+          <div>
+            <h3>Fælles implementering af sorteringsalgoritmer fra Kristians slides</h3>
+            <ul>
+              <li>Vi implementerer algoritmerne i JavaScript sammen.</li>
+              <li>I gør det samme som jeg gør, på jeres egne bærbare.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+
+      <section data-slide-step="7">
+        <h2>(6U) Lektier til næste gang</h2>
+        <div class="homework-list" style="display:grid; place-content: center;">
+          <h3>Sæt jeres logbog på GitHub</h3>
+          <ul>
+            <li>Initialisér et git repository i jeres logbog-mappe.</li>
+            <li>Publisér git repositoriet til GitHub.</li>
+            <li>Lav videre på logbogen.</li>
+          </ul>
+          <h3>Færdiggør algoritme-opgaverne</h3>
+          <ul>
+            <li>Hvis I ikke blev færdige med opgaverne så lav dem færdigt.</li>
+          </ul>
+          <h3>Læs og sæt jer ind i opgaven til næste gang</h3>
+          <ul>
+            <li>Læs opgavebeskrivelsen for opgaven I skal lave på torsdag.</li>
+            <li>Opgaven står i README-filen i følgende repo: <a href="https://github.com/AHSarantaris/shortest-path-exercise">https://github.com/AHSarantaris/shortest-path-exercise</a>.</li>
+            <li>Fork repositoriet og clone det til jeres computer.</li>
+            <li>Sæt jer ind i koden så I er klar til at løse opgaven.</li>
+          </ul>
+        </div>
+      </section>
+      
+      <section>
+        <h2>(6U) Næste lektion</h2>
+        <div class="homework-list" style="display:grid;place-content:center; width: 70%; height: 70%">
+          <h3>Shortest Path BFS i grid</h3>
+          <ul>
+            <li>I skal implementere en shortest path-algoritme der kan finde den korteste vej i et 2D grid ved brug af BFS.</li>
+            <li>For at kunne lave algoritmen skal I færdiggøre to data strukturer: En kø og en graf.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section data-slide-step="8">
+        <h2>(6Ø) Lektionen er slut</h2>
+        <div style="display: flex;flex-direction: column;justify-content: space-evenly; height: 80%;margin-left:10%;">
+          <h3>Læg en plan for hvornår I vil lave lektierne og sæt en påmindelse</h3>
+          <h3>... færdiggør, gem og commit jeres arbejde</h3>
+          <h3>... reflektér over det I har lært og saml jeres tanker</h3>
+          <h3>... I kan gå når I vil.</h3>
+        </div>
+      </section>
+
+    <template id="agenda-template">
+      <section class="agenda"><h2 class="agenda-header">Program</h2><div class="flex-center" style="font-size:1.0em;"><table class="agenda-table"><thead><tr><th><strong>Punkt *</strong></th><th><strong>Start + varighed</strong></th><th><strong>Aktivitet</strong></th><th><strong>Indhold</strong></th></tr></thead><tbody>
+        <tr data-step="0"><td>1Ø</td><td>12:05 + 30</td><td>Fælles mundtlig prøve</td><td>Jeg stiller jer nogle spørgsmål om de forløb vi har været igennem som I skal svare på mundtligt.</td></tr>
+        <tr data-step="1"><td>2Ø</td><td>12:35 + 40</td><td>Skriv logbog og noter</td><td>I får noget tid til at skrive nogle noter/forløbsresuméer i jeres logbog.</td></tr>
+        <tr data-step="2"><td>3Ø</td><td>13:15 + 25</td><td>Individuel skriftlig prøve</td><td>I skal lave en 20 minutters skriftlig prøve uden hjælpemidler.</td></tr>
+        <tr data-step="3"><td>P</td><td>13:40 + 10</td><td>Pause</td><td>Pause inden næste modul.</td></tr>
+        <tr data-step="4"><td>4U</td><td>13:50 + 20</td><td>Introduktion til Forløb 15: Algoritmer og Datastrukturer</td><td>Overblik over hvordan algoritmer og datastrukturer anvendes, samt hvad I skal igennem dette forløb.</td></tr>
+        <tr data-step="5"><td>5U</td><td>14:20 + 20</td><td>Repetition af Algoritmik-forløbet</td><td>Vi repeterer det I lærte sidste år om algoritmik.</td></tr>
+        <tr data-step="6"><td>5Ø</td><td>14:40 + 30</td><td>Små algoritme-opgaver</td><td>I får nogle små opgaver med at implementere simple algoritmer i JavaScript.</td></tr>
+        <tr data-step="7"><td>6U</td><td>15:10 + 10</td><td>Opsamling, lektier og næste lektion</td><td>Hjemmearbejde til næste gang og emnerne for næste lektion.</td></tr>
+        <tr data-step="8"><td>6Ø</td><td>15:20 + 5</td><td>Afrunding</td><td>Færdiggør jeres arbejde og reflektér over jeres læring.</td></tr>
+      </tbody></table></div><div class="text-sm muted"><strong>*</strong> (U = undervisning, Ø = øvelse, P = Pause)</div></section>
+    </template>
+  </div>
+  </div>
+  <script src="../../node_modules/reveal.js/dist/reveal.js"></script>
+  <script src="../../node_modules/reveal.js-menu/menu.js"></script>
+  <script src="../../node_modules/reveal.js-multimodal/plugin/multimodal/multimodal.js"></script>
+  <script src="../../node_modules/reveal.js/dist/plugin/notes.js"></script>
+  <script src="../../node_modules/reveal.js/dist/plugin/highlight.js"></script>
+  <script src="../../node_modules/reveal.js/dist/plugin/zoom.js"></script>
+  <script src="../../node_modules/reveal.js/dist/plugin/math.js"></script>
+  <script src="../main.js"></script>
+</body>
+</html>
