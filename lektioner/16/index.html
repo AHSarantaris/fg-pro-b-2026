@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1f1f1f">
+  <title>Lektion 16: Korteste vej i 2D grid</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/all.min.css">
+  <link rel="stylesheet" href="../../node_modules/reveal.js/dist/reveal.css">
+  <link rel="stylesheet" href="../variables.css">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../highlight.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <section class="title-slide">
+        <h1><span hidden>Lektion 16: </span>Korteste vej i 2D grid</h1>
+        <h3>Lektion 16</h3>
+        <p>Andreas Hussain Sarantaris · 29-10-2026</p>
+        <p style="font-size:0.82em;color:var(--fg-muted);">Frederikssund Gymnasium · Programmering B</p>
+      </section>
+
+      <section data-slide-step="0">
+        <h2>(1U) Overblik over Forløb 15</h2>
+        <div class="spaced-list header-list" style="display: grid;grid-template-columns: 1.5fr 1fr; gap:4em">
+          <div>
+            <h3>I tirsdags:</h3>
+            <ul>
+              <li>Repetition af algoritmik-forløbet fra programmering C.</li>
+              <li>Vi gennemgik Kristians slides fra sidste år.</li>
+            </ul>
+            <h3>I dag: Shortest Path i 2D grid</h3>
+            <ul>
+              <li>Vi skal implementere en algoritme der finder den korteste vej i et 2D grid.</li>
+              <li>Følgende repository indeholder ufærdig kode til at implementere dette: <a href="https://github.com/AHSarantaris/shortest-path-exercise">https://github.com/AHSarantaris/shortest-path-exercise</a></li>
+            </ul>
+            <h3>Næste uge: Udvid Tower Defence-spil</h3>
+            <ul>
+              <li>I skal udvide jeres Tower Defence-spil til at have et åbent grid hvor monstrene selv finder den hurtigste vej til målet ved brug af BFS.</li>
+              <li>Hvis vi når det skal vi også gøre at der er felter på griddet hvor monstrene bevæger sig hurtigere/langsommere (eksempelvis søer på griddet), hvorved vi skal implementere Dijkstra's algoritme.</li>
+            </ul>
+          </div>
+          <div >
+            <!-- https://www.youtube.com/watch?v=MFhxShGxHWc -->
+             <h3>Løsning til opgaven næste lektion</h3>
+              <iframe data-external="0" src="../../solutions/shortest-path-td/" width="540" height="460" style="zoom: 1.5"></iframe>
+               
+              
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>(1U) Resultat fra prøverne</h2>
+        <div class="spaced-list header-list" style="display: grid;grid-template-columns: 1fr 1fr; gap:4em">
+          <div>
+            <h3>Skriftlig prøve</h3>
+            <ul>
+              <li>Jeg har rettet jeres prøvebesvarelser, og skrevt hvor mange rigtige svar havde ud af de 18. Et delvist korrekt svar gav ½ point.</li>
+              <li>Ingen fik over 5/18 rigtige.</li>
+              <li>konventionen i uddannelsesinsitutioner er at man består hvis man svaret over halvdelen af spørgsmålene korrekt.</li>
+              <li>Det trækker som sagt ikke ned, men det har ikke trukket jer op, og det viser at der er meget I ikke kan huske.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Logbog og noter</h3>
+            <ul class="fragment">
+              <li>I kan ikke huske det mest fundamentale som vi har været igennem.</li>
+              <li>I udnyttede ikke den halve time som jeg havde givet jer til at skrive noter og gennemgå det vi har været igennem.</li>
+              <li>Jeres noteskrivningskompetencer er ikke tilstrækkelige.</li>
+              <li>Hvis I gerne vil have højere karakterer så bliver I nødt til at tage noter løbende.</li>
+              <li>Fremover så brug noget tid hjemme efter lektionerne på at kigge slides igennem og sætte skærmbilleder ind i jeres logbog, og nogle ting om hvad det vigtigste var, eller nogle små kodedele som I har arbejdet på, osv.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      
+      <section>
+        <h2>(1U) Indhold fra repetitionen af Algoritmik</h2>
+        <div class="spaced-list header-list" style="display: grid;grid-template-columns: 1fr 1fr; gap:4em">
+          <div>
+            <h3>Pseudokode</h3>
+            <ul class="fragment">
+              <li>Skriv trinene for en algoritme på samme form som kode, men med almindeligt sprog.</li>
+              <li>Skriv det på en måde så alle kan forstå det, selv hvis man ikke kan programmere.</li>
+              <li>Min præference: Almindeligt sprog og matematisk notation.</li>
+              <li>Kristians præference: En mere generisk form for Python syntaks.</li>
+            </ul>
+            <h3>Tids- og pladskompleksitet</h3>
+            <ul class="fragment">
+              <li>Man fjerner alle konstanter og faktorer, og beholder kun det led der dominerer når \(n\) bliver meget stort. \(n\) er antallet af elementer i datastrukturen.</li>
+              <li>O-notation: Konstant O(1), logaritmisk \(O(\log n)\), lineær \(O(n)\), kvadratisk \(O(n^2)\), polynomiel \(O(n^k)\), eksponentiel \(O(2^n), O(4^n)\), fx.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Sorteringsalgoritmer</h3>
+            <ul class="fragment">
+              <li>Buble-sort, Insertion-sort, Merge-sort</li>
+              <li>Rekursion: Eksempel med Merge-sort.</li>
+              <li>Data strukturer: Arrays, linked-lists, køer, stakke, grafer, træer.</li>
+            </ul>
+            <h3>Rekursion</h3>
+            <ul class="fragment">
+              <li>Definition: En rekursiv algoritme er en algoritme der kalder sig selv.</li>
+              <li>Eksempel: Merge-sort</li>
+              <li>Eksempler på rekursive funktioner i matematik: 
+                <ul>
+                  <li>Fakultet: 
+                    \[5! = 5\cdot 4\cdot 3\cdot 2\cdot 1 = 120\] 
+                    \[
+                    \begin{align}
+                      n! &= n\cdot (n-1)\cdot (n-2)\cdot\ldots\cdot 2\cdot 1 
+                      \\&= n\cdot (n-1)!
+                    \end{align}
+                    \]
+                  </li>
+                  <li>Fibonacci-rækken: 
+                    \[\{1, 1, 2, 3, 5, 8, 13,\ldots\}\]
+                    \[Fib(n) = Fib(n-2) + Fib(n-1)\]
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section data-slide-step="1">
+        <h2>(1Ø) Lektier til denne gang</h2>
+        <div class="homework-list" style="display:grid; place-content: center;">
+          <h3>Se videoer om BFS og DFS</h3>
+          <ul>
+            <li>Link til kort video der viser forskellen på BFS og DFS (11 sekunder): <a href="https://www.youtube.com/watch?v=NDxYpN2PJps">DFS vs. BFS | How Do They Actually Explore a Tree?</a>- onjsdev</li>
+            
+            <li>Link til video om BFS (1,5 minutter): <a href="https://www.youtube.com/watch?v=N6wicLpEmHY">Breadth-First Search Visualized and Explained</a> - Carl the Person</li>
+            
+            <li>Link til video om DFS (2 minutter): <a href="https://www.youtube.com/watch?v=5GcSvYDgiSo">Depth-First Search Visualized and Explained</a> - Carl the Person</li>
+          </ul>
+          <h3>Læs og sæt jer ind i opgaven til næste gang</h3>
+          <ul class="fragment">
+            <li>Læs opgavebeskrivelsen for opgaven I skal lave på torsdag.</li>
+            <li>Opgaven står i README-filen i følgende repo: <a href="https://github.com/AHSarantaris/shortest-path-exercise">https://github.com/AHSarantaris/shortest-path-exercise</a>.</li>
+            <li>Fork repositoriet og clone det til jeres computer.</li>
+            <li>Sæt jer ind i koden så I er klar til at løse opgaven.</li>
+          </ul>
+        </div>
+      </section>
+
+      
+      <section data-slide-step="2">
+        <h2>(2U) Introduktion til opgaven</h2>
+        <div class="homework-list" style="display:grid; place-content: center;">
+            <h3>Opgaverepository</h3>
+            <ul>
+              <li>Opgaven står i README-filen i følgende repository: <a href="https://github.com/AHSarantaris/shortest-path-exercise">https://github.com/AHSarantaris/shortest-path-exercise</a></li>
+            </ul>
+        </div>
+      </section>
+
+      
+      <section data-slide-step="3">
+        <h2>(2U) I laver opgaven</h2>
+        <div class="homework-list" style="display:grid; place-content: center;">
+            <h3>Opgaverepository</h3>
+            <ul>
+              <li>Opgaven står i README-filen i følgende repository: <a href="https://github.com/AHSarantaris/shortest-path-exercise">https://github.com/AHSarantaris/shortest-path-exercise</a></li>
+            <li>Fork repositoriet og clone det til jeres computer.</li>
+            <li>Gå igang med at løse opgaven.</li>
+            </ul>
+        </div>
+      </section>
+
+      <section data-slide-step="8">
+        <h2>(2Ø) Lektionen er slut</h2>
+        <div style="display: flex;flex-direction: column;justify-content: space-evenly; height: 80%;margin-left:10%;">
+          <h3>Læg en plan for hvornår I vil lave lektierne og sæt en påmindelse</h3>
+          <h3>... færdiggør, gem og commit jeres arbejde</h3>
+          <h3>... reflektér over det I har lært og saml jeres tanker</h3>
+          <h3>... I kan gå når I vil.</h3>
+        </div>
+      </section>
+
+    <template id="agenda-template">
+      <section class="agenda"><h2 class="agenda-header">Program</h2><div class="flex-center" style="font-size:1.0em;"><table class="agenda-table"><thead><tr><th><strong>Punkt *</strong></th><th><strong>Start + varighed</strong></th><th><strong>Aktivitet</strong></th><th><strong>Indhold</strong></th></tr></thead><tbody>
+        <tr data-step="0"><td>1U</td><td>12:05 + 25</td><td>Opsamling fra sidst</td><td>Resultat fra prøverne, og repetitionen af Algoritmik-forløbet.</td></tr>
+        <tr data-step="1"><td>1Ø</td><td>12:30 + 5</td><td>Lektier til i dag</td><td>Hvad fik I ud af lektierne.</td></tr>
+        <tr data-step="2"><td>2U</td><td>12:35 + 15</td><td>Introduktion af opgaven: Korteste vej i et 2D grid</td><td>Jeg gennemgår kort opgaven og koden.</td></tr>
+        <tr data-step="3"><td>2Ø</td><td>13:50 + 45</td><td>I laver opgaven</td><td>I skal implementere nogle datastrukturer og en algoritme der finder den korteste vej i et 2D grid.</td></tr>
+        <tr data-step="8"><td>3Ø</td><td>13:35 + 5</td><td>Afrunding</td><td>Færdiggør jeres arbejde og reflektér over jeres læring.</td></tr>
+      </tbody></table></div><div class="text-sm muted"><strong>*</strong> (U = undervisning, Ø = øvelse, P = Pause)</div></section>
+    </template>
+  </div>
+  </div>
+  <script src="../../node_modules/reveal.js/dist/reveal.js"></script>
+  <script src="../../node_modules/reveal.js-menu/menu.js"></script>
+  <script src="../../node_modules/reveal.js-multimodal/plugin/multimodal/multimodal.js"></script>
+  <script src="../../node_modules/reveal.js/dist/plugin/notes.js"></script>
+  <script src="../../node_modules/reveal.js/dist/plugin/highlight.js"></script>
+  <script src="../../node_modules/reveal.js/dist/plugin/zoom.js"></script>
+  <script src="../../node_modules/reveal.js/dist/plugin/math.js"></script>
+  <script src="../main.js"></script>
+</body>
+</html>
