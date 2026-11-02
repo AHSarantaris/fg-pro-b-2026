@@ -6,15 +6,24 @@ Frederikssund Gymnasium - Programmering B
 
 Forløb 13 og 14
 
+## Formaliteter
+
+- I har 20 minutter.
+- Ingen hjælpemidler. Jeres bærbar skal være lukket i.
+- Ingen toiletbesøg.
+- Ingen kommunikation.
+- Ved tvivl om spørgsmålene kan I række hånden op. I må ikke sige noget som kan hjælpe andre under jeres spørgsmål.
+- Besvarelsen skal tydeligt angive hvilket svar der besvares (fx. 2.1), og svaret må ikke være tvetydigt.
+
 ## Spørgsmål til forløb 13
 
 ### 1. JavaScript
 
 1.1. Hvilket keyword skal man bruge når man skal definere en funktion i JavaScript? Svarmuligheder: `def`, `class`, `function`, `let`.
 
-1.2. Skriv kommandoen til at printe `"hello world"` til konsolen/terminalen.
+1.2. Skriv kommandoen til at printe `Hello world` til konsolen/terminalen.
 
-1.3. Skriv kode til at lave et array der indeholder alle tal fra 1 til 100 ved brug af en for-løkke.
+1.3. Skriv kode til at lave et array `numbers` der indeholder alle tal fra 1 til 100 ved brug af en for-løkke.
 
 1.4. Skriv kode til at lave et objekt med en attributterne `x` og `y` med værdierne `3` og `4`, henholdsvist, samt en metode `move` der lægger 1 til værdien af `x`. Objektet skal gemmes i en variabel `p`.
 
@@ -40,7 +49,7 @@ Forløb 13 og 14
 
 3.4. Bør man umiddelbart udføre en enhedstest som alfatest eller betatest?
 
-3.5. Er en UAT en white-, grey- eller black-box test?
+3.5. Er en UAT umiddelbart en white-, grey- eller black-box test?
 
 ### 4. Git og GitHub
 
@@ -48,10 +57,10 @@ Forløb 13 og 14
 
 4.2. Hvilke kommandoer kan man bruge for at skifte branch?
 
-4.3. Hvilket fil-format skal readme-filer være, og er der specifikke regler/konventioner for navngigvning af readme-filer?
+4.3. Hvilket fil-format skal readme-filer være, og er der specifikke regler/konventioner for navngivning af readme-filer?
 
 4.4. Hvis man skal merge en feature-branch ind i `main`, hvilken branch skal man stå i når man kører kommandoen `merge`?
 
 ### 5. AI
 
-5.1. Giv to eksempler på hvordan man ikke må bruge AI i programmering B, og to eksempler på hvordan man gerne må. Besvarelsen må gerne være i form af specifikke prompts.
+5.1. Giv to eksempler på hvordan man ikke må bruge AI i programmering B, og to eksempler på hvordan man bør bruge AI. Besvarelsen må gerne være i form af specifikke prompts.
