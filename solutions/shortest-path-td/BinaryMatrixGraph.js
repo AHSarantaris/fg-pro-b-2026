@@ -38,6 +38,7 @@ class BinaryMatrixGraph {
     neighbors(n) {
         let neighbors = [];
         let directions = [[0,-1],[1,0],[0,1],[-1,0]];
+        // directions.push([1,1],[-1,-1],[1,-1],[-1,1])
         for (let dir of directions) {
             let m = [n[0]-dir[0], n[1]-dir[1]];
             if (this.inBounds(m) && !this.valueAt(m)) {

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1f1f1f">
+  <title>Lektion 17: Korteste vej i 2D grid</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/all.min.css">
+  <link rel="stylesheet" href="../../node_modules/reveal.js/dist/reveal.css">
+  <link rel="stylesheet" href="../variables.css">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../highlight.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <section class="title-slide">
+        <h1><span hidden>Lektion 17: </span>Korteste vej i 2D grid</h1>
+        <h3>Lektion 17</h3>
+        <p>Andreas Hussain Sarantaris · 03-11-2026</p>
+        <p style="font-size:0.82em;color:var(--fg-muted);">Frederikssund Gymnasium · Programmering B</p>
+      </section>
+
+      <section data-slide-step="0">
+        <h2>(1U) Overblik over Forløb 15</h2>
+        <div class="spaced-list header-list" style="display: grid;grid-template-columns: 3fr 1fr; gap:4em">
+          <div>
+            <h3>Sidste uge:</h3>
+            <ul>
+              <li>Repetition af <strong>algoritmik-forløbet</strong> fra programmering C.</li>
+              <li>I tirsdags gennemgik vi <strong>Kristians slides</strong> fra sidste år (<strong>som stadig er pensum</strong>).</li>
+              <li>I torsdags gik vi lidt i dybden med <strong>pseudokode</strong>, <strong>tidskompleksitet</strong>, <strong>køer</strong> og <strong>rekursion</strong>, samt grafalgoritmerne <strong>BFS</strong> og <strong>DFS</strong>. (<strong>Vi vil ikke have mere om rekursion fremover</strong>)</li>
+            </ul>
+            <h3>I dag: Shortest Path i 2D grid</h3>
+            <ul>
+              <li>Vi implementerer datastrukturen <code>BinaryMatrixGraph</code> der repræsenterer en graf baseret på en <strong>binær matrix</strong>.</li>
+            </ul>
+            <h3>På torsdag: Udvid Tower Defence-spil</h3>
+            <ul>
+              <li>I skal implementere algoritmen der finder den <strong>korteste vej</strong> i grafen repræsenteret ved den binære matrix.</li>
+              <li>Derefter skal I <strong>udvide</strong> jeres Tower Defence-spil til at have et <strong>åbent grid</strong> hvor monstrene selv finder den hurtigste vej til målet ved brug af den algoritme I har implementeret.</li>
+              <li><strong>Hvis vi når det</strong> skal vi også gøre at der er felter på griddet hvor monstrene bevæger sig hurtigere/langsommere (<strong>eksempelvis søer på banen</strong>), hvorved vi skal implementere <strong>Dijkstra's algoritme</strong>.</li>
+            </ul>
+          </div>
+          <div >
+             <h3>Løsning til opgaven</h3>
+              <iframe data-external="0" src="../../solutions/shortest-path-td/" width="540" height="460" style="zoom: 1.3"></iframe>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>(1U) Resultatet fra prøverne og standpunktskarakterer</h2>
+        <div class="spaced-list header-list" style="display: grid;grid-template-columns: 1fr 1fr; gap:4em">
+          <div>
+            <h3>Standpunktskarakterer</h3>
+            <ul>
+              <li>Samme karakter som i Afleveringsprojekt 1 <strong>plus/minus ét karaktértrin</strong>, ud fra det <strong>individuelle arbejde</strong> og <strong>faglig deltagelse</strong> i undervisningen.</li>
+              <li>Hvis I har <strong>spørgsmål</strong> til karakteren eller er i tvivl om hvordan I forbedrer den så skriv en besked eller tal med mig efter undervisningen.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Budskaberne fra resultatet af prøverne</h3>
+            <ul class="fragment">
+              <li><strong>Ingen</strong> fik over <strong>5/18 rigtige</strong>.</li>
+              <li>Konventionen i uddannelsesinsitutioner er at <strong>man består</strong> hvis man svaret <strong>over halvdelen</strong> af spørgsmålene korrekt.</li>
+              <li>Indholdet i prøven var <strong>det minimale som I skal have lært</strong> indtil nu i faget.</li>
+              <li>Hvis I gerne vil have højere karakterer så bliver I nødt til at <strong>tage noter løbende</strong>.</li>
+              <li>Fremover så <strong>brug noget tid hjemme</strong> efter lektionerne på at <strong>kigge slides igennem</strong> og sætte <strong>skærmbilleder</strong> ind i jeres logbog, og <strong>skrive</strong> nogle ting om <strong>hvad det vigtigste var</strong>, eller nogle <strong>små kodedele</strong> som I har arbejdet på, osv.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section data-slide-step="1">
+        <h2>(1Ø) Lektier til denne gang</h2>
+        <div class="spaced-list header-list" style="display: grid;grid-template-columns: 1fr 1fr; gap:4em">
+          <div>
+            <h3>Læs om rekursiv vs. iterativ DFS</h3>
+            <ul>
+              <li><strong>Gav det mening? Nogen spørgsmål til teksterne?</strong></li>
+              <li>De markerer knuderne som "visited", hvilket vi ikke gjorde i pseudokoden til vores algoritme. <strong>Hvorfor?</strong></li>
+              <li>Længden af koden i de to typer algoritmer er også forskellig. <strong>Hvilken er kortest og simplest?</strong></li>
+              <li>Rekursiv DFS: <a href="https://www.geeksforgeeks.org/dsa/depth-first-search-or-dfs-for-a-graph/">Depth First Search or DFS for a Graph - GeeksforGeeks</a></li>
+              <li>Iterativ DFS: <a href="https://www.geeksforgeeks.org/dsa/iterative-depth-first-traversal/">Iterative Depth First Traversal of Graph - GeeksforGeeks</a></li>
+            </ul>
+            <h3>Læs om rekursiv vs. iterativ Fibonacci-algoritme</h3>
+            <ul class="fragment">
+              <li><strong>Gav det mening? Nogen spørgsmål til teksten?</strong></li>
+              <li>Den "simple" rekursive algoritme har en eksponentiel køretid, <strong>hvordan gør de den lineær?</strong></li>
+              <li>De viser også nogle iterative Fibonacci-algoritmer, <strong>hvordan fungerer de?</strong></li>
+              <li>Link til tekst: <a href="https://www.geeksforgeeks.org/dsa/program-for-nth-fibonacci-number/">Nth Fibonacci Number - GeeksforGeeks</a> </li>
+              <li>(Kun til og med afsnittet "[Expected Approach-3] Bottom Up Space Optimized Approach")</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Skriv nogle noter i jeres logbog</h3>
+            <ul class="fragment">
+              <li><strong>Har I gjort det? Var der nogen problemer/udfordringer?</strong></li>
+              <li>Tag <strong>skærmbilleder</strong> af <strong>slides</strong>/<strong>kode</strong>/<strong>tekster</strong> og indsæt det i logbogen. </li>
+              <li>Skriv nogle vigtige informationer ned, og det som I har lært de forskellige lektioner. </li>
+              <li>Tjek at jeres noter <strong>som minimum</strong> indeholder alt det information der er nødvendig for <strong>at bestå en test</strong> som den skriftlige prøve. </li>
+            </ul>
+            <h3>Lav første delopgave: Implementer enqueue-metoden i Queue-klassen</h3>
+            <ul class="fragment">
+              <li><strong>Hvordan gik det, blev alle tests grønne? Og var der problemer/udfordringer?</strong> </li>
+              <li>Ved problemer skulle I søge på "<strong>mdn js [...]</strong>", efterfulgt af det som I vil slå op. <strong>Hvad står MDN og JS for?</strong></li>
+              <li>Link til opgave repositoriet:
+                <br>
+                <a href="https://github.com/AHSarantaris/shortest-path-exercise">https://github.com/AHSarantaris/shortest-path-exercise</a></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      
+      <section data-slide-step="2">
+        <h2>(2U) Grafer repræsenteret ved en binær matrix</h2>
+        <div class="spaced-list header-list" style="display: grid;grid-template-columns: 1fr 1fr; gap:4em">
+            <div>
+              <h3>Delopgave 2</h3>
+              <ul>
+                <li>Tomme felter repræsenteres ved tallet "0", og forhindringer (eller towers) repræsenteres af tallet "1".</li>
+                <li>Hvordan bestemmer man naboerne til feltet \((i,j)\)?</li>
+                <li>Hvilke forskellige tilfælde kan der være?</li>
+                <li>Opgaverepository: <a href="https://github.com/AHSarantaris/shortest-path-exercise">https://github.com/AHSarantaris/shortest-path-exercise</a></li>
+              </ul>
+            </div>
+          <div >
+             <h3>Løsning til opgaven</h3>
+              <iframe data-external="0" src="../../solutions/shortest-path-td/" width="540" height="460" style="zoom: 1.3"></iframe>
+          </div>
+        </div>
+      </section>
+
+      
+      <section data-slide-step="3">
+        <h2>(2Ø) Implementer graf-metoden</h2>
+        <div class="homework-list" style="display:grid; place-content: center;width:70%">
+            <h3>Lav delopgave 2</h3>
+            <ul>
+              <li>Klassen <code>BinaryMatrixGraph</code> har allerede metoderne <code>valueAt()</code>, <code>inBounds()</code>, <code>identicalNodes()</code>, <code>key()</code>, <code>numberOfNodes()</code>. <strong>Hvilke skal I bruge?</strong></li>
+              <li><strong>Fork</strong> repositoriet og <strong>clone</strong> det til jeres computer (<strong>hvis I ikke har gjort det endnu</strong>).</li>
+              <li>Gå igang med at løse delopgave 2: Implementering af <code>neighbors()</code>-metoden i <code>BinaryMatrixGraph</code>.</li>
+              <li>Opgaven står i <strong>README-filen</strong> i følgende repository: <a href="https://github.com/AHSarantaris/shortest-path-exercise">https://github.com/AHSarantaris/shortest-path-exercise</a></li>
+            </ul>
+        </div>
+      </section>
+
+      <section data-slide-step="7">
+        <h2>(3U) Lektier til næste gang</h2>
+        <div class="homework-list" style="display:grid; place-content: center;width:70%">
+          <h3>Færdiggør de to første delopgaver i "Korteste vej"-opgaven.</h3>
+          <ul>
+            <li>Færdiggør implementeringen af metoderne <code>enqueue()</code> og <code>neighbors()</code> i henholdsvis <code>Queue</code> og <code>BinaryMatrixGraph</code>.</li>
+          </ul>
+          <h3>Læs og forstå pseudokoden til "Shortest path BFS"-algoritmen</h3>
+          <ul>
+            <li>Pseudokoden er i filen <code>algorithms.md</code>.</li>
+          </ul>
+          <h3>Skriv nogle noter i jeres logbog</h3>
+          <ul>
+            <li>Tag skærmbilleder af slides/kode/tekster og indsæt det i logbogen. </li>
+            <li>Skriv nogle vigtige informationer ned, og det som I har lært de forskellige lektioner. </li>
+            <li>Tjek at jeres noter som minimum indeholder alt det information der er nødvendig for at bestå en test som den skriftlige prøve. </li>
+          </ul>
+        </div>
+      </section>
+      
+      <section>
+        <h2>(3U) Næste lektion</h2>
+        <div class="homework-list" style="display:grid;place-content:center; width: 70%; height: 70%">
+          <h3>Shortest Path BFS i grid</h3>
+          <ul>
+            <li>I skal implementere "<strong>Shortest path</strong>"-algoritme der kan finde den korteste vej i et 2D grid ved brug af <strong>BFS</strong>.</li>
+            <li>Derefter skal I <strong>udvide</strong> jeres Tower Defence-spil til at have et <strong>åbent grid</strong> hvor monstrene selv finder den hurtigste vej til målet ved brug af den algoritme I har implementeret.</li>
+            <li><strong>Hvis vi når det</strong> skal vi også gøre at der er felter på griddet hvor monstrene bevæger sig hurtigere/langsommere (<strong>eksempelvis søer på banen</strong>), hvorved vi skal implementere <strong>Dijkstra's algoritme</strong>.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section data-slide-step="8">
+        <h2>(3Ø) Lektionen er slut</h2>
+        <div style="display: flex;flex-direction: column;justify-content: space-evenly; height: 80%;margin-left:10%;">
+          <h3>Læg en plan for hvornår I vil lave lektierne og sæt en påmindelse</h3>
+          <h3>... færdiggør, gem og commit jeres arbejde</h3>
+          <h3>... reflektér over det I har lært og saml jeres tanker</h3>
+          <h3>... I kan gå når I vil.</h3>
+        </div>
+      </section>
+
+    <template id="agenda-template">
+      <section class="agenda"><h2 class="agenda-header">Program</h2><div class="flex-center" style="font-size:1.0em;"><table class="agenda-table"><thead><tr><th><strong>Punkt *</strong></th><th><strong>Start + varighed</strong></th><th><strong>Aktivitet</strong></th><th><strong>Indhold</strong></th></tr></thead><tbody>
+        <tr data-step="0"><td>1U</td><td>10:00 + 15</td><td>Opsamling fra sidst</td><td></td></tr>
+        <tr data-step="1"><td>1Ø</td><td>10:15 + 15</td><td>Lektier til i dag</td><td>Spørgsmål til lektierne.</td></tr>
+        <tr data-step="2"><td>2U</td><td>10:30 + 15</td><td>Introduktion til delopgave 2</td><td>Jeg gennemgår kort delopgave 2 og koden der allerede er skrevet.</td></tr>
+        <tr data-step="3"><td>2Ø</td><td>10:45 + 40</td><td>I laver delopgave 2</td><td>I får noget tid til at lave delopgaven.</td></tr>
+        <tr data-step="7"><td>3U</td><td>11:25 + 5</td><td>Opsamling, lektier og næste lektion</td><td>Hjemmearbejde til næste gang og emnerne for næste lektion.</td></tr>
+        <tr data-step="8"><td>3Ø</td><td>11:30 + 5</td><td>Afrunding</td><td>Færdiggør jeres arbejde og reflektér over jeres læring.</td></tr>
+      </tbody></table></div><div class="text-sm muted"><strong>*</strong> (U = undervisning, Ø = øvelse, P = Pause)</div></section>
+    </template>
+  </div>
+  </div>
+  <script src="../../node_modules/reveal.js/dist/reveal.js"></script>
+  <script src="../../node_modules/reveal.js-menu/menu.js"></script>
+  <script src="../../node_modules/reveal.js-multimodal/plugin/multimodal/multimodal.js"></script>
+  <script src="../../node_modules/reveal.js/dist/plugin/notes.js"></script>
+  <script src="../../node_modules/reveal.js/dist/plugin/highlight.js"></script>
+  <script src="../../node_modules/reveal.js/dist/plugin/zoom.js"></script>
+  <script src="../../node_modules/reveal.js/dist/plugin/math.js"></script>
+  <script src="../main.js"></script>
+</body>
+</html>
