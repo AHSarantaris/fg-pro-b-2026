@@ -400,6 +400,7 @@ a:has(img):hover {
 }
 .reveal pre.block {
     display: block;
+    padding: 0.5em 0.8em !important;
     background: var(--bg-card) !important;
 }
 

@@ -57,6 +57,8 @@ function draw() {
     background(15, 22, 32);
     drawTitle();
     drawCells();
+    // drawPath();
+    drawMarkers();
     drawInfo();
 }
 
@@ -86,8 +88,25 @@ function drawCells() {
             rect(x, y, CELL, CELL);
         }
     }
+}
+
+function drawMarkers() {
     drawMarker(start, color(0, 170, 70), 'S');
     drawMarker(target, color(230, 55, 55), 'T');
+}
+
+function drawPath() {
+    if (path.length < 2) return;
+    stroke(230, 55, 55);
+    strokeWeight(6);
+    strokeCap(ROUND);
+    strokeJoin(ROUND);
+    noFill();
+    beginShape();
+    for (const [r, c] of path) {
+        vertex(MARGIN_X + c * CELL + CELL / 2, MARGIN_Y + r * CELL + CELL / 2);
+    }
+    endShape();
 }
 
 function drawInfo() {

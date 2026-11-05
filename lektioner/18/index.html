@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1f1f1f">
+  <title>Lektion 18: Korteste Vej BFS-Algoritmen</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/all.min.css">
+  <link rel="stylesheet" href="../../node_modules/reveal.js/dist/reveal.css">
+  <link rel="stylesheet" href="../variables.css">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../highlight.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <section class="title-slide">
+        <h1><span hidden>Lektion 18: </span>Korteste Vej BFS-Algoritmen</h1>
+        <h3>Lektion 18</h3>
+        <p>Andreas Hussain Sarantaris · 05-11-2026</p>
+        <p style="font-size:0.82em;color:var(--fg-muted);">Frederikssund Gymnasium · Programmering B</p>
+      </section>
+
+      <section data-slide-step="0">
+        <h2>(1U) Overblik over Forløb 15</h2>
+        <div class="small-list header-list" style="display: grid;grid-template-columns: 3fr 1fr; gap:4em">
+          <div>
+            <h3>Sidste uge: Repetition af algoritmik-forløbet fra sidste år</h3>
+            <ul class="spaced-list">
+              <li>Første lektion gennemgik vi <strong>Kristians slides</strong> fra programmering C (<strong>som stadig er pensum</strong>).</li>
+              <li>Anden lektion gik vi lidt i dybden med <strong>pseudokode</strong>, <strong>tidskompleksitet</strong>, <strong>køer</strong> og <strong>rekursion</strong>, samt grafalgoritmerne <strong>BFS</strong> og <strong>DFS</strong>. (<strong>Vi vil ikke have mere om rekursion fremover</strong>)</li>
+            </ul>
+            <h3>Sidste lektion: Datastrukturer til Shortest Path algoritmen</h3>
+            <ul class="fragment spaced-list">
+              <li>Vi gennemgik datastrukturerne <code>Queue</code> og <code>BinaryMatrixGraph</code> på tavlen og så implementerede I dem.</li>
+            </ul>
+            <h3>Dagens lektion: Implementer Shortest Path algoritmen</h3>
+            <ul class="fragment spaced-list">
+              <li>I skal implementere algoritmen der finder den <strong>korteste vej</strong> i grafen repræsenteret ved den binære matrix.</li>
+            </ul>
+            <h3>Torsdag næste uge: Udvid Tower Defence-spil</h3>
+            <ul class="fragment spaced-list">
+              <li>I skal <strong>udvide</strong> jeres Tower Defence-spil til at have et <strong>åbent grid</strong> hvor monstrene selv finder den hurtigste vej til målet ved brug af den algoritme I har implementeret.</li>
+              <li><strong>Hvis vi når det</strong> skal vi også gøre at der er felter på griddet hvor monstrene bevæger sig hurtigere/langsommere (<strong>eksempelvis søer på banen</strong>), hvorved vi skal implementere <strong>Dijkstra's algoritme</strong>.</li>
+            </ul>
+          </div>
+          <div >
+             <h3>Løsning til opgaven</h3>
+              <iframe data-external="0" src="../../solutions/shortest-path-td/" width="540" height="460" style="zoom: 1.2"></iframe>
+          </div>
+        </div>
+      </section>
+
+      <section data-slide-step="1">
+        <h2>(1Ø) Lektier til denne gang</h2>
+        <div class="spaced-list header-list" style="display: grid;grid-template-columns: 1fr 1fr; gap:4em">
+          <div>
+            <h3>Færdiggør de to første delopgaver i "Korteste vej"-opgaven.</h3>
+            <ul class="spaced-list">
+              <li>Færdiggør implementeringen af metoderne <code>enqueue()</code> og <code>neighbors()</code> i henholdsvis <code>Queue</code> og <code>BinaryMatrixGraph</code>.</li>
+              <li><strong>Hvordan gik det, blev alle tests grønne? Og var der problemer/udfordringer?</strong> </li>
+            </ul>
+            <h3>Skriv nogle noter i jeres logbog</h3>
+            <ul class="fragment spaced-list">
+              <li><strong>Har I gjort det? Var der nogen problemer/udfordringer?</strong></li>
+              <li>Tag <strong>skærmbilleder</strong> af <strong>slides</strong>/<strong>kode</strong>/<strong>tekster</strong> og indsæt det i logbogen. </li>
+              <li>Skriv nogle vigtige informationer ned, og det som I har lært de forskellige lektioner. </li>
+              <li>Tjek at jeres noter <strong>som minimum</strong> indeholder alt det information der er nødvendig for <strong>at bestå en test</strong> som den skriftlige prøve. </li>
+            </ul>
+          </div>
+          <div>  
+            <h3>Se video om BFS (fra sidste uge)</h3>
+            <ul class="fragment spaced-list">
+              <li><strong>Hvilken type graf bruges i eksemplet?</strong></li>
+              <li>Link til video om BFS (1,5 minutter): <a href="https://www.youtube.com/watch?v=N6wicLpEmHY">Breadth-First Search Visualized and Explained</a> - Carl the Person </li>
+            </ul>
+            <h3>Læs og forstå pseudokoden til "Shortest path BFS"-algoritmen</h3>
+            <ul class="fragment spaced-list">
+              <li><strong>Gav det mening?</strong></li>
+              <li>Pseudokoden er i filen <code>algorithms.md</code>.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      
+      <section data-slide-step="2">
+        <h2>(2U) Korteste vej i binær matrix</h2>
+        <div class="small-list header-list" style="display: grid;grid-template-columns: 1fr 1fr; gap:4em">
+            <div>
+              <h3>Koden i filen shortestPathBFS.js</h3>
+              <ul>
+                <li>Funktionen <code>shortestPathBFS()</code> har tre datastrukturer, hvor den ene (<code>Queue</code>) har vi selv implementeret.</li>
+                <li>Variablen <code>visitedSet</code> er et <code>Set</code> der gemmer alle de felter der allerede er besøgt.
+                  <ul>
+                    <li><strong>Hvordan indsætter man noget i et <code>Set</code> og hvordan tjekker man om noget er i sættet?</strong></li>
+                    <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set">MDN reference - Set</a></li>
+                  </ul>
+                </li>
+                <li>Varablen <code>prevMap</code> er et <code>Map</code> der for hvert felt gemmer det felt som det kom fra.
+                  <ul>
+                    <li><strong>Hvordan indsætter man noget i et <code>Map</code> og hvordan får man værdien til en bestemt nøgle?</strong></li>
+                    <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map">MDN reference - Map</a></li>
+                  </ul>
+                </li>
+                <li>Vi kan bruge <code>key()</code>-metoden i <code>BinaryMatrixGraph</code>-klassen når vi skal indsætte knuderne i datastrukturerne.
+                  <ul>
+                    <li><strong>Hvad skal vi skrive for at indsætte startknuden i <code>visitedSet</code>?</strong></li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          <div >
+             <h3>Startkoden til shortestPathBFS()</h3>
+<pre class="block">
+<code class="language-js">
+/**
+ * @template TNode
+ * @param {TNode} s - Start node
+ * @param {TNode} t - Terminal node
+ * @param {object} g  - Graph object with the methods
+ *   numberOfNodes(), key(), identicalNodes() and neighbors().
+ * @returns {TNode[]} An array of nodes forming the 
+ *   shortest path from s to t,
+ *   Returns an empty array if no path from s to t exists.
+ */
+function shortestPathBFS(s,t,g) {
+  let path = [];
+  let visitedSet = new Set();
+  let prevMap = new Map();
+  let q = new Queue(g.numberOfNodes());
+
+  // Implementér resten af koden herunder
+  // ...
+
+  return path;
+}
+</code>
+</pre>
+          </div>
+        </div>
+      </section>
+
+      <section data-slide-step="3">
+        <h2>(2Ø) Implementer shortestPathBFS-algoritmen</h2>
+        <div class="header-list" style="display: grid;grid-template-columns: 1fr 1fr; gap:4em">
+            <div>
+              <h3>Lav delopgave 3</h3>
+              <ol class="spaced-list-large">
+                <li><strong>Fork</strong> repositoriet og <strong>clone</strong> det til jeres computer (<strong>hvis I ikke har gjort det endnu</strong>). <a href="https://github.com/AHSarantaris/shortest-path-exercise">https://github.com/AHSarantaris/shortest-path-exercise</a></li>
+                <li><strong>Læs pseudokoden</strong> i Markdown-filen<code>algoritms.md</code></li>
+                <li>Implementér <strong>en linje</strong> fra pseudokoden <strong>ad gangen</strong> i <code>shortestPathBFS()</code>-funktionen.</li>
+                <li>Når I tænker at den er fuldt implementeret så åbn <code>index.html</code> og se om den korteste vej tegnes.</li>
+                <li>Hvis den korteste vej ikke tegnes når I har implementeret den så <strong>hjælper jeg jer</strong> med hvordan I kan debugge det.</li>
+              </ol>
+            </div>
+            <div>
+              <h3>Metoder til debugging</h3>
+              <ul class="spaced-list">
+                <li>Åbn browserens DevTools: Tryk <code>F12</code> eller <strong>højreklik</strong> og vælg "<strong>Undersøg</strong>"/"<strong>Inspect</strong>".</li>
+                <li>Tryk på fanen"<strong>Console</strong>", hvis du ikke er der allerede.</li>
+                <li>I VS Code editoren kan man printe variablenes værdier (eller tekststrenge) ved at skrive <code>console.log(...)</code> og skrive det man gerne vil printe til konsolen.</li>
+                <li>Tekst om brug af "<strong>Breakpoints</strong>" til debugging: <a href="https://developer.chrome.com/docs/devtools/javascript">https://developer.chrome.com/docs/devtools/javascript</a></li>
+              </ul>
+            </div>
+        </div>
+
+      </section>
+
+      <section data-slide-step="4">
+        <h2>(3U) SOP og Fagbazar</h2>
+        <div class="header-list" style="display: grid;grid-template-columns: 1fr 1fr; gap:4em">
+          <div>
+            <h3>Fagkombinationer med Programmering B</h3>
+            <ul class="spaced-list">
+              <li><strong>Matematik A:</strong> 3D computer grafik, Bezier kurver, simulering (robotter), </li>
+              <li><strong>Fysik A:</strong> Physics engines (computerspil), simulering (planetbaner), ...</li>
+              <li><strong>Dansk A:</strong> Tekstanalyse (fx. beregning af LIX-tal), ChatBots, Large Language Models (LLM), ...</li>
+              <li><strong>Kemi A:</strong> Kemiske Biblioteksmoduler (eksempelvis <a href="https://github.com/chemplexity/molecules">molecules.js</a>),  ...</li>
+              <li><strong>TK. PLS:</strong> Billedanalyse for fødevarekontrol, processregulering, protein-foldning (AlphaFold), ...</li>
+              <li><strong>TK. DDU:</strong> Design og udvikling af hjemmesider/apps, 2D/3D printer software, ...</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Inspiration til SOP</h3>
+            <ul class="spaced-list">
+              <li>YouTube-playliste til inspiration: <a href="https://youtube.com/playlist?list=PLQR1dH5B5CnY">SOP - Programmering</a></li>
+              <li>The Nature of Code - Daniel Shiffman: <a href="https://natureofcode.com/">https://natureofcode.com/</a></li>
+              <li>Empiri i studieområdeprojekter med programmering: <a href="https://emu.dk/stx/informatik/empiri-i-studieomraadeprojekter-med-programmering">https://emu.dk/stx/informatik/empiri-i-studieomraadeprojekter-med-programmering</a></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section data-slide-step="7">
+        <h2>(4U) Lektier til næste gang</h2>
+        <div class="homework-list" style="display:grid; place-content: center;width:70%">
+          <h3>1. Færdiggør alle delopgaver i "Korteste vej"-opgaven.</h3>
+          <ul>
+            <li>Færdiggør implementeringen af funktionen <code>shortestPathBFS()</code>, samt de to tidligere delopgaver hvis man ikke har lavet dem endnu.</li>
+          </ul>
+          <h3>2. Skriv nogle noter i jeres logbog</h3>
+          <ul>
+            <li>Tag skærmbilleder af slides/kode/tekster og indsæt det i logbogen. </li>
+            <li>Skriv nogle vigtige informationer ned, og det som I har lært de forskellige lektioner. </li>
+            <li>Tjek at jeres noter som minimum indeholder alt det information der er nødvendig for at bestå en test som den skriftlige prøve. </li>
+          </ul>
+        </div>
+      </section>
+      
+      <section>
+        <h2>(4U) Næste lektion</h2>
+        <div class="homework-list" style="display:grid;place-content:center; width: 70%; height: 70%">
+          <h3>Udvid Tower Defence-spil</h3>
+          <ul>
+            <li>I skal <strong>udvide</strong> jeres Tower Defence-spil til at have et <strong>åbent grid</strong> hvor monstrene selv finder den hurtigste vej til målet ved brug af den algoritme I har implementeret.</li>
+            <li><strong>Hvis vi når det</strong> skal vi også gøre at der er felter på griddet hvor monstrene bevæger sig hurtigere/langsommere (<strong>eksempelvis søer på banen</strong>), hvorved vi skal implementere <strong>Dijkstra's algoritme</strong>.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section data-slide-step="8">
+        <h2>(4Ø) Lektionen er slut</h2>
+        <div style="display: flex;flex-direction: column;justify-content: space-evenly; height: 80%;margin-left:10%;">
+          <h3>Læg en plan for hvornår I vil lave lektierne og sæt en påmindelse</h3>
+          <h3>... færdiggør, gem og commit jeres arbejde</h3>
+          <h3>... reflektér over det I har lært og saml jeres tanker</h3>
+          <h3>... I kan gå når I vil.</h3>
+        </div>
+      </section>
+
+    <template id="agenda-template">
+      <section class="agenda"><h2 class="agenda-header">Program</h2><div class="flex-center" style="font-size:1.0em;"><table class="agenda-table"><thead><tr><th><strong>Punkt *</strong></th><th><strong>Start + varighed</strong></th><th><strong>Aktivitet</strong></th><th><strong>Indhold</strong></th></tr></thead><tbody>
+        <tr data-step="0"><td>1U</td><td>12:05 + 5</td><td>Overblik over forløbet</td><td>Hvad har vi været igennem og hvad kal vi igennem i dag?</td></tr>
+        <tr data-step="1"><td>1Ø</td><td>12:10 + 15</td><td>Lektier til i dag</td><td>Spørgsmål til lektierne.</td></tr>
+        <!-- <tr data-step="2"><td>2U</td><td>12:25 + 15</td><td>BFS i 2D grid</td><td>Fælles gennemgang af BFS-algoritmen på et simpelt eksempel.</td></tr> -->
+        <tr data-step="2"><td>2U</td><td>12:25 + 15</td><td>Introduktion til delopgave 3</td><td>Jeg gennemgår kort delopgave 3 og koden der allerede er skrevet.</td></tr>
+        <tr data-step="3"><td>2Ø</td><td>12:40 + 40</td><td>I begynder på delopgave 3</td><td>I får noget tid til at lave delopgaven, resten er lektier.</td></tr>
+        <tr data-step="4"><td>3U</td><td>13:20 + 10</td><td>SOP og fagbazar</td><td>Jeg giver inspiration til emner man kan skrive om med programmering.</td></tr>
+        <tr data-step="7"><td>4U</td><td>13:30 + 5</td><td>Opsamling, lektier og næste lektion</td><td>Hjemmearbejde til næste gang og emnerne for næste lektion.</td></tr>
+        <tr data-step="8"><td>4Ø</td><td>13:35 + 5</td><td>Afrunding</td><td>Færdiggør jeres arbejde og reflektér over jeres læring.</td></tr>
+      </tbody></table></div><div class="text-sm muted"><strong>*</strong> (U = undervisning, Ø = øvelse, P = Pause)</div></section>
+    </template>
+  </div>
+  </div>
+  <script src="../../node_modules/reveal.js/dist/reveal.js"></script>
+  <script src="../../node_modules/reveal.js-menu/menu.js"></script>
+  <script src="../../node_modules/reveal.js-multimodal/plugin/multimodal/multimodal.js"></script>
+  <script src="../../node_modules/reveal.js/dist/plugin/notes.js"></script>
+  <script src="../../node_modules/reveal.js/dist/plugin/highlight.js"></script>
+  <script src="../../node_modules/reveal.js/dist/plugin/zoom.js"></script>
+  <script src="../../node_modules/reveal.js/dist/plugin/math.js"></script>
+  <script src="../main.js"></script>
+</body>
+</html>
