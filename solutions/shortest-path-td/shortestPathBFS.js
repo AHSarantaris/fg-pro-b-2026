@@ -32,9 +32,7 @@ function shortestPathBFS(s,t,g) {
     while (!q.isEmpty()) {
         // Let n be the front node of Q and remove it from Q.
         let n = q.dequeue();
-        let n_key = g.key(n)
-        // Mark n as visited.
-        visitedSet.add(n_key);
+        let n_key = g.key(n);
         // if n is the terminal node t:
         if (g.identicalNodes(n,t)) {
             // Return the list of nodes that the procedure has traversed to reach n.
