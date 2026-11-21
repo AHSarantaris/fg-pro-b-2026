@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1f1f1f">
+  <title>Lektion 21a: Brobygning - Tank vs Planes</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/all.min.css">
+  <link rel="stylesheet" href="../node_modules/reveal.js/dist/reveal.css">
+  <link rel="stylesheet" href="../lektioner/variables.css">
+  <link rel="stylesheet" href="../lektioner/styles.css">
+  <link rel="stylesheet" href="../lektioner/highlight.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <section class="title-slide">
+        <h1><span hidden>Lektion 21a: </span>Brobygning - Tank vs Planes</h1>
+        <h3>Lektion 21a</h3>
+        <p>Andreas Hussain Sarantaris · 19-11-2026</p>
+        <p style="font-size:0.82em;color:var(--fg-muted);">Frederikssund Gymnasium · Programmering B</p>
+      </section>
+
+
+      <section>
+        <h2>Tidligere projekt (Afleveringsprojekt 1)</h2>
+        <div class="small-list header-list" style="display: grid;grid-template-columns: 4fr 1fr">
+          <div>
+            <h3>Opgavebeskrivelse</h3>
+            <ul>
+              <li>"Lav et Tower Defence-spil i programmeringssproget <strong>JavaScript</strong> ved brug af biblioteksmodulet <strong>p5.js</strong>, udviklingsmiljøet <strong>VS Code</strong>, og samarbejd om koden over <strong>GitHub</strong> ved brug af <strong>Git</strong> som versionskontrol."</li>
+              <li><strong>Agentic engineering:</strong> Grupperne måtte anvende AI til at generere koden, men skulle kunne forstå den og vurdere dens korrekthed, men de måtte ikke "<strong>Vibe kode</strong>" spillet.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="fragment small-list header-list" style="display: grid;grid-template-columns: 1fr 1fr 1fr;gap:1em; font-size: 0.8em">
+          <div>
+            <iframe data-external="1" data-src="https://kingcookie98.github.io/Tower-defense-group-project/" width="540" height="540" style="zoom: 1.1; margin-bottom: 0.5em"></iframe>
+            <a style="margin-bottom:1em" href="https://kingcookie98.github.io/Tower-defense-group-project/">kingcookie98.github.io/Tower-defense-group-project/</a>
+          </div>
+          <div>
+            <iframe data-external="1" data-src="https://alexandervaar.github.io/tower-defence/" width="540" height="540" style="zoom: 1.1; margin-bottom: 0.5em"></iframe>
+            <a href="https://alexandervaar.github.io/tower-defence/">alexandervaar.github.io/tower-defence/</a>
+          </div>
+          <div>
+            <iframe data-external="1" data-src="https://sirgy0708.github.io/fg_tower_defense/" width="540" height="540" style="zoom: 1.1; margin-bottom: 0.5em"></iframe>
+            <a  href="https://sirgy0708.github.io/fg_tower_defense/">sirgy0708.github.io/fg_tower_defense/</a>
+          </div>
+        </div>
+      </section>
+
+      
+      <section>
+        <h2>Programmeringsværktøjer</h2>
+        <div class="homework-list" style="display: grid;grid-template-columns: 3fr 1fr">
+          <div>
+            <h3>JavaScript</h3>
+            <ul class="spaced-list">
+              <li>Det <strong>programmeringssprog</strong> som vi bruger i faget.</li>
+              <li>Et <strong>meget populært</strong> programmeringssprog som er det primære der bruges til <strong>hjemmesider</strong>.</li>
+            </ul>
+            <h3>p5.js</h3>
+            <ul class="spaced-list">
+              <li>Et meget populært <strong>biblioteksmodul</strong> der gør det nemt at lave <strong>animationer</strong> og <strong>spil</strong> i JavaScript.</li>
+              <li>Den <strong>officielle hjemmeside</strong> hvor der er <strong>eksempler</strong>, <strong>tutorials</strong> og <strong>dokumentation</strong>: <a href="https://p5js.org/">p5js.org</a></li>
+            </ul>
+            <h3>GitHub</h3>
+            <ul>
+              <li>En meget populær platform for at <strong>samarbejde</strong> om at <strong>udvikle programmer</strong> med andre.</li>
+              <li>Indeholder meget Open Source kode.</li>
+            </ul>
+          </div>
+          <!-- <div class="fragment">
+            <h3>Første spil vi lavede</h3>
+            <iframe data-external="1" src="../../eksempler/sun-animation/" width="620" height="420" style="zoom: 1.4" loading="lazy"></iframe>
+          </div> -->
+        </div>
+      </section>
+
+      <section>
+        <h2>Næste projekt (Afleveringsprojekt 2)</h2>
+        <div class="small-list header-list" style="display: grid;grid-template-columns: 3fr 1fr; gap:4em">
+          <div>
+            <h3></h3>
+             <h3>Korteste vej BFS (Breadth-First Search)</h3>
+             <ul>
+              <li>De mørke felter er forhindringer og de lyse må man gå på.</li>
+             </ul>
+              <iframe data-external="0" data-src="../solutions/shortest-path-td/" width="540" height="460" style="zoom: 1.4"></iframe>
+          </div>
+          <div>
+             <h3>Korteste vej Dijkstra (Dijkstra's algoritme)</h3>
+             <ul>
+              <li>De orange felter bevæger man sig langsommere</li>
+             </ul>
+              <iframe data-external="0" data-src="../solutions/shortest-path-td-dijkstra/" width="540" height="460" style="zoom: 1.4"></iframe>
+          </div>
+        </div>
+      </section>
+
+      
+      <section>
+        <h2>Dagens opgave</h2>
+        <div class="small-list header-list" style="display: grid;grid-template-columns: 3fr 1fr; gap:4em">
+          <div>
+            <h3>Skriv efter mig</h3>
+            <ul class="spaced-list-large">
+              <li>Gå ind på <a href="https://openprocessing.org/sketch/create">openprocessing.org/sketch/create</a>.</li>
+              <li>Lav eventuelt en bruger hvis I gerne vil.</li>
+              <li>Skriv det samme som jeg skriver.</li>
+            </ul>
+          </div>
+          <div>
+             <h3>Løsning til opgaven</h3>
+              <iframe data-external="0" data-src="../eksempler/projectile-game-2/" width="820" height="620" style="zoom: 1.1"></iframe>
+          </div>
+        </div>
+      </section>
+
+
+
+      <section>
+        <h2>Links, inspiration og referencer</h2>
+        <div class="header-list" style="display: grid;grid-template-columns: 3fr 1fr; gap:4em">
+          <div>
+            <h3>Dagens slides</h3>
+            <ul>
+              <li>Link til disse slides: <a href="https://ahsarantaris.github.io/fg-pro-b-2026/brobygning/">ahsarantaris.github.io/fg-pro-b-2026/brobygning/</a></li>
+            </ul>
+            <h3>Links til dagens opgave</h3>
+            <ul>
+              <li>Link til løsningen: <a href="https://openprocessing.org/@ahsarantaris/3066905">openprocessing.org/@ahsarantaris/3066905</a></li>
+              <li>Link til spillet vi lavede sammen: <a href="https://openprocessing.org/@ahsarantaris/3066914">openprocessing.org/@ahsarantaris/3066914</a></li>
+            </ul>
+            <h3>Andres p5.js projekter</h3>
+            <ul>
+              <li>En platform med andres p5.js projekter: <a href="https://openprocessing.org/">openprocessing.org</a></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+    <template id="agenda-template">
+      <section class="agenda"><h2 class="agenda-header">Program</h2><div class="flex-center" style="font-size:1.0em;"><table class="agenda-table"><thead><tr><th><strong>Punkt *</strong></th><th><strong>Start + varighed</strong></th><th><strong>Aktivitet</strong></th><th><strong>Indhold</strong></th></tr></thead><tbody>
+        <tr data-step="0"><td>1U</td><td>10:00 + 10</td><td>Overblik over forløbet og sidste lektion</td><td>Hvad har vi været igennem sidste lektion og generelt i dette forløb?</td></tr>
+        <tr data-step="1"><td>1Ø</td><td>10:10 + 10</td><td>Lektier til i dag</td><td>Spørgsmål til lektierne og status på hvor langt I er nået.</td></tr>
+        <tr data-step="2"><td>2Ø</td><td>10:20 + 40</td><td>I færdiggør delopgave 3</td><td>I får noget tid til at lave delopgaven, resten er lektier.</td></tr>
+        <tr data-step="3"><td>2U</td><td>11:00 + 25</td><td>I skal hjælpe mig med at løse delopgave 3</td><td>Jeg skriver koden og I siger hvad jeg skal gøre + Catherine kommer forbi.</td></tr>
+        <tr data-step="7"><td>3U</td><td>11:25 + 5</td><td>Opsamling, lektier og næste lektion</td><td>Hjemmearbejde til næste gang og emnerne for næste lektion.</td></tr>
+        <tr data-step="8"><td>3Ø</td><td>11:30 + 5</td><td>Afrunding</td><td>Færdiggør jeres arbejde og reflektér over jeres læring.</td></tr>
+      </tbody></table></div><div class="text-sm muted"><strong>*</strong> (U = undervisning, Ø = øvelse)</div></section>
+    </template>
+  </div>
+  </div>
+  <script src="../node_modules/reveal.js/dist/reveal.js"></script>
+  <script src="../node_modules/reveal.js-menu/menu.js"></script>
+  <script src="../node_modules/reveal.js-multimodal/plugin/multimodal/multimodal.js"></script>
+  <script src="../node_modules/reveal.js/dist/plugin/notes.js"></script>
+  <script src="../node_modules/reveal.js/dist/plugin/highlight.js"></script>
+  <script src="../node_modules/reveal.js/dist/plugin/zoom.js"></script>
+  <script src="../node_modules/reveal.js/dist/plugin/math.js"></script>
+  <script src="../lektioner/main.js"></script>
+</body>
+</html>
