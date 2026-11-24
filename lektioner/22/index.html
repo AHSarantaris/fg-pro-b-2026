@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1f1f1f">
+  <title>Lektion 22: Introduktion til Afleveringsprojekt 02</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/all.min.css">
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/2.0.2/marked.min.js"></script>
+  <link rel="stylesheet" href="../../node_modules/reveal.js/dist/reveal.css">
+  <link rel="stylesheet" href="../variables.css">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../highlight.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <section class="title-slide">
+        <h1><span hidden>Lektion 22: </span>Introduktion til Afleveringsprojekt 02</h1>
+        <h3>Lektion 22</h3>
+        <p>Andreas Hussain Sarantaris · 24-11-2026</p>
+        <p style="font-size:0.82em;color:var(--fg-muted);">Frederikssund Gymnasium · Programmering B</p>
+      </section>
+
+      <section data-slide-step="0">
+        <h2>(1U) Status på Forløb 15</h2>
+        <div class="small-list header-list" style="display: grid;grid-template-columns: 1fr 1fr; gap:4em">
+          <div>
+            <h3>I torsdags (lektion 21)</h3>
+            <ul class="spaced-list-large">
+              <li>Brobygningseleverne dukkede ikke op alligevel.</li>
+              <li>Vi <strong>afsluttede</strong> implementeringen af Shortest Path BFS-algoritmen.</li>
+              <li>Vi begyndte på at <strong>udvide jeres Tower Defence spil</strong> til at have et <strong>åbent grid</strong> hvor monstrene selv finder den korteste vej.</li>
+            </ul>
+            <h3>I dag (lektion 22)</h3>
+            <ul class="fragment spaced-list-large">
+              <li>Vi <strong>går igang</strong> med afleveringsprojekt 2.</li>
+              <li>Vi <strong>tager udgangspunkt</strong> i <code>shortest-path-exercise</code> repositoriet for at lave vores biblioteksmodul.</li>
+              <li>I skal udvide repositoriet til også at kunne finde den korteste vej i en <strong>generel matrix-graf</strong> ved brug af <strong>Dijkstra's algoritme</strong>.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Afleveringsprojekt 2</h3>
+            <ul class="fragment spaced-list-large">
+              <li>I skal <strong>udvikle</strong> og <strong>dokumentere</strong> et <strong>biblioteksmodul</strong> der kan benyttes af andre til at finde den korteste vej i både <strong>uvægtede</strong> og <strong>vægtede</strong> grafer.</li>
+              <li>I skal <strong>udvide</strong> jeres Tower Defence-spil til at have et <strong>åbent grid</strong> hvor monstrene selv finder den hurtigste vej til målet ved brug af jeres <strong>biblioteksmodul</strong>.</li>
+              <li>I skal skrive <strong>dokumentation</strong> for jeres <strong>API</strong>, både i form af en <strong>README-fil</strong> og en <strong>autogenereret hjemmeside</strong> ved brug af biblioteksnmodulet <strong>JSDoc</strong>.</li>
+              <li>I skal dokumentere resultatet af projektet og jeres arbejdsprocess i en <strong>synopsis</strong>. Se filen <code>projekt02.md</code> på Lectio der indeholder opgavebeskrivelsen.</li>
+              <li><strong>Afleveringsdato:</strong> Søndag den 6. december klokken 21:00. </li>
+              <li><strong>Præsentationer:</strong> Torsdag den 10/12.</li>
+            </ul>
+              <!-- <li><strong>Inspiration til dokumentation:</strong> <a href="https://github.com/qiao/PathFinding.js">https://github.com/qiao/PathFinding.js</a> </li> -->
+             <!-- <h3>Løsning til opgaven</h3>
+              <iframe data-external="0" src="../../solutions/shortest-path-td/" width="540" height="460" style="zoom: 1.4"></iframe> -->
+             <!-- <h3>Løsning til opgave 2</h3>
+              <iframe data-external="0" src="../../solutions/shortest-path-td-dijkstra/" width="540" height="460" style="zoom: 1.4"></iframe> -->
+          </div>
+        </div>
+      </section>
+
+      <section data-slide-step="1">
+        <h2>(1Ø) Lektier til denne gang</h2>
+        <div class="small-list header-list" style="display: grid;grid-template-columns: 1fr 1fr; gap:4em">
+          <div>
+            <h3>1. Sæt jer ind i koden til jeres Tower Defence spil</h3>
+            <ul>
+              <li>Læs koden og overvej hvad I skal ændre for at spillet har et åbent grid hvor monstrene selv finder den korteste vej.</li>
+            </ul>
+            <h3>2. Færdiggør "Korteste vej"-opgaven (hvis I ikke har gjort det endnu).</h3>
+            <ul class="fragment">
+              <li><strong>Færdiggør alle tre delopgaver</strong> (metoderne for Queue og BinaryMatrixGraph, og funktionen shortestPathBFS), hvis man ikke har lavet dem endnu.</li>
+              <li>Er alle færdige?</li>
+            </ul>
+            <h3>3. Se videoer om Dijkstra's algoritme (hvis I ikke har set dem)</h3>
+            <ul class="fragment">
+              <li><strong>Dijkstra's algoritme</strong> (4 minutter): <a href="https://youtu.be/71Z-Jpnm3D4">Dijkstra's Algorithm Visualized and Explained</a> - Carl the Person</li>
+              <li><strong>Populærvidenskablig video om algoritmerne som Maps er bygget på</strong> (30 minutter): <a href="https://youtu.be/kS-CGkiPetQ">Google Maps is unreasonably fast. Let me explain</a> - Veritasium & 2swap</li>
+              <li>Hvilke datastrukturer har vi behov for?</li>
+            </ul>
+          </div>
+          <div>
+            <h3>4. Skriv nogle noter i jeres logbog</h3>
+            <ul class="fragment">
+              <li><strong>Helst i logbogen</strong>, men ellers hvordan I synes det hjælper jer bedst at skrive dem.</li>
+              <li>I læreplanen står der at I skal lave en logbog og den skal være et sted hvor jeg også kan tilgå den (se <a href="https://ahsarantaris.github.io/fg-pro-b-2026/lektioner/05/#/8">side 9 i slides til lektion 5</a>).</li>
+              <li>Helst på GitHub sådan som jeg bad jer om i lektion 5 (se <a href="https://ahsarantaris.github.io/fg-pro-b-2026/lektioner/05/#/10">slides side 11</a> for fremgangsmåden).</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      
+
+      <section data-slide-step="2">
+        <h2>(2U) Introduktion til Afleveringsprojekt 02</h2>
+        <div class="small-list header-list" style="display: grid;grid-template-columns: 1fr 1fr; gap:4em">
+            <div>
+              <h3>Formaliteter</h3>
+              <ul>
+                <li>I skal <strong>udvikle</strong> og <strong>dokumentere</strong> et <strong>biblioteksmodul</strong> der kan benyttes af andre til at finde den korteste vej i både <strong>uvægtede</strong> og <strong>vægtede</strong> grafer.</li>
+                <li>I skal <strong>udvide</strong> jeres Tower Defence-spil til at have et <strong>åbent grid</strong> hvor monstrene selv finder den hurtigste vej til målet ved brug af jeres <strong>biblioteksmodul</strong>.</li>
+                <li>I skal skrive <strong>dokumentation</strong> for jeres <strong>API</strong>, både i form af en <strong>README-fil</strong> og en <strong>autogenereret hjemmeside</strong> ved brug af biblioteksnmodulet <strong>JSDoc</strong>.</li>
+                <li>I skal dokumentere resultatet af projektet og jeres arbejdsprocess i en <strong>synopsis</strong>. Se filen <code>projekt02.md</code> på Lectio der indeholder opgavebeskrivelsen.</li>
+                <li><strong>Afleveringsdato:</strong> Søndag den 6. december klokken 21:00. </li>
+                <li><strong>Præsentationer:</strong> Torsdag den 10/12.</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Opgavebeskrivelsen</h3>
+              <iframe data-external="0" src="../../afleveringsprojekter/afleveringsprojekt02/projekt02.md" style="zoom: 2; width: 100%; height: 60vh;"></iframe>
+            </div>
+        </div>
+      </section>
+
+      <section data-slide-step="3">
+        <h2>(2Ø) Påbegynd Afleveringsprojekt 02</h2>
+        <div class="header-list" style="display: grid;grid-template-columns: 1fr 1fr; gap:4em">
+            <div>
+              <h3>Fremgangsmåde</h3>
+              <ol class="spaced-list">
+                <li><strong>Fork og clone skabelon:</strong> En af jer skal forke og clone følgende skabelon og dele det med de andre i gruppen (det må <strong>ikke</strong> være den samme der ejer Tower Defence repositoriet), og de andre skal clone repositoriet til deres computere: <a href="https://github.com/AHSarantaris/shortest-path-library-template">https://github.com/AHSarantaris/shortest-path-library-template</a></li>
+                <li><strong>Læs opgavebeskrivelsen</strong> i filen <code>projekt02.md</code> i repositoriet (eller i filen <code>projekt02.pdf</code> på opgaven i Lectio).</li>
+                <li><strong>Planlæg arbejdsfordeling:</strong> Tal i gruppen om hvordan I fordeler opgaverne og i hvilken rækkerfølge I skal lave dem.</li>
+                <li><strong>Gå igang med projektet:</strong> Start med at løse den første af jeres opgaver.</li>
+              </ol>
+            </div>
+            <div>
+              <h3>Metoder til debugging</h3>
+              <ul class="fragment spaced-list">
+                <li><strong>Åbn browserens DevTools:</strong> Tryk <code>F12</code> eller <strong>højreklik</strong> og vælg "<strong>Undersøg</strong>"/"<strong>Inspect</strong>".</li>
+                <li>Tryk på fanen "<strong>Console</strong>", hvis du ikke er der allerede.</li>
+                <li>I VS Code kan man printe variablenes værdier (eller <strong>tekststrenge</strong>) til terminalen/konsolen ved at skrive <code>console.log(...)</code>, hvor <str>argumentet</str> er det man gerne vil printe til konsolen.</li>
+                <li>Vejledning til at bruge "<strong>Breakpoints</strong>" til debugging: <a href="https://developer.chrome.com/docs/devtools/javascript">https://developer.chrome.com/docs/devtools/javascript</a></li>
+              </ul>
+            </div>
+        </div>
+
+      </section>
+
+      
+      <section data-slide-step="4">
+        <h2>(P) Pausen er slut</h2>
+        <div style="display: grid; place-content: center; height: 80%; font-size: 2em;">
+            <h3>Vi starter igen</h3>
+        </div>
+      </section>
+
+      
+
+      <section data-slide-step="5">
+        <h2>(3U) Introduktion til Test-Driven Development (TDD)</h2>
+        <div class="header-list" style="display: grid;grid-template-columns: 1fr 1fr; gap:4em">
+          <div>
+            <h3>Test ud fra niveauer (fra slides til lektion 12)</h3>
+            <ul class="spaced-list-large">
+              <li><strong>Enhedstest:</strong> 
+                Tester en enhed/en funktion/en klasse om den fungerer isoleret set.
+              </li>
+              <li><strong>Integrationstest:</strong> 
+                Tester flere enheder/klasser om de fungerer sammen.
+              </li>
+              <li><strong>Systemtest:</strong> 
+                Tester om programmet fungerer som en helhed.
+              </li>
+              <li><strong>User Acceptance Test:</strong>
+              Tester om programmet opfylder kravene hos brugerne, og om det er brugervenligt.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>V-modellen</h3>
+            <div style="margin-top: 1em; display: flex;flex-direction: column; align-items: center;">
+              <img src="../12/images/v_model.webp" style="width:100%">
+              <p class="muted text-sm">Kilde: <a href="https://www.geeksforgeeks.org/software-engineering/software-engineering-sdlc-v-model/">GeeksforGeeks &gt; SDLC V-Model - Software Engineering</a></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section data-slide-step="6">
+        <h2>(3Ø) Skriv enhedstests til datastrukturerne</h2>
+        <div class="header-list" style="display: grid;grid-template-columns: 1fr 1fr; gap:4em">
+            <div>
+              <h3>Fremgangsmåde</h3>
+              <ol class="spaced-list">
+                <li>Kig på koden i test-mappen.</li>
+                <li>Kopier de tests som er relevante for de nye datastrukturer og lav ændringer alle steder der skal ændres.</li>
+              </ol>
+            </div>
+            <div>
+            </div>
+        </div>
+
+      </section>
+
+      <section data-slide-step="7">
+        <h2>(3U) Lektier til næste gang</h2>
+        <div class="homework-list" style="display:grid; place-content: center;width:70%">
+          <h3>1. Se videoer om Dijkstra's algoritme (hvis I ikke har set dem)</h3>
+          <ul>
+            <li><strong>Dijkstra's algoritme</strong> (4 minutter): <a href="https://youtu.be/71Z-Jpnm3D4">Dijkstra's Algorithm Visualized and Explained</a> - Carl the Person</li>
+            <li><strong>Populærvidenskablig video om algoritmerne som Maps er bygget på</strong> (30 minutter): <a href="https://youtu.be/kS-CGkiPetQ">Google Maps is unreasonably fast. Let me explain</a> - Veritasium & 2swap</li>
+          </ul>
+          <h3>2. Færdiggør "Korteste vej"-opgaven (hvis I ikke har gjort det endnu).</h3>
+          <ul>
+            <li><strong>Færdiggør alle tre delopgaver</strong> (metoderne for Queue og BinaryMatrixGraph, og funktionen shortestPathBFS), hvis man ikke har lavet dem endnu.</li>
+          </ul>
+          <h3>3. Skriv nogle noter i jeres logbog</h3>
+          <ul>
+            <li><strong>Helst i logbogen</strong>, men ellers hvordan I synes det hjælper jer bedst at skrive dem.</li>
+          </ul>
+        </div>
+      </section>
+      
+      <section>
+        <h2>(4U) Næste lektion</h2>
+        <div class="homework-list" style="display:grid;place-content:center; width: 70%; height: 70%">
+          <h3>Lektion 23: Dokumentation </h3>
+          <ul>
+              <li><strong>10 brobygningselever</strong> kommer forbi i de første 45 minutter.</li>
+              <li>Vi udvider <code>shortest-path-exercise</code> repositoriet til også at kunne finde den korteste vej i en <strong>generel matrix-graf</strong> ved brug af <strong>Dijkstra's algoritme</strong>.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section data-slide-step="8">
+        <h2>(4Ø) Lektionen er slut</h2>
+        <div style="display: flex;flex-direction: column;justify-content: space-evenly; height: 80%;margin-left:10%;">
+          <h3>Læg en plan for hvornår I vil lave lektierne og sæt en påmindelse</h3>
+          <h3>... færdiggør, gem og commit jeres arbejde</h3>
+          <h3>... reflektér over det I har lært og saml jeres tanker</h3>
+          <h3>... I kan gå når I vil.</h3>
+        </div>
+      </section>
+
+    <template id="agenda-template">
+      <section class="agenda"><h2 class="agenda-header">Program</h2><div class="flex-center" style="font-size:1.0em;"><table class="agenda-table"><thead><tr><th><strong>Punkt *</strong></th><th><strong>Start + varighed</strong></th><th><strong>Aktivitet</strong></th><th><strong>Indhold</strong></th></tr></thead><tbody>
+        <tr data-step="0"><td>1U</td><td>12:05 + 15</td><td>Overblik over forløbet og sidste lektion</td><td>Hvad har vi været igennem sidste lektion og generelt i dette forløb?</td></tr>
+        <tr data-step="1"><td>1Ø</td><td>12:20 + 10</td><td>Lektier til i dag</td><td>Spørgsmål til lektierne og status på hvor langt I er nået.</td></tr>
+        <tr data-step="2"><td>2U</td><td>12:30 + 40</td><td>Introduktion til Afleveringsprojekt 2</td><td>Jeg sætter jer igang med projektet og gennemgår opgavebeskrivelsen.</td></tr>
+        <tr data-step="3"><td>2Ø</td><td>13:10 + 30</td><td>I går igang med Afleveringsprojekt 2</td><td>I får noget tid til at komme igang med projektet.</td></tr>
+        <tr data-step="4"><td>P</td><td>13:40 + 10</td><td>Pause</td><td>Pause inden næste modul.</td></tr>
+        <tr data-step="5"><td>3U</td><td>13:50 + 20</td><td>Test-Driven Development (TDD)</td><td>Introduktion til TDD og enhedstests og integrationstests.</td></tr>
+        <tr data-step="6"><td>3Ø</td><td>14:10 + 65</td><td>Skriv enhedstests til datastrukturerne</td><td>Gå igang med at lave tests til jeres nye datastrukturer.</td></tr>
+        <tr data-step="7"><td>4U</td><td>15:15 + 5</td><td>Opsamling, lektier og næste lektion</td><td>Hjemmearbejde til næste gang og emnerne for næste lektion.</td></tr>
+        <tr data-step="8"><td>4Ø</td><td>15:20 + 5</td><td>Afrunding</td><td>Færdiggør jeres arbejde og reflektér over jeres læring.</td></tr>
+      </tbody></table></div><div class="text-sm muted"><strong>*</strong> (U = undervisning, Ø = øvelse)</div></section>
+    </template>
+  </div>
+  </div>
+  <script src="../../node_modules/reveal.js/dist/reveal.js"></script>
+  <script src="../../node_modules/reveal.js-menu/menu.js"></script>
+  <script src="../../node_modules/reveal.js-multimodal/plugin/multimodal/multimodal.js"></script>
+  <script src="../../node_modules/reveal.js/dist/plugin/notes.js"></script>
+  <script src="../../node_modules/reveal.js/dist/plugin/highlight.js"></script>
+  <script src="../../node_modules/reveal.js/dist/plugin/zoom.js"></script>
+  <script src="../../node_modules/reveal.js/dist/plugin/math.js"></script>
+  <script src="../main.js"></script>
+</body>
+</html>
