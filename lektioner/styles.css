@@ -392,6 +392,7 @@ a:has(img):hover {
 }
 .reveal pre {
     display: inline;
+    line-height: normal;
 }
 .reveal pre code {
     background: var(--bg-card) !important;
@@ -501,7 +502,7 @@ a:has(img):hover {
 .reveal img {
     /* width: 100%; 
     height: 100%; */
-    object-fit: scale-down;
+    /* object-fit: scale-down; */
 }
 
 .reveal .slide-background-content {

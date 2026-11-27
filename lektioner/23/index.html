@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1f1f1f">
+  <title>Lektion 23: Installering, udvikling og dokumentation af et biblioteksmodul</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/all.min.css">
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/2.0.2/marked.min.js"></script>
+  <link rel="stylesheet" href="../../node_modules/reveal.js/dist/reveal.css">
+  <link rel="stylesheet" href="../variables.css">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../highlight.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <section class="title-slide">
+        <h1><span hidden>Lektion 23: </span>Installering, udvikling og dokumentation af et biblioteksmodul</h1>
+        <h3>Lektion 23 · Forløb 15</h3>
+        <p>Andreas Hussain Sarantaris · 26-11-2026</p>
+        <p style="font-size:0.82em;color:var(--fg-muted);">Frederikssund Gymnasium · Programmering B</p>
+      </section>
+
+      <section data-slide-step="0">
+        <h2>(1U) Status på Forløb 15</h2>
+        <div class="small-list header-list" style="display: grid;grid-template-columns: 1fr 1fr; gap:4em">
+          <div>
+            <h3>I torsdags (lektion 21)</h3>
+            <ul class="spaced-list-large">
+              <li>Brobygningseleverne <strong>dukkede ikke op</strong> alligevel.</li>
+              <li>Vi <strong>færdiggjorde</strong> implementeringen af <code>shortestPathBFS()</code>.</li>
+              <li>Det eneste vi <strong>manglede</strong> fra lektionen før var at gemme den korteste vej fra <code>s</code> til <code>t</code>.</li>
+            </ul>
+            <h3>I tirsdags (lektion 22)</h3>
+            <ul class="fragment spaced-list-large" data-fragment-index="1">
+              <li>Vi <strong>gik igang</strong> med afleveringsprojekt 2.</li>
+              <li>Vi udvidede koden fra <code>shortest-path-exercise</code> repositoriet til at lave biblioteksmodul der også indeholder Dijkstra's algoritme.</li>
+            </ul>
+            <h3>I dag (lektion 23)</h3>
+            <ul class="fragment spaced-list-large" data-fragment-index="2">
+              <li>Vi ser på hvordan man kan <strong>installere</strong>, <strong>udvikle</strong> og <strong>dokumentere</strong> biblioteksmoduler i JavaScript ved brug af <strong>npm</strong> (Node Package Manager) og <strong>JSDoc</strong>.</li>
+            </ul>
+          </div>
+          <div style="display: flex;flex-direction: column; align-items: center;">
+<pre class="block"><code class="language-js">if (g.identicalNodes(n,t)) {
+  path.push(t);
+  let m = prevMap.get(g.key(t));
+  path.push(m);
+  while (!g.identicalNodes(m,s)) {
+      m = prevMap.get(g.key(m));
+      path.push(m);
+  }
+  return path.reverse();
+}</code>
+</pre>
+             <!-- <h3>Demo af biblioteksmodulets funktionalitet</h3> -->
+              <iframe class="fragment" data-fragment-index="1" data-external="0" src="../../solutions/shortest-path-td-dijkstra/" width="540" height="460" style="zoom: 1.2"></iframe>
+          </div>
+        </div>
+      </section>
+
+      
+      <section>
+        <h2>(1U) Introduktion til Afleveringsprojekt 2</h2>
+        <div class="small-list header-list" style="display: grid;grid-template-columns: 1fr 1fr; gap:4em">
+          <div>
+            <h3>Formaliteter</h3>
+            <ul>
+              <li>I skal <strong>udvikle</strong> og <strong>dokumentere</strong> et <strong>biblioteksmodul</strong> der kan benyttes af andre til at finde den korteste vej i både <strong>uvægtede</strong> og <strong>vægtede</strong> grafer.</li>
+              <li>I skal <strong>udvide</strong> jeres Tower Defence-spil til at have et <strong>åbent grid</strong> hvor monstrene selv finder den hurtigste vej til målet ved brug af jeres <strong>biblioteksmodul</strong>.</li>
+              <li>I skal skrive <strong>dokumentation</strong> for jeres <strong>API</strong>, både i form af en <strong>README-fil</strong> og en <strong>autogenereret hjemmeside</strong> ved brug af biblioteksnmodulet <strong>JSDoc</strong>.</li>
+              <li>I skal dokumentere resultatet af projektet og jeres arbejdsprocess i en <strong>synopsis</strong>. Se filen <code>projekt02.md</code> på Lectio der indeholder opgavebeskrivelsen.</li>
+              <li><strong>Afleveringsdato:</strong> Søndag den 6. december klokken 21:00. </li>
+              <li><strong>Præsentationer:</strong> Torsdag den 10/12. Heidi vikarierer for mig og sender en video af jeres præsentationer da jeg sansynligvis er på barsel.</li>
+            </ul>
+          </div>
+          <div>
+            
+            <h3>Brug af AI</h3>
+            <ul>
+              <li>I må <em>ikke</em> bruge AI til at <strong>generere kode</strong> til biblioteksmodulet. Hvis AI hjælper jer og den foreslår noget som I ikke forstår så få den til at gøre det mere simpelt, så I kun bruger de udtryk/kontrolstrukturer som vi har været igennem.</li>
+              <li>I må <em>ikke</em> bruge AI til at skrive tekst til synopsen.</li>
+              <li>I må <em>kun</em> generere kode i jeres Tower Defence spil når I skal bruge biblioteksmodulet til at udvide spillet. <strong>Men</strong> I skal beskrive i synopsen hvordan I/AI har gjort det.</li>
+            </ul>
+            <h3>Hvad gør følgende kode?</h3>
+<pre class="block fragment"><code class="language-js">let array = [0, 5, 7, 10 , 14];
+
+array.filter((e) =&gt; e &gt; 8);</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>(1U) Rettelser</h2>
+        <div class="small-list header-list" style="display: grid;grid-template-columns: 1fr 1fr; gap:4em">
+          <div>
+            <h3>API</h3>
+            <ul class="fragment">
+              <li>Forkortelse for <strong>Application Programming Interface</strong>.</li>
+            </ul>
+            <h3>Primitive og sammensatte datatyper</h3>
+            <ul class="fragment">
+              <li><strong>Primitive datatyper i JavaScript:</strong> <code>String</code>, <code>Number</code>, <code>BigInt</code>, <code>Boolean</code>, <code>Symbol</code>, <code>Undefined</code>, og <code>Null</code>. I JavaScript kaldes de også "<strong>primitive værdier</strong>" (primitive values).</li>
+              <li><strong>Sammensatte (composite) datatyper i JavaScript:</strong> Stort set alle objekter i JavaScript (der ikke er primitive) nedarver fra <code>Object</code>.</li>
+              <li>Se <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Data_structures">MDN - JavaScript data types and data structures</a></li>
+            </ul>
+          </div>
+          <div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>(1U) Indholdet i sidste lektion</h2>
+        <div class="small-list header-list" style="display: grid;grid-template-columns: 1fr 1fr; gap:4em">
+          <div>
+            <h3>TDD</h3>
+            <ul>
+              <li class="fragment" data-fragment-index="0">Test-Driven development</li>
+              <li class="fragment">En udviklingsteknik hvor man <strong>først skriver koden til enhedstests</strong> af en funktion/metode, og <strong>derefter implementerer funktionen/metoden</strong> så den består alle tests.</li>
+            </ul>          
+            <h3>Datastrukturer vi skal bruge til Dijkstra's algoritme</h3>
+            <ul>
+              <li class="fragment">Vi skal gemme den korteste afstand til hver knude. <strong>Hvordan gemmer vi den?</strong></li>
+              <li class="fragment">Vi skal gemme hvilken knude hver knude kom fra når den blev besøgt af algoritmen. <strong>Hvordan gemmer vi den?</strong></li>
+              <li class="fragment">Vi skal bruge en Prioritetskø (<code>PriorityQueue</code>). <strong>Hvad er det? Hvordan implementerer vi den?</strong></li>
+              <li class="fragment">Vi skal bruge en vægtet matrixgraf (<code>WeightedMatrixGraph</code>) med en vægtfunktion \(w(n,m)\) (weight function). <strong>Hvad er vægtfunktionen \(w\) givet ved?</strong></li>
+            </ul>
+          </div>
+          <div>
+            <div class="fragment" data-fragment-index="0">
+              <img src="tdd.png" style="width:100%">
+              <p>Kilde: <a href="https://martinfowler.com/bliki/TestDrivenDevelopment.html">martinfowler.com/bliki/TestDrivenDevelopment.html</a></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section data-slide-step="1">
+        <h2>(1Ø) Lektier til denne gang</h2>
+        <div class="small-list header-list" style="display: grid;grid-template-columns: 1.5fr 1fr; gap:4em">
+          <div>
+            <h3>1. Download Node.js før lektionen</h3>
+            <ul>
+              <li>Download Node.js fra følgende hjemmeside (hvis I ikke vil downloade den fra terminalen så scroll ned til Windows installeren): <a href="https://nodejs.org/en/download">nodejs.org</a></li>
+              <li><strong>Har alle downloadet det?</strong></li>
+            </ul>
+            <h3>2. Læs opgavebeskrivelsen til Afleveringsprojekt 2</h3>
+            <ul class="fragment">
+              <li>Opgavebeskrivelsen står på opgaven i Lectio som Pdf-fil, og i repositoriet som Markdown fil.</li>
+              <li><strong>Har I alle læst den? Nogen spørgsmål til den?</strong></li>
+            </ul>
+            <h3>3. Læs og sæt jer ind i delopgaverne til biblioteksmodulet</h3>
+            <ul class="fragment">
+              <li>Fremgangsmåden til hvordan I udvikler biblioteksmodulet står i shortest-path-library-template repositoriet: <a href="https://github.com/AHSarantaris/shortest-path-library-template">https://github.com/AHSarantaris/shortest-path-library-template</a></li>
+              <li>Hvis I allerede har forket repositoriet så <strong>synkronisér jeres fork</strong> for at få de nyeste opdateringer til README-filen.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>4. Skriv nogle noter i jeres logbog</h3>
+            <ul class="fragment">
+              <li><strong>Helst i logbogen</strong>, men ellers hvordan I synes det hjælper jer bedst at skrive dem.</li>
+              <li>I læreplanen står der at I skal lave en logbog og den skal være et sted hvor jeg også kan tilgå den (se <a href="https://ahsarantaris.github.io/fg-pro-b-2026/lektioner/05/#/8">side 9 i slides til lektion 5</a>).</li>
+              <li>Helst på GitHub sådan som jeg bad jer om i lektion 5 (se <a href="https://ahsarantaris.github.io/fg-pro-b-2026/lektioner/05/#/10">slides side 11</a> for fremgangsmåden).</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      
+
+      <section data-slide-step="2">
+        <h2>(2U) Biblioteksmoduler og npm</h2>
+        <div class="small-list header-list" style="display: grid;grid-template-columns: 1fr 1fr; gap:4em">
+            <div>
+              <h3>npm (Node Package Manager)</h3>
+              <ul>
+                <li>Bruges til at installere og udgive biblioteksmoduler. Se referencen på <a href="https://www.npmjs.com/">npmjs.com</a>.</li>
+                <li>Den mest populære "package manager", og den officielle der følger med når man downloader Node.js.</li>
+                <li><code>npm install package-name</code>: Downloader npm-pakken ved navn "package-name" til mappen <code>node_modules</code>, tilføjer den som dependency i filen <code>package.json</code> og opretter/opdaterer filen <code>package-lock.json</code>. </li>
+                <li><code>npm install</code>: Downloader alle <strong>dependencies</strong> i filen <code>package.json</code> til mappen <code>node_modules</code> og opretter/opdaterer filen <code>package-lock.json</code>. </li>
+                <li><code>node_modules</code>-mappen skal ignoreres af Git (se <code>.gitignore</code>-filen).</li>
+                <li><strong>Dependencies:</strong> De biblioteksmoduler som ens eget biblioteksmodul/program afhænger af og bruger.</li>
+                <li>Man kan oprette sin egen "npm package" ved at køre <code>npm init</code> (jeg har allerede oprettet repositoriet som en npm pakke og opsat de fleste nødvendige filer).</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Node.js</h3>
+              <ul class="fragment">
+                <li>Den mest poplære server-side (<strong>backend</strong>) JavaScript "Runtime Environment".</li>
+                <li>Bruges til at køre JavaScript-kode på computeren/<strong>serveren</strong>, fremfor i browseren/<strong>hos klienten</strong>.</li>
+                <li>Vi skal kun bruge det til at bruge <strong>npm</strong>.</li>
+              </ul>
+              <h3>JSON-filer</h3>
+              <ul class="fragment">
+                <li>JSON: <strong>JavaScript Object-Notation</strong></li>
+                <li>En <strong>filtype</strong> der indeholder <strong>et javascript-objekt</strong> eller <strong>et array</strong> (eller en primitiv datatype).</li>
+                <li>Meget anvendt i <strong>API'er</strong>, <strong>konfigurationsfiler</strong> og <strong>databaser</strong>, selv i andre programmeringssprog.</li>
+              </ul>
+              <h3>ES6 modules</h3>
+              <ul class="fragment">
+                <li>Keywords: <code>export</code> og <code>import</code>.</li>
+                <li>I HTML-filerne skal <strong>script-tags</strong> have <code>type="module"</code>.</li>
+                <li>Se <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules">MDN &gt; JavaScript modules</a> eller søg på "mdn js export"/"mdn js import" for yderligere information.</li>
+              </ul>
+            </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>(2U) Dokumentation og JSDoc</h2>
+        <div class="small-list header-list" style="display: grid;grid-template-columns: 1fr 1fr; gap:4em">
+            <div>
+              <h3>JSDoc</h3>
+              <ul>
+                <li>Et biblioteksmodul der gør det nemt at dokumentere javascript programmer. </li>
+                <li>Kommentarer med <code class="language-js">/**... */</code> bliver registreret af JSDoc. </li>
+                <li>Nogle features fra JSDoc er allerede indbygget i VS Code.</li>
+                <li>Kan automatisk generere en dokumentationshjemmeside.</li>
+                <li>Jeg har konfigureret <code>jsdoc.json</code>-filen til at dokumentere alle klasser/funktioner der eksporteres i filen <code>index.js</code> i mappen <code>src</code>.</li>
+                <li>Reference: <a href="https://jsdoc.app/">jsdoc.app</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3>Inspiration til dokumentation</h3>
+              <ul>
+                <li>I kan kigge på biblioteksmodulet <a href="https://github.com/qiao/PathFinding.js/">PathFinding.js</a> for inspiration til hvordan man kan dokumentere et biblioteksmodul.</li>
+                <li>PathFinding.js har nogenlunde samme funktionaliteter som vores.</li>
+                <li>I kan også se på koden i filen <code>p5.js</code> (demo/js/p5.js) der også bruger JSDoc-notation til deres dokumentation i deres reference (<a href="https://p5js.org/reference/">p5js.org/reference/</a>).</li>
+              </ul>
+            </div>
+        </div>
+      </section>
+
+      
+      <!-- <section data-slide-step="4">
+        <h2>(P) Pausen er slut</h2>
+        <div style="display: grid; place-content: center; height: 80%; font-size: 2em;">
+            <h3>Vi starter igen</h3>
+        </div>
+      </section> -->
+
+      <section data-slide-step="3">
+        <h2>(2Ø) Skriv enhedstests til datastrukturerne</h2>
+        <div class="header-list" style="display: grid;grid-template-columns: 1fr 1fr; gap:4em">
+            <div>
+              <h3>1. Dokumenter jeres biblioteksmodul</h3>
+              <ol>
+                <li>Download <a href="https://nodejs.org/en/download">Node.js</a> (hvis I ikke allerede har gjort det).</li>
+                <li>Åben jeres fork af shortest-path-library-template repositoriet og kør <code>npm install</code> i terminalen.</li>
+                <li>Stadig i terminalen kør <code>npm run docs</code>. Det vil køre kommandoen <code>jsdoc -c jsdoc.json</code> (se <code>package.json</code>) som genererer/opdaterer en dokumentationshjemmeside som befinder sig i mappen <code>docs</code> ud fra konfigurationsfilen <code>jsdoc.json</code>.</li>
+              </ol>
+            </div>
+            <div>
+              <h3>2. Fortsæt implementeringen</h3>
+              <ol class="spaced-list">
+                <li>Når I er færdige med 1. så fortsæt med at skrive enhedstests og implementere datastrukturer/funktioner.</li>
+              </ol>
+            </div>
+        </div>
+
+      </section>
+
+      <section data-slide-step="7">
+        <h2>(3U) Lektier til næste gang</h2>
+        <div class="homework-list" style="display:grid; place-content: center;width:70%">
+          <h3>1. Færdiggør testene og implementeringen af datastrukturerne i biblioteksmodulet</h3>
+          <ul>
+            <li>I skal aflevere søndag i næste uge, så koden bør være færdig næste gang.</li>
+          </ul>
+          
+          <h3>2. Færdiggør dokumentationen af biblioteksmodulet</h3>
+          <ul>
+            <li>Skriv kommentarer til alle de metoder som I eksporterer.</li>
+          </ul>
+        </div>
+      </section>
+      
+      <section>
+        <h2>(4U) Næste lektion</h2>
+        <div class="homework-list" style="display:grid;place-content:center; width: 70%; height: 70%">
+          <h3>Lektion 24: Synopsis</h3>
+          <ul>
+              <li>Vi går videre med Afleveringsprojekt 2 og kigger på hvordan man installerer, udvikler og dokumenterer et biblioteksmodul.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section data-slide-step="8">
+        <h2>(4Ø) Lektionen er slut</h2>
+        <div style="display: flex;flex-direction: column;justify-content: space-evenly; height: 80%;margin-left:10%;">
+          <h3>Læg en plan for hvornår I vil lave lektierne og sæt en påmindelse</h3>
+          <h3>... færdiggør, gem og commit jeres arbejde</h3>
+          <h3>... reflektér over det I har lært og saml jeres tanker</h3>
+          <h3>... I kan gå når I vil.</h3>
+        </div>
+      </section>
+
+    <template id="agenda-template">
+      <section class="agenda"><h2 class="agenda-header">Program</h2><div class="flex-center" style="font-size:1.0em;"><table class="agenda-table"><thead><tr><th><strong>Punkt *</strong></th><th><strong>Start + varighed</strong></th><th><strong>Aktivitet</strong></th><th><strong>Indhold</strong></th></tr></thead><tbody>
+        <tr data-step="0"><td>1U</td><td>12:05 + 15</td><td>Overblik over forløbet og sidste lektion</td><td>Hvad har vi været igennem sidste lektion og generelt i dette forløb?</td></tr>
+        <tr data-step="1"><td>1Ø</td><td>12:20 + 10</td><td>Lektier til i dag</td><td>Spørgsmål til lektierne og status på hvor langt I er nået.</td></tr>
+        <tr data-step="2"><td>2U</td><td>12:30 + 40</td><td>Introduktion til Afleveringsprojekt 2</td><td>Jeg sætter jer igang med projektet og gennemgår opgavebeskrivelsen.</td></tr>
+        <tr data-step="3"><td>2Ø</td><td>13:10 + 30</td><td>I går igang med Afleveringsprojekt 2</td><td>I får noget tid til at komme igang med projektet.</td></tr>
+        <!-- <tr data-step="4"><td>P</td><td>13:40 + 10</td><td>Pause</td><td>Pause inden næste modul.</td></tr> -->
+        <tr data-step="5"><td>3U</td><td>13:50 + 20</td><td>Test-Driven Development (TDD)</td><td>Introduktion til TDD og enhedstests og integrationstests.</td></tr>
+        <tr data-step="6"><td>3Ø</td><td>14:10 + 65</td><td>Skriv enhedstests til datastrukturerne</td><td>Gå igang med at lave tests til jeres nye datastrukturer.</td></tr>
+        <tr data-step="7"><td>4U</td><td>15:15 + 5</td><td>Opsamling, lektier og næste lektion</td><td>Hjemmearbejde til næste gang og emnerne for næste lektion.</td></tr>
+        <tr data-step="8"><td>4Ø</td><td>15:20 + 5</td><td>Afrunding</td><td>Færdiggør jeres arbejde og reflektér over jeres læring.</td></tr>
+      </tbody></table></div><div class="text-sm muted"><strong>*</strong> (U = undervisning, Ø = øvelse)</div></section>
+    </template>
+  </div>
+  </div>
+  <script src="../../node_modules/reveal.js/dist/reveal.js"></script>
+  <script src="../../node_modules/reveal.js-menu/menu.js"></script>
+  <script src="../../node_modules/reveal.js-multimodal/plugin/multimodal/multimodal.js"></script>
+  <script src="../../node_modules/reveal.js/dist/plugin/notes.js"></script>
+  <script src="../../node_modules/reveal.js/dist/plugin/highlight.js"></script>
+  <script src="../../node_modules/reveal.js/dist/plugin/zoom.js"></script>
+  <script src="../../node_modules/reveal.js/dist/plugin/math.js"></script>
+  <script src="../main.js"></script>
+</body>
+</html>
